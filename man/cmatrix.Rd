@@ -25,11 +25,12 @@ returned.
         On the Exact Distribution of Maximally Selected Rank Statistics.
         \emph{Computational Statistics \& Data Analysis}, (in press).
         Preprint available from
-        \url{http://www.mathpreprints.com/math/Preprint/hothorn/20020227/2}
+        \url{http://www.mathpreprints.com/math/Preprint/hothorn/20020227/2/}
 
         Lausen, B., Hothorn, T., Bretz, F. and Schmacher, M. (2002).
         Assessment of Optimally Selected Prognostic Factors.
-	\emph{submitted}.
+	\emph{submitted}. Preprint available from
+	\url{http://www.mathpreprints.com/math/Preprint/blausen/20021007/1/}
 }
  
 \author{ Torsten Hothorn <Torsten.Hothorn@rzmail.uni-erlangen.de> }
