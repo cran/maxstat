@@ -1,6 +1,6 @@
 
 R : Copyright 2001, The R Development Core Team
-Version 1.2.2  (2001-02-26)
+Version 1.3.0 Under development (unstable) (2001-06-10)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -22,7 +22,7 @@ Type `q()' to quit R.
 > library('maxstat')
 Loading required package: exactRankTests 
 Loading required package: mvtnorm 
-Loading required package: survival5 
+Loading required package: survival 
 > rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
 > ###--- >>> `DLBCL' <<<----- Diffuse large B-cell lymphoma
 > 
@@ -56,7 +56,7 @@ postscript
 > maxstat.test(DLBCL$MGE, DLBCL$time,
 +              cens=DLBCL$cens, smethod="LogRank", pmethod="Lau92")
 
-	 LogRank using Lau92 
+	LogRank using Lau92
 
 data:  DLBCL$MGE and DLBCL$time 
 M = 3.171, p-value = 0.03611 
@@ -70,7 +70,7 @@ estimated cutpoint
 > maxstat.test(DLBCL$MGE, DLBCL$time,
 +              cens=DLBCL$cens, smethod="LogRank", pmethod="Lau94")
 
-	 LogRank using Lau94 
+	LogRank using Lau94
 
 data:  DLBCL$MGE and DLBCL$time 
 M = 3.171, p-value = 0.02435 
@@ -84,7 +84,7 @@ estimated cutpoint
 > maxstat.test(DLBCL$MGE, DLBCL$time,
 +              cens=DLBCL$cens, smethod="LogRank", pmethod="HL")
 
-	 LogRank using HL 
+	LogRank using HL
 
 data:  DLBCL$MGE and DLBCL$time 
 M = 3.171, p-value = 0.02220 
@@ -96,7 +96,7 @@ estimated cutpoint
 > maxstat.test(DLBCL$MGE, DLBCL$time,
 +              cens=DLBCL$cens, smethod="LogRank", pmethod="exactGauss")
 
-	 LogRank using exactGauss 
+	LogRank using exactGauss
 
 data:  DLBCL$MGE and DLBCL$time 
 M = 3.171, p-value = 0.01960 
@@ -163,7 +163,7 @@ postscript
 > maxstat.test(hohnloser$EF, hohnloser$month, cens=hohnloser$cens,
 + smethod="LogRank", pmethod="Lau92")
 
-	 LogRank using Lau92 
+	LogRank using Lau92
 
 data:  hohnloser$EF and hohnloser$month 
 M = 3.5639, p-value = 0.01083 
@@ -177,7 +177,7 @@ estimated cutpoint
 > maxstat.test(hohnloser$EF, hohnloser$month, cens=hohnloser$cens,
 + smethod="LogRank", pmethod="Lau94")
 
-	 LogRank using Lau94 
+	LogRank using Lau94
 
 data:  hohnloser$EF and hohnloser$month 
 M = 3.5639, p-value = 0.00996 
@@ -191,7 +191,7 @@ estimated cutpoint
 > maxstat.test(hohnloser$EF, hohnloser$month, cens=hohnloser$cens,
 + smethod="LogRank", pmethod="HL", plot=T)
 
-	 log-rank using HL 
+	log-rank using HL
 
 data:  hohnloser$EF and hohnloser$month 
 M = 3.5639, p-value = 0.006929 
@@ -203,7 +203,7 @@ estimated cutpoint
 > maxstat.test(hohnloser$EF, hohnloser$month, cens=hohnloser$cens,
 + smethod="LogRank", pmethod="exactGauss")
 
-	 LogRank using exactGauss 
+	LogRank using exactGauss
 
 data:  hohnloser$EF and hohnloser$month 
 M = 3.5639, p-value = 0.003307 
@@ -229,7 +229,7 @@ estimated cutpoint
 > 
 > maxstat.test(x, y, smethod="Wilcoxon", pmethod="HL", minprop=0.25, maxprop=0.75)
 
-	 Wilcoxon using HL 
+	Wilcoxon using HL
 
 data:  x and y 
 M = 3.3261, p-value = 0.001607 
@@ -362,7 +362,7 @@ estimated cutpoint
 > 
 > 
 > cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-Time elapsed:  7.92 0.32 8.48 0 0 
+Time elapsed:  11.87 0.66 13.28 0 0 
 > dev.off(); quit('no')
 null device 
           1 

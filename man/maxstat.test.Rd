@@ -7,7 +7,7 @@ Performs a maximally selected rank or Gauss test on bivariate observations.
 
 }
 \usage{
-maxstat.test(x, y, smethod=c("Gauss", "Wilcoxon", "Median",
+maxstat.test(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
             "NormalQuantil","LogRank"), pmethod=c("none", "Lau92",
             "Lau94", "exactGauss", "HL", "min"),
             minprop = 0.1, maxprop=0.9, plot=F, xlab=NULL,...)
@@ -15,6 +15,7 @@ maxstat.test(x, y, smethod=c("Gauss", "Wilcoxon", "Median",
 \arguments{
   \item{x}{ vector of data values, independent variable. }
   \item{y}{ numeric vector of data values, dependent variable. }
+  \item{cens}{censoring: 0 cencored, 1 dead (only meaningful with LogRank)}
   \item{smethod}{ kind of statistic to be computed. }
   \item{pmethod}{ kind of p-value approximation to be used. }
   \item{minprop}{ at least \code{minprop}*100\% of the observations in the

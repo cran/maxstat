@@ -9,7 +9,7 @@ greater or equal to \code{b}.
 
 }
 \usage{
-pexactgauss(b, N, m)
+pexactgauss(b, N, m, maxpts)
 qexactgauss(p, N, m)
 }
 \arguments{
@@ -17,6 +17,7 @@ qexactgauss(p, N, m)
   \item{p]{ probability. } 
   \item{N}{ number of observations. }
   \item{m}{ cutpoints. }
+  \item{maxpts}{maximum number of function values as integer}
 }
 \details{
 

@@ -5,9 +5,10 @@
  Technical parts
 }
 \usage{
-hl(H, E, S, msample, N, b)
+hl(scores, H, E, S, msample, N, b)
 }
 \arguments{
+  \item{scores}{ score vector }
   \item{H}{ SR-matrix }
   \item{E}{ matrix of expections }
   \item{S}{ matrix of variances }
