@@ -1,7 +1,7 @@
 Package: maxstat
-Version: 0.5-4
+Version: 0.5-5
 Title: Maximally Selected Rank- and Gauss Statistics
-Date: $Date: 2002/03/06 15:17:28 $
+Date: $Date: 2002/04/10 16:13:35 $
 Author: Torsten Hothorn <Torsten.Hothorn@rzmail.uni-erlangen.de>
 Maintainer: Torsten Hothorn <Torsten.Hothorn@rzmail.uni-erlangen.de>
 Description: Maximally selected rank and Gauss statistics with

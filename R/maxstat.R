@@ -1,4 +1,4 @@
-# $Id: maxstat.R,v 1.30.2.1 2002/03/06 15:17:59 hothorn Exp $
+# $Id: maxstat.R,v 1.30.2.2 2002/04/10 16:13:40 hothorn Exp $
 
 maxstat.test <- function(x, ...) UseMethod("maxstat.test")
 
@@ -261,7 +261,7 @@ qLausen92 <- function(p, minprop=0.1, maxprop=0.9)
   test <- function(x)
     abs(pLausen92(x, minprop, maxprop) - p)
 
-  return(optim(2, test)$par)
+  return(optimize(test, interval=c(0,10))$minimum)
 }
 
 pLausen94 <- function(b, N, minprop=0.1, maxprop=0.9, m=NULL)
@@ -280,7 +280,7 @@ qLausen94 <- function(p, N, minprop=0.1, maxprop=0.9, m=NULL)
   test <- function(x)
     abs(pLausen94(x, N, minprop, maxprop, m) - p)
 
-  return(optim(2, test)$par)
+  return(optimize(test, interval=c(0,10))$minimum)
 }
   
 p2normG <- function(h,k,rho, maxp=3000)
@@ -334,7 +334,7 @@ qSchlitt <- function(p, N, m)
   test <- function(x)
     abs(pSchlitt(x, N, m) - p)
 
-  return(optim(2, test)$par)
+  return(optim(test, interval=c(0,10))$minimum)
 }
 
 pexactgauss <- function(b, N, m, maxpts=25000)
@@ -361,7 +361,7 @@ qexactgauss <- function(p, N, m)
   test <- function(x)
     abs(pexactgauss(x, N, m) - p)
 
-  return(optim(2, test)$par)
+  return(optimize(test, interval=c(0,10))$minimum)
 }
 
 
