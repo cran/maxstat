@@ -121,4 +121,3 @@ SEXP corr(SEXP ilist, SEXP N) {
   UNPROTECT(1);
   return(cm);
 }
-         
