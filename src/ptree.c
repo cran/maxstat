@@ -95,11 +95,10 @@ double corrgauss(int *x, int *y, int m, int n, int N)
 }
 
 SEXP corr(SEXP ilist, SEXP N) {
-  int n, i, j, m, mm, t;
+  int n, i, j, m, mm;
   SEXP cm;
   int *x;
   int *y;
-  double *corr;
   
   n = length(ilist);
   
@@ -121,4 +120,5 @@ SEXP corr(SEXP ilist, SEXP N) {
   }
   UNPROTECT(1);
   return(cm);
-}         
+}
+         
