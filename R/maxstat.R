@@ -1,8 +1,8 @@
-# $Id: maxstat.R,v 1.17 2001/04/23 12:36:05 hothorn Exp $
+# $Id: maxstat.R,v 1.19 2001/09/27 08:25:52 hothorn Exp $
 maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
                 "NormalQuantil","LogRank"), pmethod=c("none", "Lau92", "Lau94",
                 "exactGauss", "HL", "min"),
-                minprop = 0.1, maxprop=0.9, plot=F, xlab=NULL, ...)
+                minprop = 0.1, maxprop=0.9, plot=F, xlab=NULL, retT = F, ...)
 {
   smethod <- match.arg(smethod)
   pmethod <- match.arg(pmethod)
@@ -23,10 +23,12 @@ maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Medi
   ties <- duplicated(x)
 
   m <- which(!ties)
-  if (all(m < floor(N*minprop))) stop("minprop too large")
-  if (all(m > floor(N*maxprop))) stop("maxprop too small")
-  m <- m[m >= floor(N*minprop)]
-  m <- m[m <= floor(N*maxprop)]
+  if (minprop == 0 & maxprop==1) m <- m[2:(length(m)-1)] else {
+    if (all(m < floor(N*minprop))) stop("minprop too large")
+    if (all(m > floor(N*maxprop))) stop("maxprop too small")
+    m <- m[m >= floor(N*minprop)]
+    m <- m[m <= floor(N*maxprop)]
+  }
 
   if(length(m) < 1) stop("no data between minprop, maxprop")
 
@@ -34,7 +36,7 @@ maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Medi
     cu <- cumsum(y)
     G <- cu[m]/m - (sum(y) - cu[m])/(N-m)
 
-    G <- abs(sqrt(m*(N-m)/N)*G)
+    Test <- abs(sqrt(m*(N-m)/N)*G)
     STATISTIC <- max(G)
           ESTIMATOR <- min(which(G == STATISTIC))
     names(ESTIMATOR) <- c("estimated cutpoint")
@@ -87,18 +89,18 @@ maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Medi
     E <- m/N*sum(scores)
     V <- m*(N-m)/(N^2*(N-1))*(N*sum(scores^2) - sum(scores)^2)
 
-    T <- abs((cumsum(scores)[m] - E)/sqrt(V))
+    Test <- abs((cumsum(scores)[m] - E)/sqrt(V))
 
 
-    STATISTIC <- max(T)
-    ESTIMATOR <- x[m[min(which(T == STATISTIC))]]
+    STATISTIC <- max(Test)
+    ESTIMATOR <- x[m[min(which(Test == STATISTIC))]]
     names(STATISTIC) <- "M"
     names(ESTIMATOR) <- c("estimated cutpoint")
 
     if (plot) {
       if (grep("\\$", xname) > 0) xname <- unlist(strsplit(xname, "\\$"))[2]
       if (smethod =="LogRank") smethod <- "log-rank"
-      plot(x[m], T, type="b", xlab=ifelse(is.null(xlab), xname, xlab), 
+      plot(x[m], Test, type="b", xlab=ifelse(is.null(xlab), xname, xlab), 
            ylab=paste("Standardized", smethod, "statistic"), ...)
       lines(c(ESTIMATOR, ESTIMATOR), c(0, STATISTIC), lty=2)
     }
@@ -124,7 +126,7 @@ maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Medi
                method = paste(smethod, "using", pmethod),
                estimate = ESTIMATOR, data.name = DNAME)
   class(RVAL) <- "htest"
-  return(RVAL)
+  if (!retT) return(RVAL) else Test
 }
 
 pLausen92 <- function(b, minprop=0.1, maxprop=0.9)

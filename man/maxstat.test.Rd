@@ -10,7 +10,7 @@ Performs a maximally selected rank or Gauss test on bivariate observations.
 maxstat.test(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
             "NormalQuantil","LogRank"), pmethod=c("none", "Lau92",
             "Lau94", "exactGauss", "HL", "min"),
-            minprop = 0.1, maxprop=0.9, plot=F, xlab=NULL,...)
+            minprop = 0.1, maxprop=0.9, plot=F, xlab=NULL, retT=F, ...)
 }
 \arguments{
   \item{x}{ vector of data values, independent variable. }
@@ -24,6 +24,8 @@ maxstat.test(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
                   the first group. }
   \item{plot}{ logical. Should the process be plotted? }
   \item{xlab}{use alternative \code{xlab}}
+  \item{retT}{logical, return the vector of the statistics instead of a
+htest object}
   \item{...}{additional plotting parameters}
 }
 \details{
@@ -59,12 +61,15 @@ the minimum p-value of all procedures.
 
 }
 \value{
-A list of class \code{htest} containing the following components:
+If \code{retT=F} a list of class \code{htest} containing the following components
+is returned:
   \item{statistic }{the value of the test statistic.}
   \item{p.value }{the p-value for the test.}
   \item{method}{ the type of test and p-value approximation applied.}
   \item{estimate}{ the estimated cutpoint (of \code{x}) which separates
                    \code{y} best.} 
+Otherwise a vector containing the standardized statistics for each cutpoint
+is returned.
 }
 \references{ 
 
