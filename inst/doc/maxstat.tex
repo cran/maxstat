@@ -209,6 +209,30 @@ a cutpoint of 0.186 mean gene expression is plotted in Figure
 \ref{surv}. No event was observed for patients with mean gene expression
 greater 0.186.
 
+The exact conditional $p$-value can be simulated via conditional
+Monte-Carlo. This may be time consuming but is an easy way to check the goodness of
+the $p$-value approximations. The argument \texttt{B} specifies
+the number of Monte-Carlo replications to be performed (and defaults to
+$10000$).
+
+\begin{Schunk}
+\begin{Sinput}
+>maxstat.test(Surv(time, cens) ~ MGE, data = DLBCL, 
++     smethod = "LogRank", pmethod = "condMC", B = 9999)
+\end{Sinput}
+\begin{Soutput}
+	Maximally selected LogRank statistics using condMC
+
+data:  Surv(time, cens) by MGE 
+M = 3.1772, p-value = 0.0122
+sample estimates:
+estimated cutpoint 
+         0.1860526 
+\end{Soutput}
+\end{Schunk}
+
+
+
 \section{More than One Predictor}
 
 If the cutpoints in more than one predictor are evalutated, the problem is
@@ -245,19 +269,19 @@ Call: maxstat.test.data.frame(formula = Surv(time, cens) ~ MGE + IPI,
 	exactGauss
 
 data:  Surv(time, cens) by IPI 
-M = 2.9603, p-value = 0.01167
+M = 2.9603, p-value = 0.01148
 sample estimates:
 estimated cutpoint 
                  1 
 
 Adjusted p.value: 
-0.03271027 , error:  0.008848054 
+0.03088528 , error:  0.007842964 
 \end{Soutput}
 \end{Schunk}
 \renewcommand{\baselinestretch}{1.5}
 
 The p-value of the global test for the null hypothesis ``survival is
-independent from both IPI and MGE'' is 0.033 
+independent from both IPI and MGE'' is 0.031 
 and IPI provides a better distinction into two groups than 
 MGE does. We can display the
 standardized statistics using \texttt{plot} (Figure \ref{plotmmax}). The

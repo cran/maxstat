@@ -35,6 +35,8 @@ maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
 pmethod="Lau94", iscores=TRUE)
 maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
 pmethod="HL")
+maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
+pmethod="condMC", B = 9999)
 plot(maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank"))
 
 }

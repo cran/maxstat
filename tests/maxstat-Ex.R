@@ -1,3 +1,5 @@
+### * <HEADER>
+###
 attach(NULL, name = "CheckExEnv")
 assign(".CheckExEnv", as.environment(2), pos = length(search())) # base
 ## This plot.new() patch has no effect yet for persp();
@@ -13,26 +15,35 @@ assign("plot.new",
                      outer = outer, adj = 1, cex = .8, col = "orchid")
 	   }
        },
-       env = .CheckExEnv)
+       env = environment(plot))
 assign("cleanEx",
        function(env = .GlobalEnv) {
 	   rm(list = ls(envir = env, all.names = TRUE), envir = env)
-           RNGkind("Wichmann-Hill", "Kinderman-Ramage")
+           RNGkind("Wichmann-Hill", "default")
 	   assign(".Random.seed", c(0, rep(7654, 3)), pos = 1)
+	   assign("T", delay(stop("T used instead of TRUE")),
+		  pos = .CheckExEnv)
+	   assign("F", delay(stop("F used instead of FALSE")),
+		  pos = .CheckExEnv)
        },
        env = .CheckExEnv)
-assign("..nameEx", "__{must remake R-ex/*.R}__", env = .CheckExEnv) #-- for now
+assign("..nameEx", "__{must remake R-ex/*.R}__", env = .CheckExEnv) # for now
 assign("ptime", proc.time(), env = .CheckExEnv)
 postscript("maxstat-Examples.ps")
 assign("par.postscript", par(no.readonly = TRUE), env = .CheckExEnv)
 options(contrasts = c(unordered = "contr.treatment", ordered = "contr.poly"))
 library('maxstat')
+
 cleanEx(); ..nameEx <- "DLBCL"
-###--- >>> `DLBCL' <<<----- Diffuse large B-cell lymphoma
 
-	## alias	 help(DLBCL)
+### * DLBCL
 
-##___ Examples ___:
+### Name: DLBCL
+### Title: Diffuse large B-cell lymphoma
+### Aliases: DLBCL
+### Keywords: datasets
+
+### ** Examples
 
 
 data(DLBCL)
@@ -90,6 +101,11 @@ maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
              smethod="LogRank", pmethod="exactGauss", iscores=TRUE,
              abseps=0.01)
 
+# conditional Monte-Carlo
+
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="condMC", B = 9999) 
+
 # survival analysis and plotting like in Alizadeh et al. (2000)
 
 if(require(survival, quietly = TRUE)) {
@@ -140,16 +156,77 @@ if(require(survival, quietly = TRUE)) {
 }
 
 
-## Keywords: 'datasets'.
 
 
 par(get("par.postscript", env = .CheckExEnv))
+cleanEx(); ..nameEx <- "corrmsrs"
+
+### * corrmsrs
+
+### Name: corrmsrs
+### Title: Correlation Matrix
+### Aliases: corrmsrs
+### Keywords: misc
+
+### ** Examples
+
+
+# matrix of hypothetical prognostic factors
+
+X <- matrix(rnorm(30), ncol=3) 
+
+# this function
+
+a <- corrmsrs(X, minprop=0, maxprop=0.9999)
+
+# coded by just typing the definition of the correlation
+
+testcorr <- function(X) {
+  wh <- function(cut, x)
+    which(x <= cut)
+  index <- function(x) {
+    ux <- unique(x)
+    ux <- ux[ux < max(ux)]
+    lapply(ux, wh, x = x)
+  }
+  a <- unlist(test <- apply(X, 2, index), recursive=FALSE)
+  cnull <- rep(0, nrow(X))
+  mycorr <- diag(length(a))
+  for (i in 1:(length(a)-1)) {
+    for (j in (i+1):length(a)) {
+      cone <- cnull
+      cone[a[[i]]] <- 1
+      ctwo <- cnull
+      ctwo[a[[j]]] <- 1
+      sone <- sqrt(sum((cone - mean(cone))^2))
+      stwo <- sqrt(sum((ctwo - mean(ctwo))^2))
+      tcorr <- sum((cone - mean(cone))*(ctwo - mean(ctwo)))
+      tcorr <- tcorr/(sone * stwo)
+      mycorr[i,j] <- tcorr
+    }
+  }
+  mycorr
+}
+
+tc <- testcorr(X)
+tc <- tc + t(tc)
+diag(tc) <- 1
+stopifnot(all.equal(tc, a))
+
+
+
+
 cleanEx(); ..nameEx <- "hohnloser"
-###--- >>> `hohnloser' <<<----- Left ventricular ejection fraction of patients with malignant ventricular tachyarrhythmias.
 
-	## alias	 help(hohnloser)
+### * hohnloser
 
-##___ Examples ___:
+### Name: hohnloser
+### Title: Left ventricular ejection fraction of patients with malignant
+###   ventricular tachyarrhythmias.
+### Aliases: hohnloser
+### Keywords: datasets
+
+### ** Examples
 
 
 data(hohnloser)
@@ -185,18 +262,25 @@ smethod="LogRank", pmethod="exactGauss")
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
+# conditional Monte-Carlo
 
-## Keywords: 'datasets'.
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
+smethod="LogRank", pmethod="condMC", B = 9999)
+
+
 
 
 cleanEx(); ..nameEx <- "maxstat.test"
-###--- >>> `maxstat.test' <<<----- Maximally Selected Rank and Gauss Statistics
 
-	## alias	 help(maxstat.test)
-	## alias	 help(maxstat.test.formula)
-	## alias	 help(maxstat.test.default)
+### * maxstat.test
 
-##___ Examples ___:
+### Name: maxstat.test
+### Title: Maximally Selected Rank and Statistics
+### Aliases: maxstat.test maxstat.test.data.frame maxstat.test.default
+###   maxstat
+### Keywords: htest
+
+### ** Examples
 
 
 x <- sort(runif(20))
@@ -208,17 +292,28 @@ mod <- maxstat.test(y ~ x, data=mydata, smethod="Wilcoxon", pmethod="HL",
 print(mod)
 plot(mod)
 
+# adjusted for more than one prognostic factor.
 
-## Keywords: 'htest'.
+data(DLBCL)
+
+mstat <- maxstat.test(Surv(time, cens) ~ IPI + MGE, data=DLBCL, 
+                      smethod="LogRank", pmethod="exactGauss", 
+                      abseps=0.01)
+plot(mstat)
+
+
 
 
 cleanEx(); ..nameEx <- "pLausen92"
-###--- >>> `pLausen92' <<<----- Approximating Maximally Selected Statistics
 
-	## alias	 help(pLausen92)
-	## alias	 help(qLausen92)
+### * pLausen92
 
-##___ Examples ___:
+### Name: pLausen92
+### Title: Approximating Maximally Selected Statistics
+### Aliases: pLausen92 qLausen92
+### Keywords: distribution
+
+### ** Examples
 
 
 # Compute quantiles. Should be equal to Table 2 in Lausen and Schumacher
@@ -248,16 +343,18 @@ LausenTab2
 if(!all.equal(LausenTab2, Quant)) stop("error checking pLausen92")
 
 
-## Keywords: 'distribution'.
 
 
 cleanEx(); ..nameEx <- "pLausen94"
-###--- >>> `pLausen94' <<<----- Approximating Maximally Selected Statistics
 
-	## alias	 help(pLausen94)
-	## alias	 help(qLausen94)
+### * pLausen94
 
-##___ Examples ___:
+### Name: pLausen94
+### Title: Approximating Maximally Selected Statistics
+### Aliases: pLausen94 qLausen94
+### Keywords: distribution
+
+### ** Examples
 
 
 p <- pLausen94(2.5, 20, 0.25, 0.75)
@@ -273,67 +370,78 @@ p2 <- pLausen94(2.5, 200, 0.25, 0.75, m=seq(from=50, to=150, by=10))
 stopifnot(all.equal(round(p,3), round(p2,3)))
 
 
-## Keywords: 'distribution'.
 
 
 cleanEx(); ..nameEx <- "pexactgauss"
-###--- >>> `pexactgauss' <<<----- Computing Maximally Selected Gauss Statistics
 
-	## alias	 help(pexactgauss)
-	## alias	 help(qexactgauss)
+### * pexactgauss
 
-##___ Examples ___:
+### Name: pexactgauss
+### Title: Computing Maximally Selected Gauss Statistics
+### Aliases: pexactgauss qexactgauss
+### Keywords: distribution
+
+### ** Examples
 
 
 x <- rnorm(20)
-pexact <- pexactgauss(2.5, x,  abseps=0.01)
+
+pexact <- pexactgauss(2.5, x, abseps=0.01)
 
 
-## Keywords: 'distribution'.
 
 
 cleanEx(); ..nameEx <- "plot.maxtest"
-###--- >>> `plot.maxtest' <<<----- Print and Plot Standardized Statistics
 
-	## alias	 help(plot.maxtest)
-	## alias	 help(print.maxtest)
+### * plot.maxtest
 
-##___ Examples ___:
+### Name: plot.maxtest
+### Title: Print and Plot Standardized Statistics
+### Aliases: plot.maxtest print.maxtest plot.mmaxtest print.mmaxtest
+### Keywords: htest
+
+### ** Examples
 
 
 x <- sort(runif(20))
 y <- rbinom(20, 1, 0.5)
-mydata <- data.frame(cbind(x,y))
+mydata <- data.frame(c(x,y))
 
-mod <- maxstat.test(y ~ x, data=mydata, smethod="Median", pmethod="HL", alpha=0.05)
+mod <- maxstat.test(y ~ x, data=mydata, smethod="Median", 
+                    pmethod="HL", alpha=0.05)
 print(mod)
 plot(mod)
 
 
-## Keywords: 'htest'.
 
 
 cleanEx(); ..nameEx <- "pmaxstat"
-###--- >>> `pmaxstat' <<<----- Approximating Maximally Selected Statistics
 
-	## alias	 help(pmaxstat)
-	## alias	 help(qmaxstat)
+### * pmaxstat
 
-##___ Examples ___:
+### Name: pmaxstat
+### Title: Approximating Maximally Selected Statistics
+### Aliases: pmaxstat qmaxstat
+### Keywords: distribution
+
+### ** Examples
 
 
 pmaxstat(2.5, 1:20, 5:15)
 
 
-## Keywords: 'distribution'.
 
 
 cleanEx(); ..nameEx <- "sphase"
-###--- >>> `sphase' <<<----- S-phase fraction of tumor cells
 
-	## alias	 help(sphase)
+### * sphase
 
-##___ Examples ___:
+### Name: sphase
+### Title: S-phase fraction of tumor cells
+### Aliases: sphase
+### Keywords: datasets
+
+### ** Examples
 
 data(sphase)
 maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
@@ -342,11 +450,20 @@ maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
 pmethod="Lau94", iscores=TRUE)
 maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
 pmethod="HL")
+maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
+pmethod="condMC", B = 9999)
 plot(maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank"))
 
 
-## Keywords: 'datasets'.
 
 
+### * <FOOTER>
+###
 cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-dev.off(); quit('no')
+dev.off()
+###
+### Local variables: ***
+### mode: outline-minor ***
+### outline-regexp: "\\(> \\)?### [*]+" ***
+### End: ***
+quit('no')

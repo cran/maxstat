@@ -22,7 +22,7 @@ qmaxstat(p, scores, msample)
 }
 \details{
 
-Small sample approximation by Hothorn and Lausen (2002).
+Small sample approximation by Hothorn and Lausen (2003).
 
 }
 \value{
@@ -35,11 +35,10 @@ is observed. \code{qmaxstat} needs optimization.
 
 \references{
 
-        Hothorn, T. and Lausen, B. (2002).
-        On the Exact Distribution of Maximally Selected Rank Statistics.
-        \emph{Computational Statistics \& Data Analysis} (in press). 
-        Preprint available from
-        \url{http://www.mathpreprints.com/math/Preprint/hothorn/20020227/2}
+	Hothorn, T. and Lausen, B. (2003).
+        On the Exact Distribution of Maximally Selected Rank Statistics. 
+        \emph{Computational Statistics \& Data Analysis}, \bold{43}, 
+        121--137.
 }
 
 \examples{

@@ -1,9 +1,5 @@
 
 library(maxstat)
-actversion <- paste(R.version$major, R.version$minor, sep=".")
-thisversion <- "1.7.0"
-if (compareVersion(actversion, thisversion) >= 0)
-  RNGversion("1.6.2")
 set.seed(290875)
 
 # by Achim Zeileis, 13.09.2002
@@ -21,3 +17,16 @@ mydata <- data.frame(cbind(y,x))
 a <- maxstat.test(y ~ x, data=mydata, smethod="Wilcoxon", pmethod="HL")
 b <- wilcox.exact(y ~ x, data=mydata)                                  
 stopifnot(all.equal(a$p.value, b$p.value))
+
+# check new conditional Monte-Carlo p-values
+
+set.seed(290875)
+a <- maxstat.test(y ~ x, data=mydata, smethod="Wilcoxon", pmethod="condMC", 
+             B = 9999)$p.value
+a
+set.seed(290875)
+b <- maxstat.test(y ~ x, data=mydata, smethod="Wilcoxon", pmethod="condMC", 
+             B = 9999, alpha = 0.9)$p.value
+b
+stopifnot(all.equal(a, b))
+

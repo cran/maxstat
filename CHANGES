@@ -1,4 +1,9 @@
-# $Id: CHANGES,v 1.24 2003/04/23 15:17:12 hothorn Exp $
+# $Id: CHANGES,v 1.26 2003/06/16 13:17:23 hothorn Exp $
+
+	0.7-1 (15.06.2003)
+
+	maxstat.test(..., pmethod = "condMC", B = 999) can be used to
+        compute the p-values via conditional Monte-Carlo. 
 
 	0.6-8 (23.04.2003)
 

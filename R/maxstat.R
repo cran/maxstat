@@ -1,4 +1,4 @@
-# $Id: maxstat.R,v 1.48 2003/04/09 10:10:31 hothorn Exp $
+# $Id: maxstat.R,v 1.50 2003/06/16 09:38:41 hothorn Exp $
 
 
 print.maxtest <- function(x, digits = 4, quote = TRUE, prefix = "", ...) {
@@ -316,4 +316,40 @@ hl <- function(scores, H, E, S, msample, N, b)
   p <- list(upper, lower)
   names(p) <- c("upper", "lower")
   p
+}
+
+### just internal functions, not exported (yet), so less sanity checking...
+
+pmaxperm <- function(b, scores, msample, expect,
+                     variance, B = 10000, ...) {
+  N <- length(scores)
+  if (any(msample) > N) stop("invalid split points in msample")
+  p <- .Call("maxstatpermdist", scores = as.double(scores),
+                           msample = as.integer(msample),
+                           expect = as.double(expect),
+                           variance = as.double(variance),
+                           Nsim = as.integer(B),    
+                           pvalonly = as.logical(TRUE),
+                           ostat = as.double(b), PACKAGE = "maxstat")
+  p
+}
+
+qmaxperm <- function(p, scores, msample, expect,
+                     variance, B = 10000, ...) {
+  N <- length(scores)
+  if (length(p) > 1 || p > 1 || p < 0) stop("p must be in [0,1]")
+  if (any(msample) > N) stop("invalid split points in msample")
+  cp <- .Call("maxstatpermdist", scores = as.double(scores),
+                           msample = as.integer(msample),
+                           expect = as.double(expect),
+                           variance = as.double(variance),
+                           Nsim = as.integer(B),    
+                           pvalonly = as.logical(FALSE),
+                           ostat = NULL, PACKAGE = "maxstat")
+  names(cp) <- c("T", "Prob")
+  # class(cp) <- c("data.frame", "excondens")
+  cs <- cumsum(cp$Prob) 
+  quant <- max(cp$T[which(cs <= p)])
+  RET <- list(quant = quant, exdens = cp)
+  return(RET)
 }

@@ -92,6 +92,11 @@ maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
              smethod="LogRank", pmethod="exactGauss", iscores=TRUE,
              abseps=0.01)
 
+# conditional Monte-Carlo
+
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="condMC", B = 9999) 
+
 # survival analysis and plotting like in Alizadeh et al. (2000)
 
 if(require(survival, quietly = TRUE)) {

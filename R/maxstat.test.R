@@ -1,4 +1,4 @@
-# $Id: maxstat.test.R,v 1.16 2003/02/07 14:31:39 hothorn Exp $
+# $Id: maxstat.test.R,v 1.17 2003/06/15 15:50:56 hothorn Exp $
 
 maxstat.test <- function(formula, data, ...) 
   UseMethod("maxstat.test", data)
@@ -50,7 +50,8 @@ function(formula, data, subset, na.action, ...)
 
 maxstat <- function(y, x=NULL, smethod=c("Wilcoxon", 
          "Median", "NormalQuantil","LogRank", "Data"), 
-         pmethod=c("none", "Lau92", "Lau94", "exactGauss", "HL", "min"), 
+         pmethod=c("none", "Lau92", "Lau94", "exactGauss", "HL", "condMC", 
+         "min"), 
          iscores=(pmethod == "HL"), minprop=0.1, maxprop=0.9,  
          alpha=NULL, keepxy=TRUE, ...) 
 {
@@ -116,7 +117,7 @@ maxstat <- function(y, x=NULL, smethod=c("Wilcoxon",
 
 
 cmaxstat <- function(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
-          "exactGauss", "HL", "min"), minprop = 0.1, 
+          "exactGauss", "HL", "condMC", "min"), minprop = 0.1, 
           maxprop=0.9, alpha = NULL, ...)
 {
   pmethod <- match.arg(pmethod)
@@ -195,6 +196,16 @@ cmaxstat <- function(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
     if (!is.null(alpha))
        QUANT <- qmaxstat(alpha, y, m)
   }
+  if (pmethod == "condMC") {
+    if (!is.null(alpha)) {
+       maxdens <- qmaxperm(alpha, y, m, E, V, ...)
+       QUANT <- maxdens$quant
+       PVAL <- sum(maxdens$exdens$Prob[maxdens$exdens$T > STATISTIC])
+    } else { 
+      PVAL <- pmaxperm(STATISTIC, y, m, E, V, ...)
+    }
+  }
+
   if (pmethod == "min") {
     PVAL <- min(pLausen92(STATISTIC, minprop, maxprop), 
                 pLausen94(STATISTIC, N, minprop, maxprop, m=m),  

@@ -12,7 +12,7 @@ using maximally selected rank statistics.
 \method{maxstat.test}{data.frame}(formula, data, subset, na.action, \dots)
 maxstat(y, x=NULL, smethod=c("Wilcoxon", "Median",
             "NormalQuantil","LogRank", "Data"), pmethod=c("none", "Lau92",
-            "Lau94", "exactGauss", "HL", "min"), iscores=(pmethod=="HL"),
+            "Lau94", "exactGauss", "HL", "condMC", "min"), iscores=(pmethod=="HL"),
             minprop = 0.1, maxprop=0.9, alpha = NULL, keepxy=TRUE, \dots)
 }
 \arguments{
@@ -44,7 +44,8 @@ FALSE otherwise.}
     the data contain \code{NA}s.  Defaults to
     \code{getOption("na.action")}.}
   \item{\dots}{additional parameters to be passed to
-               \code{\link[mvtnorm]{pmvnorm}}.}
+               \code{\link[mvtnorm]{pmvnorm}} or \code{B}, an integer
+               defining the number of Monte-Carlo replications.}
 }
 \details{
 
@@ -65,18 +66,20 @@ be used. \code{Lau92} is the limiting distribution by a Brownian bridge
 inequality (see Lausen, Sauerbrei and Schumacher, 1994, and \code{\link{pLausen94}}).
 
 \code{exactGauss} returns the exact p-value for a maximally selected Gauss
-statistic, see Hothorn and Lausen (2002).
+statistic, see Hothorn and Lausen (2003).
 
 \code{HL} is a small sample approximation based on the Streitberg-R\"ohmel
 algorithm (see \code{\link[exactRankTest]{pperm}}) introduced by Hothorn and
-Lausen (2002). This requires integer
+Lausen (2003). This requires integer
 valued scores. For v. d. Waerden and Log-rank scores we try to find
 integer valued scores having the same shape. This results in slightly
 different scores (and a different test), the procedure is described in
-Hothorn (2001) and Hothorn and Lausen (2002).  
+Hothorn (2001) and Hothorn and Lausen (2003).  
 
 All the approximations are known to be conservative, so \code{min} gives
 the minimum p-value of all procedures.
+
+\code{condMC} simulates the distribution via conditional Monte-Carlo. 
 
 For survival problems, i.e. using a maximally selected log-rank statistic,
 the interface is similar to \code{\link[survival]{survfit}}. The depended
@@ -114,11 +117,10 @@ and \code{x} giving the response and independent variable.
 }
 \references{ 
 
-        Hothorn, T. and Lausen, B. (2002).
+        Hothorn, T. and Lausen, B. (2003).
         On the Exact Distribution of Maximally Selected Rank Statistics. 
-        \emph{Computational Statistics \& Data Analysis}, (in press). 
-        Preprint available from
-        \url{http://www.mathpreprints.com/math/Preprint/hothorn/20020227/2/}
+        \emph{Computational Statistics \& Data Analysis}, \bold{43}, 
+        121--137.
 
 	Lausen, B. and Schumacher, M. (1992).
         Maximally Selected Rank Statistics.

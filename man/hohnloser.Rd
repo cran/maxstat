@@ -73,6 +73,11 @@ smethod="LogRank", pmethod="exactGauss")
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
+# conditional Monte-Carlo
+
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
+smethod="LogRank", pmethod="condMC", B = 9999)
+
 }
 
 \keyword{datasets}

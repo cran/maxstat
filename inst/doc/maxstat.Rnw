@@ -205,6 +205,20 @@ a cutpoint of \Sexpr{round(mtHL$estimate,3)} mean gene expression is plotted in 
 \ref{surv}. No event was observed for patients with mean gene expression
 greater \Sexpr{round(mtHL$estimate,3)}.
 
+The exact conditional $p$-value can be simulated via conditional
+Monte-Carlo. This may be time consuming but is an easy way to check the goodness of
+the $p$-value approximations. The argument \texttt{B} specifies
+the number of Monte-Carlo replications to be performed (and defaults to
+$10000$).
+
+<<DLBCL-condMC, echo= TRUE>>=
+maxstat.test(Surv(time, cens) ~ MGE,
+             data=DLBCL, smethod="LogRank",
+             pmethod="condMC", B = 9999)
+@
+
+
+
 \section{More than One Predictor}
 
 If the cutpoints in more than one predictor are evalutated, the problem is
