@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159-1.00a-pretest-20011114-ojmw (Web2C 7.3.7) (format=pdflatex 2002.12.12)  18 NOV 2004 13:40
+This is pdfTeX, Version 3.14159-1.00a-pretest-20011114-ojmw (Web2C 7.3.7) (format=pdflatex 2004.12.21)  24 JAN 2005 14:50
 **\nonstopmode \input /home/hothorn/projects/packages/maxstat/inst/doc/maxstat.
 tex
 (/home/hothorn/projects/packages/maxstat/inst/doc/maxstat.tex
@@ -189,7 +189,7 @@ File: maxstat-mmax-fig.pdf Graphic file (type pdf)
 Here is how much of TeX's memory you used:
  2341 strings out of 50428
  31188 string characters out of 440380
- 74167 words of memory out of 263001
+ 74167 words of memory out of 1500001
  5286 multiletter control sequences out of 10000+15000
  30531 words of font info for 74 fonts, out of 500000 for 1000
  15 hyphenation exceptions out of 1000
@@ -205,4 +205,4 @@ y/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share
 cm/cmr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/tex
 mf/fonts/type1/bluesky/cm/cmss17.pfb></usr/share/texmf/fonts/type1/bluesky/cm/c
 mr17.pfb>
-Output written on maxstat.pdf (9 pages, 126679 bytes).
+Output written on maxstat.pdf (9 pages, 126680 bytes).

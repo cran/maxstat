@@ -1,7 +1,7 @@
 # $Id: maxstat.R,v 1.50 2003/06/16 09:38:41 hothorn Exp $
 
 
-print.maxtest <- function(x, digits = 4, quote = TRUE, prefix = "", ...) {
+print.maxtest <- function(x, digits = 4, ...) {
   x$stats <- NULL
   x$cuts <- NULL
   x$quant <- NULL
@@ -10,10 +10,10 @@ print.maxtest <- function(x, digits = 4, quote = TRUE, prefix = "", ...) {
                     x$pmethod, collapse=" ")
 
   class(x) <- "htest"
-  print(x, digits = digits, quote = quote, prefix = prefix, ...)
+  print(x, digits = digits, quote = TRUE, prefix = "", ...)
 } 
 
-print.mmaxtest <- function(x, digits = 4, quote = TRUE, prefix = "", ...) {
+print.mmaxtest <- function(x, digits = 4, ...) {
   cat("\n\t Optimally Selected Prognostic Factors \n\n")
   cat("Call: ")
   print(x$call)
@@ -28,7 +28,7 @@ print.mmaxtest <- function(x, digits = 4, quote = TRUE, prefix = "", ...) {
   sx$method <- paste("Maximally selected", sx$smethod, "statistics using",
                       sx$pmethod, collapse=" ")
   class(sx) <- "htest"
-  print(sx, digits = digits, quote = quote, prefix = prefix, ...)
+  print(sx, digits = digits, quote = TRUE, prefix = "", ...)
   cat("Adjusted p.value: \n")
   cat(x$p.value, ", error: ", attr(x$p.value, "error"), "\n\n")
 } 

@@ -1,6 +1,6 @@
 
-R : Copyright 2003, The R Foundation for Statistical Computing
-Version 1.9.0 Under development (unstable) (2003-12-15), ISBN 3-900051-00-3
+R : Copyright 2004, The R Foundation for Statistical Computing
+Version 2.0.1  (2004-11-15), ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -8,7 +8,7 @@ Type 'license()' or 'licence()' for distribution details.
 
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
-'citation()' on how to cite R in publications.
+'citation()' on how to cite R or R packages in publications.
 
 Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for a HTML browser interface to help.
@@ -49,7 +49,10 @@ Type 'q()' to quit R.
 > assign("par.postscript", par(no.readonly = TRUE), env = .CheckExEnv)
 > options(contrasts = c(unordered = "contr.treatment", ordered = "contr.poly"))
 > library('maxstat')
+Loading required package: exactRankTests 
+Loading required package: mvtnorm 
 Loading required package: survival 
+Loading required package: splines 
 > 
 > cleanEx(); ..nameEx <- "DLBCL"
 > 
@@ -138,7 +141,6 @@ estimated cutpoint
 > 
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 +              smethod="LogRank", pmethod="HL")
-Loading required package: exactRankTests 
 
 	Maximally selected LogRank statistics using HL
 
@@ -154,16 +156,17 @@ estimated cutpoint
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 +              smethod="LogRank", pmethod="exactGauss", iscores=TRUE,
 +              abseps=0.01)
-Loading required package: mvtnorm 
 
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = 0.01395
+M = 3.171, p-value = 0.01669
 sample estimates:
 estimated cutpoint 
          0.1860526 
 
+Warning message: 
+Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, ...) 
 > 
 > # conditional Monte-Carlo
 > 
@@ -173,7 +176,7 @@ estimated cutpoint
 	Maximally selected LogRank statistics using condMC
 
 data:  Surv(time, cens) by MGE 
-M = 3.1772, p-value = 0.0112
+M = 3.1772, p-value = 0.01130
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -380,7 +383,7 @@ estimated cutpoint
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5691, p-value = 0.004645
+M = 3.5691, p-value = 0.002932
 sample estimates:
 estimated cutpoint 
                 39 
@@ -394,11 +397,13 @@ Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, .
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5639, p-value = 0.003692
+M = 3.5639, p-value = 0.004902
 sample estimates:
 estimated cutpoint 
                 39 
 
+Warning message: 
+Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, ...) 
 > 
 > # conditional Monte-Carlo
 > 
@@ -408,7 +413,7 @@ estimated cutpoint
 	Maximally selected LogRank statistics using condMC
 
 data:  Surv(month, cens) by EF 
-M = 3.5691, p-value = 0.0035
+M = 3.5691, p-value = 0.0036
 sample estimates:
 estimated cutpoint 
                 39 
@@ -455,6 +460,9 @@ estimated cutpoint
 > mstat <- maxstat.test(Surv(time, cens) ~ IPI + MGE, data=DLBCL, 
 +                       smethod="LogRank", pmethod="exactGauss", 
 +                       abseps=0.01)
+Warning messages: 
+1: Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, ...) 
+2: pvmnorm:  Completion with error > abseps in: maxstat(y = c(77.4, 3.4, 71.3, 69.6, 51.2, 3.2, 8.3, 102.4, 89.8,  
 > plot(mstat)
 > 
 > 
@@ -696,7 +704,7 @@ estimated cutpoint
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-Time elapsed:  9.1 0.24 9.44 0 0 
+Time elapsed:  10.58 0.25 10.9 0 0 
 > dev.off()
 null device 
           1 
