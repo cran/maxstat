@@ -1,6 +1,6 @@
 
 R : Copyright 2002, The R Development Core Team
-Version 1.7.0 Under development (unstable) (2002-11-19)
+Version 1.6.0 Patched (2002-10-14)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -147,7 +147,7 @@ estimated cutpoint
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = 0.02165
+M = 3.171, p-value = 0.02034
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -293,7 +293,7 @@ estimated cutpoint
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5691, p-value = 0.003529
+M = 3.5691, p-value = 0.002257
 sample estimates:
 estimated cutpoint 
                 39 
@@ -305,7 +305,7 @@ estimated cutpoint
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5639, p-value = 0.003838
+M = 3.5639, p-value = 0.003681
 sample estimates:
 estimated cutpoint 
                 39 
@@ -531,7 +531,7 @@ estimated cutpoint
 > 
 > 
 > cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-Time elapsed:  26.23 1.16 28.81 0 0 
+Time elapsed:  13.22 0.68 14.01 0 0 
 > dev.off(); quit('no')
 null device 
           1 

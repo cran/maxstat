@@ -1,5 +1,6 @@
 
 library(maxstat)
+set.seed(290875)
 
 # by Achim Zeileis, 13.09.2002
 y <- c(0.9, 1, 0.8, 0.8, 0.85, 0.3, 0.2, 0.2, 0.1, 0.2, 0.3)
