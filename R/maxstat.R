@@ -1,8 +1,12 @@
-# $Id: maxstat.R,v 1.19 2001/09/27 08:25:52 hothorn Exp $
-maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
-                "NormalQuantil","LogRank"), pmethod=c("none", "Lau92", "Lau94",
-                "exactGauss", "HL", "min"),
-                minprop = 0.1, maxprop=0.9, plot=F, xlab=NULL, retT = F, ...)
+# $Id: maxstat.R,v 1.31 2001/12/14 13:11:54 hothorn Exp $
+
+maxstat.test <- function(x, ...) UseMethod("maxstat.test")
+
+maxstat.test.default <-
+function(x, y=NULL, event = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
+         "NormalQuantil","LogRank"), pmethod=c("none", "Lau92", "Lau94",
+          "exactGauss", "HL", "min"), minprop = 0.1, maxprop=0.9, alpha =
+          NULL, ...)
 {
   smethod <- match.arg(smethod)
   pmethod <- match.arg(pmethod)
@@ -12,13 +16,28 @@ maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Medi
 
   xname <- deparse(substitute(x))
   yname <- deparse(substitute(y))  
-  DNAME <- paste(xname, "and", yname)
+  if (length(xname) == 1 & length(yname) == 1)
+    DNAME <- paste(xname, "and", yname)
+  else
+    DNAME <- "y by x" 
 
   N <- length(y)
 
+  if (!is.null(event)) {
+    if (smethod != "LogRank") warning("eventoring only meaningful with LogRank")
+    if (!is.logical(event)) {
+      one <- event[event == 1]
+      zero <- event[event == 0]
+      if (length(c(one, zero)) != N)
+        stop("only 0/TRUE (alive) and 1/FALSE (dead) allowed for eventoring")
+    } else {
+      event <- as.numeric(event)
+    }
+  }
+
   y <- y[order(x)]
-  if (!is.null(cens)) cens <- cens[order(x)]
-          else cens <- rep(1, length(y))
+  if (!is.null(event)) event <- event[order(x)]
+          else event <- rep(1, length(y))
   x <- sort(x)
   ties <- duplicated(x)
 
@@ -46,7 +65,7 @@ maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Medi
     if (pmethod == "Lau92")
       PVAL <- pLausen92(STATISTIC, minprop, maxprop)
     if (pmethod == "Lau94")
-      PVAL <- pLausen94(STATISTIC, N, minprop, maxprop)
+      PVAL <- pLausen94(STATISTIC, N, minprop, maxprop, m=m)
     if (pmethod == "exactGauss")
       PVAL <- pexactgauss(STATISTIC, N, m)
     if (pmethod == "HL") {
@@ -79,7 +98,7 @@ maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Medi
       intr <- intrank(y)
       for (i in 1:N) {
         indx <- which(y <= y[i])
-        sc[i] <- cens[i] - sum(cens[indx]/(N - intr[indx] + 1))
+        sc[i] <- event[i] - sum(event[indx]/(N - intr[indx] + 1))
       }
       scores <- sc
       scores <- scores - min(scores)
@@ -97,36 +116,137 @@ maxstat.test <- function(x, y, cens = NULL, smethod=c("Gauss", "Wilcoxon", "Medi
     names(STATISTIC) <- "M"
     names(ESTIMATOR) <- c("estimated cutpoint")
 
-    if (plot) {
-      if (grep("\\$", xname) > 0) xname <- unlist(strsplit(xname, "\\$"))[2]
-      if (smethod =="LogRank") smethod <- "log-rank"
-      plot(x[m], Test, type="b", xlab=ifelse(is.null(xlab), xname, xlab), 
-           ylab=paste("Standardized", smethod, "statistic"), ...)
-      lines(c(ESTIMATOR, ESTIMATOR), c(0, STATISTIC), lty=2)
-    }
-    
-    if (pmethod == "none")
+    if (is.null(alpha)) QUANT <- NA
+
+    if (pmethod == "none") {
       PVAL <- NA
-    if (pmethod == "Lau92")
+      QUANT <- NA
+    }
+    if (pmethod == "Lau92") {
       PVAL <- pLausen92(STATISTIC, minprop, maxprop)
-    if (pmethod == "Lau94")
-      PVAL <- pLausen94(STATISTIC, N, minprop, maxprop)
-    if (pmethod == "exactGauss")
+      if (!is.null(alpha))
+        QUANT <- qLausen92(alpha, minprop, maxprop)
+    }
+    if (pmethod == "Lau94") {
+      PVAL <- pLausen94(STATISTIC, N, minprop, maxprop, m=m)
+      if (!is.null(alpha))
+         QUANT <- qLausen94(alpha, N, minprop, maxprop, m=m)
+    }
+    if (pmethod == "exactGauss") {
       PVAL <- pexactgauss(STATISTIC, N, m)
-    if (pmethod == "HL")
-      PVAL <- pmaxstat(STATISTIC, scores, m)$lower
-    if (pmethod == "min")
+      if (!is.null(alpha))
+         QUANT <- qexactgauss(alpha, N, m)
+    }
+    if (pmethod == "HL") {
+      PVAL <- pmaxstat(STATISTIC, scores, m)
+      if (!is.null(alpha))
+         QUANT <- qmaxstat(alpha, scores, m)
+    }
+    if (pmethod == "min") {
       PVAL <- min(pLausen92(STATISTIC, minprop, maxprop), 
-                  pLausen94(STATISTIC, N, minprop, maxprop),  
+                  pLausen94(STATISTIC, N, minprop, maxprop, m=m),  
                   pexactgauss(STATISTIC, N, m),
-                  pmaxstat(STATISTIC, scores, m)$lower)
+                  pmaxstat(STATISTIC, scores, m))
+      if (!is.null(alpha))
+         QUANT <- NA
+    } 
   }
 
   RVAL <- list(statistic = STATISTIC, p.value = PVAL,
                method = paste(smethod, "using", pmethod),
-               estimate = ESTIMATOR, data.name = DNAME)
-  class(RVAL) <- "htest"
-  if (!retT) return(RVAL) else Test
+               estimate = ESTIMATOR, data.name = DNAME,
+               stats = Test, cuts = x[m], quant = QUANT)
+  class(RVAL) <- "maxtest"
+  RVAL
+}
+
+maxstat.test.formula <-
+function(formula, data, subset, na.action, ...)
+{
+    if(missing(formula)
+       || (length(formula) != 3)
+       || (length(attr(terms(formula[-2]), "term.labels")) != 1)
+       || (length(attr(terms(formula[-3]), "term.labels")) != 1))
+        stop("formula missing or incorrect")
+    if (length(formula[[2]]) > 1) {
+        if (formula[[2]][[1]] == as.name("Surv")) 
+            formula[[2]][[1]] <- as.name("msurv")
+    }
+    if(missing(na.action))
+        na.action <- getOption("na.action")
+    m <- match.call(expand.dots = FALSE)
+    if (length(m$formula[[2]]) > 1) {
+        if (m$formula[[2]][[1]] == as.name("Surv"))
+            m$formula[[2]][[1]] <- as.name("msurv")
+    }
+    if(is.matrix(eval(m$data, parent.frame())))
+        m$data <- as.data.frame(data)
+    m[[1]] <- as.name("model.frame")
+    m$... <- NULL
+    mf <- eval(m, parent.frame())
+    DNAME <- paste(names(mf), collapse = " by ")
+    DNAME <- gsub("msurv", "Surv", DNAME)
+    names(mf) <- NULL
+    response <- attr(attr(mf, "terms"), "response")
+    nc <- ncol(mf[[response]])
+    if (!is.null(nc)) {
+      if (nc == 2) {
+        if (!class(mf[[response]]) == "msurv") stop("response is not of class msurv")
+        event <- mf[[response]][,2]
+        y <- mf[[response]][,1]
+        arg <- list(...)
+        if (!is.null(arg$event)) warning("survival formula and argument event given. Using survival formula.")
+        arg <- c(arg, event = list(event))
+      }
+    } else {
+      y <- mf[[response]]
+      arg <- list(...)
+    }
+    DATA <- list(x = mf[[-response]], y = y)
+    names(DATA) <- c("x", "y")
+    y <- do.call("maxstat.test", c(DATA, arg))
+    y$data.name <- DNAME
+    return(y)
+}
+
+
+
+print.maxtest <- function(x, digits = 4, quote = TRUE, prefix = "", ...) {
+  x$stats <- NULL
+  x$cuts <- NULL
+  x$quant <- NULL
+  class(x) <- "htest"
+  print(x, digits = digits, quote = quote, prefix = prefix, ...)
+} 
+
+plot.maxtest <- function(x, xlab=NULL, ylab=NULL, ...) {
+  xname <- unlist(strsplit(x$data.name, "by"))[2]
+  if (is.na(x$quant)) {
+    smethod <- gsub(" ", "", unlist(strsplit(x$method, "using"))[1])
+    if (smethod == "LogRank") smethod <- "log-rank"
+    if (is.null(ylab)) ylab <- paste("Standardized", smethod, "statistic")
+    if (is.null(xlab)) xlab <- xname
+    plot(x$cuts, x$stats, type="b", xlab=xlab, ylab=ylab, ...)
+    lines(c(x$estimate, x$estimate), c(0, x$statistic), lty=2)
+  } else {
+    smethod <- gsub("LogRank", "log-rank", x$method)
+    smethod <- gsub(" ", "",unlist(strsplit(smethod, "using")))
+    ylim <- c(min(x$quant, min(x$stats)), max(x$quant, max(x$stats)))
+    ylim <- c(ylim[1]*0.95, ylim[2]*1.05)
+    xlength <- range(x$cuts)
+    if (is.null(ylab)) ylab <- paste("Standardized", smethod[1],
+                                     "statistic using", smethod[2])
+    if (is.null(xlab)) xlab <- xname
+    plot(x$cuts, x$stats, type="b", xlab=xlab, ylab=ylab, ylim=ylim, ...)
+    lines(c(x$estimate, x$estimate), c(0, x$statistic), lty=2)
+    lines(xlength, c(x$quant, x$quant), col="red")
+  }
+}
+
+msurv <- function(time, event) {
+  RET <- cbind(time, event)
+  class(RET) <- "msurv"
+  RET
 }
 
 pLausen92 <- function(b, minprop=0.1, maxprop=0.9)
@@ -144,9 +264,10 @@ qLausen92 <- function(p, minprop=0.1, maxprop=0.9)
   return(optim(2, test)$par)
 }
 
-pLausen94 <- function(b, N, minprop=0.1, maxprop=0.9)
+pLausen94 <- function(b, N, minprop=0.1, maxprop=0.9, m=NULL)
 {
-  m <- floor(N*minprop):floor(N*maxprop)
+  if(is.null(m))
+    m <- floor(N*minprop):floor(N*maxprop)
   m1 <- m[1:(length(m)-1)]
   m2 <- m[2:length(m)]
   t <- sqrt(1 - m1*(N-m2)/((N-m1)*m2))
@@ -154,10 +275,10 @@ pLausen94 <- function(b, N, minprop=0.1, maxprop=0.9)
   1 - (pnorm(b) - pnorm(-b)) + D
 }
 
-qLausen94 <- function(p, N, minprop=0.1, maxprop=0.9)
+qLausen94 <- function(p, N, minprop=0.1, maxprop=0.9, m=NULL)
 {
   test <- function(x)
-    abs(pLausen94(x, N, minprop, maxprop) - p)
+    abs(pLausen94(x, N, minprop, maxprop, m) - p)
 
   return(optim(2, test)$par)
 }
@@ -168,7 +289,7 @@ p2normG <- function(h,k,rho, maxp=3000)
   sigma <- diag(2)
   sigma[1,2] <- rho
   sigma[2,1] <- rho
-  prob <- pmvnorm(c(-Inf, -Inf), c(h, k), c(0,0), sigma)$value
+  prob <- pmvnorm(lower=c(-Inf, -Inf), upper=c(h, k), mean=c(0,0), corr=sigma)
   prob
 }
 
@@ -218,6 +339,7 @@ qSchlitt <- function(p, N, m)
 
 pexactgauss <- function(b, N, m, maxpts=25000)
 {
+  if (!require(mvtnorm)) stop("package mvtnorm not loaded")
   n <- m[2:length(m)]
   mm <- m[1:(length(m)-1)]
   mcorr <- sqrt((mm/N)*(1 - n/N))/sqrt(n/N*(1 - mm/N))
@@ -230,7 +352,8 @@ pexactgauss <- function(b, N, m, maxpts=25000)
   p <- pmvnorm(mean=rep(0, length(m)),
                corr=t(corrmatrix), lower=rep(-b, length(m)),
                upper=rep(b, length(m)), maxpts=maxpts)
-  1 - p$value
+  attributes(p) <- NULL
+  1 - p
 }
 
 qexactgauss <- function(p, N, m)
@@ -242,8 +365,10 @@ qexactgauss <- function(p, N, m)
 }
 
 
-pmaxstat <- function(b, scores,  msample, quant=F)
+pmaxstat <- function(b, scores,  msample, quant=FALSE)
 {
+  if (!require(exactRankTests)) stop("package exactRankTests not loaded")
+
   # for intergers only
 
   if (!all(round(scores) == scores))
@@ -271,6 +396,8 @@ pmaxstat <- function(b, scores,  msample, quant=F)
 
   # Streitberg / Roehmel in C, package "exactRankTest"
 
+  if (!is.loaded("cpermdist2")) stop("Function cpermdist2 from package exactRankTests not found!")
+
   H <- .C("cpermdist2", H = as.double(H), as.integer(N),
                 as.integer(totsum), as.integer(sc),
     as.integer(scores), as.integer(N),
@@ -278,7 +405,7 @@ pmaxstat <- function(b, scores,  msample, quant=F)
 
   # add last row, column for compatibility
 
-  H <- matrix(H, nrow=N, ncol=totsum, byrow=T)
+  H <- matrix(H, nrow=N, ncol=totsum, byrow=TRUE)
   H <- rbind(H, rep(0, ncol(H)))
   H <- cbind(H, c(rep(0, nrow(H)-1), 1))
 
@@ -291,7 +418,7 @@ pmaxstat <- function(b, scores,  msample, quant=F)
   E <- m/N*sum(scores)
   V <- m*(N-m)/(N^2*(N-1))*(N*sum(scores^2) - sum(scores)^2)
   S <- rep(1:(ncol(H)-1), nrow(H) -2)
-  S <- matrix(S, nrow(H) -2, ncol(H)-1, byrow=T)
+  S <- matrix(S, nrow(H) -2, ncol(H)-1, byrow=TRUE)
   EM <- matrix(rep(E, ncol(H) -1), nrow(H) -2, ncol(H) - 1)
   VM <- matrix(rep(V, ncol(H) -1), nrow(H) -2, ncol(H) - 1 )
   S <- (S- E)/sqrt(V)
@@ -343,23 +470,22 @@ pmaxstat <- function(b, scores,  msample, quant=F)
 
   gaN <- gamma(N+1)   
   lower <- min(sum(sH)/gaN, 1)  # <- this is a better approx.
-  upper <- max(apply(H, 1, sum))/gaN
-  p <- list(upper, lower)
-  names(p) <- c("upper", "lower")
-#  cat("hl working: ", all.equal(hl(scores, H, E, S, msample, N, b), p), "\n")
-  p
+  #  upper <- max(apply(H, 1, sum))/gaN
+  #  p <- list(upper, lower)
+  #  names(p) <- c("upper", "lower")
+  #  cat("hl working: ", all.equal(hl(scores, H, E, S, msample, N, b), p), "\n")
+  lower
 }
 
 qmaxstat <- function(p, scores, msample)
 {
   if (p > 1 | p < 0) stop("p not in [0,1]")
-  sr <- pmaxstat(3, scores, msample, quant=T)
+  sr <- pmaxstat(3, scores, msample, quant=TRUE)
   tr <- rev(sort(unique(round(sr$S,5))))
   i <- 1
   pw <- 0
   while (pw < p) {
     pw <- hl(sr$scores, sr$H, sr$E, sr$S, sr$msample, sr$N, tr[i])$lower
-#    print(pw)
     i <- i+1
   }
   return(tr[i-1])

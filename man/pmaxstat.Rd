@@ -9,7 +9,7 @@ statistic is greater or equal to \code{b}.
 
 }
 \usage{
-pmaxstat(b, scores, msample, quant=F)
+pmaxstat(b, scores, msample, quant=FALSE)
 qmaxstat(p, scores, msample)
 }
 \arguments{
@@ -22,7 +22,7 @@ qmaxstat(p, scores, msample)
 }
 \details{
 
-Small sample approximation by Hothorn and Lausen (2001).
+Small sample approximation by Hothorn and Lausen (2002).
 
 }
 \value{
@@ -33,17 +33,16 @@ is observed. \code{qmaxstat} needs optimization.
 
 }
 
-\reference{
+\references{
 
-        Hothorn, T. and Lausen, B. (2001).
+        Hothorn, T. and Lausen, B. (2002).
         On the Exact Distribution of Maximally Selected Rank Statistics.
         \emph{submitted}
 }
-\author{ Torsten.Hothorn <Torsten.Hothorn@rzmail.uni-erlangen.de> }
 
 \examples{
 
-pmaxstat(2.5, 1:20, 5:15)$lower
+pmaxstat(2.5, 1:20, 5:15)
 
 }
 \keyword{distribution}

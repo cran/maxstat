@@ -1,0 +1,53 @@
+# $Id: CHANGES,v 1.9 2001/12/11 15:04:51 hothorn Exp $
+
+	0.5-3 (14.12.2001)
+
+	fixed bug in pLausen94: take tied predictors into account
+
+	0.5-1 (11.12.2001)
+
+	check the return value of require in zzz.R
+
+	0.5-0 (10.12.2001)
+
+	release for R-1.4.0
+
+	0.4-6 (08.12.2001)
+
+	cosmetrics, \dontrun{ postscript() } in DLBCL.Rd
+
+	0.4-5 (04.12.2001)
+
+	interface changes in mvtnorm, 
+	Depends: exactRankTests(>= 0.5-8),mvtnorm(>= 0.4-1)
+
+
+	0.4-4 (03.12.2001)
+
+	survival interface now as in package survival
+	pmaxstat returns a double, not a list
+	man-pages updated
+
+	0.4-3 (01.12.2001)
+
+	clean interface (for survival problems too)
+	no longer depends on survival
+
+	0.4-2 (01.12.2001)
+
+	maxstat.test generic passed R CMD check
+	plot.maxtest and print.maxtest implemented
+
+	0.4-1 (29.11.2001)
+
+	maxstat.test is now generic. 
+	To-Do:
+	the interface is not clean for survival
+	problems (formula for cens???, `Surv' isn't nice for that).
+
+	take off `plot' and use `retT' to get the empirical process plotted
+	(including p-values as in strucchange :-)
+
+	for the examples: check, if `survival' is there and don't Depend on
+	it
+

@@ -4,7 +4,7 @@
 \title{ Computing Maximally Selected Gauss Statistics  }
 \description{
 
-Computes the probability that a maximally selected gauss statistic is
+Computes the exact probability that a maximally selected gauss statistic is
 greater or equal to \code{b}.
 
 }
@@ -21,15 +21,16 @@ qexactgauss(p, N, m)
 }
 \details{
 
-Correlations from Schlittgen, normal probabilities by Genz/Bretz (see
+This is the exact distribution of a maximally selected Gauss statistic and
+the asymptotic distribution for maximally selected rank statistics.
+Correlations from Schlittgen (1999), normal probabilities by Genz/Bretz (see
 \code{\link[mvtnorm]{pmvnorm}} for details).
 
 }
 \value{
 
 The probability that, under the hypothesis of independence, a maximally
-selected gauss statistic greater equal \code{b} is observed. This ist exact
-whereas \code{\link{pSchlitt}} does not work as advertised.
+selected gauss statistic greater equal \code{b} is observed. 
 
 }
 \references{ 
@@ -46,7 +47,6 @@ whereas \code{\link{pSchlitt}} does not work as advertised.
 	Discontinuous Split Points by Rank Statistics.
 	\emph{Biometrical Journal}, \bold{41}(8), 943--954.
 }
-\author{ Torsten Hothorn <Torsten.Hothorn@rzmail.uni-erlangen.de> }
 
 \examples{
 

@@ -1,11 +1,28 @@
 attach(NULL, name = "CheckExEnv")
-assign(".CheckExEnv", pos.to.env(2), pos = length(search()))
+assign(".CheckExEnv", as.environment(2), pos = length(search())) # base
+## This plot.new() patch has no effect yet for persp();
+## layout() & filled.contour() are now ok
+assign("plot.new", function() { .Internal(plot.new())
+		       pp <- par(c("mfg","mfcol","oma","mar"))
+		       if(all(pp$mfg[1:2] == c(1, pp$mfcol[2]))) {
+			 outer <- (oma4 <- pp$oma[4]) > 0; mar4 <- pp$mar[4]
+			 mtext(paste("help(",..nameEx,")"), side = 4,
+			       line = if(outer)max(1, oma4 - 1) else min(1, mar4 - 1),
+			       outer = outer, adj=1, cex= .8, col="orchid")} },
+       env = .CheckExEnv)
+assign("cleanEx", function(env = .GlobalEnv) {
+	rm(list = ls(envir = env, all.names = TRUE), envir = env)
+	RNGkind("Wichmann-Hill", "default")
+	assign(".Random.seed", c(0,rep(7654,3)), pos=1)
+       },
+       env = .CheckExEnv)
+assign("..nameEx", "__{must remake R-ex/*.R}__", env = .CheckExEnv) #-- for now
 assign("ptime", proc.time(), env = .CheckExEnv)
 postscript("maxstat-Examples.ps")
 assign("par.postscript", par(no.readonly = TRUE), env = .CheckExEnv)
 options(contrasts = c(unordered = "contr.treatment", ordered = "contr.poly"))
 library('maxstat')
-rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
+cleanEx(); ..nameEx <- "DLBCL"
 ###--- >>> `DLBCL' <<<----- Diffuse large B-cell lymphoma
 
 	## alias	 help(DLBCL)
@@ -15,83 +32,106 @@ rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
 
 data(DLBCL)
 
-# remove NA's
+# compute the cutpoint and plot the empirical process 
 
-DLBCL <- DLBCL[!is.na(DLBCL$time),]
+mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank")
 
-# compute the cutpoint
+print(mod)
 
-postscript("statDLBCL.ps",horizontal=F, width=8, height=8)
+##Don't run: 
+##D   postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
+
 par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
+plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression")
+##Don't run: 
+##D   dev.off()
 
-mod <- maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", plot=T, cex.lab=1.6,
-             cex.axis=1.6, xlab="Mean gene expression")
-
-dev.off()
 
 # significance of the cutpoint
-# Limiting distribution
+# limiting distribution
 
-maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", pmethod="Lau92")
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="Lau92")
 
-# improved Bonferroni inequality
+# improved Bonferroni inequality, plot with significance bound
 
-maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", pmethod="Lau94")
+mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank",
+                    pmethod="Lau94", alpha=0.05)
+plot(mod, xlab="Mean gene expression")
 
-# small sample solution Hothorn & Lausen (2001)
+##Don't run: 
+##D   postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
 
-maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", pmethod="HL")
-
-maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", pmethod="exactGauss")
-
-# Nature article survival analysis
-
-splitGEG <- rep(1, nrow(DLBCL))
-DLBCL <- cbind(DLBCL, splitGEG)
-DLBCL$splitGEG[DLBCL$GEG == "Activated B-like"] <- 0
-
-plot(survfit(Surv(time, cens) ~ splitGEG, data=DLBCL), xlab="Survival time in month", ylab="Probability")
-
-text(90, 0.7, "GC B-like")
-text(60, 0.3, "Activated B-like")
-
-splitIPI <- rep(1, nrow(DLBCL))
-DLBCL <- cbind(DLBCL, splitIPI)
-DLBCL$splitIPI[DLBCL$IPI <= 2] <- 0
-
-plot(survfit(Surv(time, cens) ~ splitIPI, data=DLBCL), xlab="Survival time in month", ylab="Probability")
-
-text(90, 0.7, "Low clinical risk")
-text(60, 0.25, "High clinical risk")
-
-# survival analysis using the cutpoint 
-
-splitMGE <- rep(1, nrow(DLBCL))
-DLBCL <- cbind(DLBCL, splitMGE)
-DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
-
-postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
 par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
+plot(mod, xlab="Mean gene expression", cex.lab=1.6, cex.axis=1.6)
+##Don't run: 
+##D   dev.off()
 
-plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL), xlab = "Survival time in month",
-ylab="Probability", cex.lab=1.6, cex.axis=1.6)
 
-text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
-text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
+# small sample solution Hothorn & Lausen
 
-dev.off()
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="HL")
+
+# normal approximation
+
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="exactGauss")
+
+# survival analysis and plotting like in Alizadeh et al. (2000)
+
+if(require(survival, quietly = TRUE)) {
+
+  splitGEG <- rep(1, nrow(DLBCL))
+  DLBCL <- cbind(DLBCL, splitGEG)
+  DLBCL$splitGEG[DLBCL$GEG == "Activated B-like"] <- 0
+
+  plot(survfit(Surv(time, cens) ~ splitGEG, data=DLBCL),
+       xlab="Survival time in month", ylab="Probability")
+
+  text(90, 0.7, "GC B-like")
+  text(60, 0.3, "Activated B-like")
+
+  splitIPI <- rep(1, nrow(DLBCL))
+  DLBCL <- cbind(DLBCL, splitIPI)
+  DLBCL$splitIPI[DLBCL$IPI <= 2] <- 0
+
+  plot(survfit(Surv(time, cens) ~ splitIPI, data=DLBCL),
+       xlab="Survival time in month", ylab="Probability")
+
+  text(90, 0.7, "Low clinical risk")
+  text(60, 0.25, "High clinical risk")
+
+  # survival analysis using the cutpoint 
+
+  splitMGE <- rep(1, nrow(DLBCL))
+  DLBCL <- cbind(DLBCL, splitMGE)
+  DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
+
+  ##Don't run: 
+##D     postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
+##D   
+  par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
+
+  plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
+       xlab = "Survival time in month",
+       ylab="Probability", cex.lab=1.6, cex.axis=1.6)
+
+  text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
+  text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
+
+  ##Don't run: 
+##D     dev.off()
+##D   
+}
+
 
 ## Keywords: 'datasets'.
 
 
 par(get("par.postscript", env = .CheckExEnv))
-rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
-###--- >>> `hohnloser' <<<----- Left ventricular ejection fraction of patients with malignant ventricular tachyarrhythmias
+cleanEx(); ..nameEx <- "hohnloser"
+###--- >>> `hohnloser' <<<----- Left ventricular ejection fraction of patients with malignant ventricular tachyarrhythmias.
 
 	## alias	 help(hohnloser)
 
@@ -100,32 +140,36 @@ rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
 
 data(hohnloser)
 
-# The approximation used in Lausen & Schumacher
+# limiting distribution
 
-maxstat.test(hohnloser$EF, hohnloser$month, cens=hohnloser$cens,
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 
 smethod="LogRank", pmethod="Lau92")
 
 # improved Bonferroni inequality
 
-maxstat.test(hohnloser$EF, hohnloser$month, cens=hohnloser$cens,
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="Lau94")
 
-# The approximation by Hothorn & Lausen
+# small sample solution by Hothorn & Lausen
 
-maxstat.test(hohnloser$EF, hohnloser$month, cens=hohnloser$cens,
-smethod="LogRank", pmethod="HL", plot=T)
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
+smethod="LogRank", pmethod="HL")
 
-maxstat.test(hohnloser$EF, hohnloser$month, cens=hohnloser$cens,
+# normal approximation
+
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="exactGauss")
 
 
 ## Keywords: 'datasets'.
 
 
-rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
+cleanEx(); ..nameEx <- "maxstat.test"
 ###--- >>> `maxstat.test' <<<----- Maximally Selected Rank and Gauss Statistics
 
 	## alias	 help(maxstat.test)
+	## alias	 help(maxstat.test.formula)
+	## alias	 help(maxstat.test.default)
 
 ##___ Examples ___:
 
@@ -133,13 +177,16 @@ rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
 x <- sort(runif(20))
 y <- c(rnorm(10), rnorm(10, 2))
 
-maxstat.test(x, y, smethod="Wilcoxon", pmethod="HL", minprop=0.25, maxprop=0.75)
+mod <- maxstat.test(y ~ x, smethod="Wilcoxon", pmethod="HL",
+                    minprop=0.25, maxprop=0.75, alpha=0.05)
+print(mod)
+plot(mod)
 
 
 ## Keywords: 'htest'.
 
 
-rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
+cleanEx(); ..nameEx <- "pLausen92"
 ###--- >>> `pLausen92' <<<----- Approximating Maximally Selected Statistics
 
 	## alias	 help(pLausen92)
@@ -152,17 +199,14 @@ rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
 
 data(LausenTab2)
 
-test <- function(x, prop, alpha)
-        abs(pLausen92(x, prop[1], prop[2]) - alpha)
-
 a <- rev(c(0.01, 0.025, 0.05, 0.1))
 prop <- rbind(c(0.25, 0.75), c(0.4, 0.6), c(0.1, 0.9), c(0.4, 0.9))
 Quant <- matrix(rep(0, length(a)*nrow(prop)), nrow=length(a)) 
 
 for (i in 1:length(a)) {                                            
-        for (j in 1:nrow(prop)) {                            
-                Quant[i,j] <- optim(2, test, prop=prop[j,], alpha=a[i])$par
-        }
+  for (j in 1:nrow(prop)) {                            
+    Quant[i,j] <- qLausen92(a[i], minprop=prop[j,1], maxprop=prop[j,2]) 
+  }
 }
 
 Quant <- round(Quant, 3)
@@ -175,14 +219,13 @@ Quant
 
 LausenTab2
 
-check <- all.equal(LausenTab2, Quant)
-if(!check) stop("error checking pLausen92")
+if(!all.equal(LausenTab2, Quant)) stop("error checking pLausen92")
 
 
 ## Keywords: 'distribution'.
 
 
-rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
+cleanEx(); ..nameEx <- "pLausen94"
 ###--- >>> `pLausen94' <<<----- Approximating Maximally Selected Statistics
 
 	## alias	 help(pLausen94)
@@ -193,30 +236,21 @@ rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
 
 p <- pLausen94(2.5, 20, 0.25, 0.75)
 
+# Lausen 94, page 489
+
 if (round(p, 3) != 0.073) stop("error checking pLausen94")
 
+# the same
 
-## Keywords: 'distribution'.
+p2 <- pLausen94(2.5, 200, 0.25, 0.75, m=seq(from=50, to=150, by=10))
 
-
-rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
-###--- >>> `pSchlitt' <<<----- Approximating Maximally Selected Statistics
-
-	## alias	 help(pSchlitt)
-	## alias	 help(qSchlitt)
-
-##___ Examples ___:
-
-
-# no example given in the paper!
-
-pSchlitt(2.5, N = 200, m = seq(from=50, to=150, by=10))
+stopifnot(all.equal(round(p,3), round(p2,3)))
 
 
 ## Keywords: 'distribution'.
 
 
-rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
+cleanEx(); ..nameEx <- "pexactgauss"
 ###--- >>> `pexactgauss' <<<----- Computing Maximally Selected Gauss Statistics
 
 	## alias	 help(pexactgauss)
@@ -231,7 +265,27 @@ pexact <- pexactgauss(2.5, 20, 2:18)
 ## Keywords: 'distribution'.
 
 
-rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
+cleanEx(); ..nameEx <- "plot.maxtest"
+###--- >>> `plot.maxtest' <<<----- Print and Plot Standardized Statistics
+
+	## alias	 help(plot.maxtest)
+	## alias	 help(print.maxtest)
+
+##___ Examples ___:
+
+
+x <- sort(runif(20))
+y <- rbinom(20, 1, 0.5)
+
+mod <- maxstat.test(y ~ x, smethod="Median", pmethod="HL", alpha=0.05)
+print(mod)
+plot(mod)
+
+
+## Keywords: 'htest'.
+
+
+cleanEx(); ..nameEx <- "pmaxstat"
 ###--- >>> `pmaxstat' <<<----- Approximating Maximally Selected Statistics
 
 	## alias	 help(pmaxstat)
@@ -240,7 +294,7 @@ rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
 ##___ Examples ___:
 
 
-pmaxstat(2.5, 1:20, 5:15)$lower
+pmaxstat(2.5, 1:20, 5:15)
 
 
 ## Keywords: 'distribution'.

@@ -19,97 +19,119 @@ data(DLBCL)
 \item{\code{IPI}}{International Prognostic Index}
 \item{\code{MGE}}{Mean Gene Expression}
 }
-Except of \code{MGE}, the data is published at
-\url{http://llmpp.nih.gov/lymphoma/data.shtml}. 
 }
-
 \source{
+
+Except of \code{MGE}, the data is published at
+\url{http://llmpp.nih.gov/lymphoma/data.shtml}. \code{MGE} is the mean of
+the gene expression.
+
+}
+\references{
+
 Ash A. Alizadeh et. al (2000), Distinct types of diffuse large
 B-cell lymphoma identified by gene
 expression profiling. \emph{Nature}, \bold{403}, 504--509
-}
-\references{
-Lausen, B. and Schumacher, M. (1992), Maximally Selected Rank Statistics.
-\emph{Biometrics} \bold{48}, 73--85
+
 }
 
 \examples{
 
 data(DLBCL)
 
-# remove NA's
+# compute the cutpoint and plot the empirical process 
 
-DLBCL <- DLBCL[!is.na(DLBCL$time),]
+mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank")
 
-# compute the cutpoint
+print(mod)
 
-
-postscript("statDLBCL.ps",horizontal=F, width=8, height=8)
+\dontrun{
+  postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
+}
 par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
-
-mod <- maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", plot=T, cex.lab=1.6,
-             cex.axis=1.6, xlab="Mean gene expression")
-
-dev.off()
+plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression")
+\dontrun{
+  dev.off()
+}
 
 # significance of the cutpoint
-# Limiting distribution
+# limiting distribution
 
-maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", pmethod="Lau92")
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="Lau92")
 
-# improved Bonferroni inequality
+# improved Bonferroni inequality, plot with significance bound
 
-maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", pmethod="Lau94")
 
-# small sample solution Hothorn & Lausen (2001)
+mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank",
+                    pmethod="Lau94", alpha=0.05)
+plot(mod, xlab="Mean gene expression")
 
-maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", pmethod="HL")
-
-maxstat.test(DLBCL$MGE, DLBCL$time,
-             cens=DLBCL$cens, smethod="LogRank", pmethod="exactGauss")
-
-# Nature article survival analysis
-
-splitGEG <- rep(1, nrow(DLBCL))
-DLBCL <- cbind(DLBCL, splitGEG)
-DLBCL$splitGEG[DLBCL$GEG == "Activated B-like"] <- 0
-
-plot(survfit(Surv(time, cens) ~ splitGEG, data=DLBCL),
-     xlab="Survival time in month", ylab="Probability")
-
-text(90, 0.7, "GC B-like")
-text(60, 0.3, "Activated B-like")
-
-splitIPI <- rep(1, nrow(DLBCL))
-DLBCL <- cbind(DLBCL, splitIPI)
-DLBCL$splitIPI[DLBCL$IPI <= 2] <- 0
-
-plot(survfit(Surv(time, cens) ~ splitIPI, data=DLBCL),
-     xlab="Survival time in month", ylab="Probability")
-
-text(90, 0.7, "Low clinical risk")
-text(60, 0.25, "High clinical risk")
-
-# survival analysis using the cutpoint 
-
-splitMGE <- rep(1, nrow(DLBCL))
-DLBCL <- cbind(DLBCL, splitMGE)
-DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
-
-postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
+\dontrun{
+  postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
+}
 par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
+plot(mod, xlab="Mean gene expression", cex.lab=1.6, cex.axis=1.6)
+\dontrun{
+  dev.off()
+}
 
-plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
-xlab = "Survival time in month",
-ylab="Probability", cex.lab=1.6, cex.axis=1.6)
+# small sample solution Hothorn & Lausen
 
-text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
-text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="HL")
 
-dev.off()
+# normal approximation
+
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="exactGauss")
+
+# survival analysis and plotting like in Alizadeh et al. (2000)
+
+if(require(survival, quietly = TRUE)) {
+
+  splitGEG <- rep(1, nrow(DLBCL))
+  DLBCL <- cbind(DLBCL, splitGEG)
+  DLBCL$splitGEG[DLBCL$GEG == "Activated B-like"] <- 0
+
+  plot(survfit(Surv(time, cens) ~ splitGEG, data=DLBCL),
+       xlab="Survival time in month", ylab="Probability")
+
+  text(90, 0.7, "GC B-like")
+  text(60, 0.3, "Activated B-like")
+
+  splitIPI <- rep(1, nrow(DLBCL))
+  DLBCL <- cbind(DLBCL, splitIPI)
+  DLBCL$splitIPI[DLBCL$IPI <= 2] <- 0
+
+  plot(survfit(Surv(time, cens) ~ splitIPI, data=DLBCL),
+       xlab="Survival time in month", ylab="Probability")
+
+  text(90, 0.7, "Low clinical risk")
+  text(60, 0.25, "High clinical risk")
+
+  # survival analysis using the cutpoint 
+
+  splitMGE <- rep(1, nrow(DLBCL))
+  DLBCL <- cbind(DLBCL, splitMGE)
+  DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
+
+  \dontrun{
+    postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
+  }
+  par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
+
+  plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
+       xlab = "Survival time in month",
+       ylab="Probability", cex.lab=1.6, cex.axis=1.6)
+
+  text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
+  text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
+
+  \dontrun{
+    dev.off()
+  }
+}
+
 }
 \keyword{datasets}
