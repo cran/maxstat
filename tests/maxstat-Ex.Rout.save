@@ -1,6 +1,6 @@
 
 R : Copyright 2001, The R Development Core Team
-Version 1.3.0 Under development (unstable) (2001-06-10)
+Version 1.3.0  (2001-06-22)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -23,6 +23,14 @@ Type `q()' to quit R.
 Loading required package: exactRankTests 
 Loading required package: mvtnorm 
 Loading required package: survival 
+
+Attaching package `survival':
+
+
+	The following object(s) are masked from package:base :
+
+	 naprint naprint.default naprint.omit naresid 
+
 > rm(list = ls(all = TRUE)); .Random.seed <- c(0,rep(7654,3))
 > ###--- >>> `DLBCL' <<<----- Diffuse large B-cell lymphoma
 > 
@@ -362,7 +370,7 @@ estimated cutpoint
 > 
 > 
 > cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-Time elapsed:  11.87 0.66 13.28 0 0 
+Time elapsed:  11.35 0.64 14.32 0 0 
 > dev.off(); quit('no')
 null device 
           1 

@@ -20,8 +20,7 @@ data(DLBCL)
 \item{\code{MGE}}{Mean Gene Expression}
 }
 Except of \code{MGE}, the data is published at
-\url{http://llmpp.nih.gov/lymphoma/data.shtml}. \code{MGE} was computed by
-Berthold Lausen.
+\url{http://llmpp.nih.gov/lymphoma/data.shtml}. 
 }
 
 \source{
