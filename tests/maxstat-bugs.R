@@ -1,5 +1,9 @@
 
 library(maxstat)
+actversion <- paste(R.version$major, R.version$minor, sep=".")
+thisversion <- "1.7.0"
+if (compareVersion(actversion, thisversion) >= 0)
+  RNGversion("1.6.2")
 set.seed(290875)
 
 # by Achim Zeileis, 13.09.2002

@@ -1,6 +1,6 @@
 
-R : Copyright 2002, The R Development Core Team
-Version 1.6.0 Patched (2002-10-14)
+R : Copyright 2003, The R Development Core Team
+Version 1.7.0 Under development (unstable) (2003-04-09)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -32,7 +32,7 @@ Type `q()' to quit R.
 > assign("cleanEx",
 +        function(env = .GlobalEnv) {
 + 	   rm(list = ls(envir = env, all.names = TRUE), envir = env)
-+            RNGkind("Wichmann-Hill", "default")
++            RNGkind("Wichmann-Hill", "Kinderman-Ramage")
 + 	   assign(".Random.seed", c(0, rep(7654, 3)), pos = 1)
 +        },
 +        env = .CheckExEnv)
@@ -42,8 +42,6 @@ Type `q()' to quit R.
 > assign("par.postscript", par(no.readonly = TRUE), env = .CheckExEnv)
 > options(contrasts = c(unordered = "contr.treatment", ordered = "contr.poly"))
 > library('maxstat')
-Loading required package: exactRankTests 
-Loading required package: mvtnorm 
 Loading required package: survival 
 > cleanEx(); ..nameEx <- "DLBCL"
 > ###--- >>> `DLBCL' <<<----- Diffuse large B-cell lymphoma
@@ -128,11 +126,12 @@ estimated cutpoint
 > 
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 +              smethod="LogRank", pmethod="HL")
+Loading required package: exactRankTests 
 
 	Maximally selected LogRank statistics using HL
 
 data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = 0.02216
+M = 3.171, p-value = 0.02218
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -143,6 +142,7 @@ estimated cutpoint
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 +              smethod="LogRank", pmethod="exactGauss", iscores=TRUE,
 +              abseps=0.01)
+Loading required package: mvtnorm 
 
 	Maximally selected LogRank statistics using exactGauss
 
@@ -456,7 +456,7 @@ estimated cutpoint
 	Maximally selected Median statistics using HL
 
 data:  y by x 
-M = 1.9714, p-value = 0.5134
+M = 1.9714, p-value = 0.5432
 sample estimates:
 estimated cutpoint 
          0.2138944 
@@ -531,7 +531,7 @@ estimated cutpoint
 > 
 > 
 > cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-Time elapsed:  13.22 0.68 14.01 0 0 
+Time elapsed:  15.61 1.23 20.66 0 0 
 > dev.off(); quit('no')
 null device 
           1 

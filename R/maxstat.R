@@ -1,4 +1,4 @@
-# $Id: maxstat.R,v 1.47 2002/11/22 15:09:17 hothorn Exp $
+# $Id: maxstat.R,v 1.48 2003/04/09 10:10:31 hothorn Exp $
 
 
 print.maxtest <- function(x, digits = 4, quote = TRUE, prefix = "", ...) {
@@ -194,17 +194,19 @@ pmaxstat <- function(b, scores,  msample, quant=FALSE)
 
   if (!is.loaded("cpermdist2")) stop("Function cpermdist2 from package exactRankTests not found!")
 
-  H <- .C("cpermdist2", H = as.double(H), as.integer(N),
+#  H <- .C("cpermdist2", H = as.double(H), as.integer(N),
+#                as.integer(totsum), as.integer(sc),
+#                as.integer(scores), as.integer(N),
+#                as.integer(length(H)), PACKAGE="exactRankTests")$H
+
+  H <- .Call("cpermdist2", as.integer(N),
                 as.integer(totsum), as.integer(sc),
-                as.integer(scores), as.integer(N),
-                as.integer(length(H)), PACKAGE="exactRankTests")$H
+                as.integer(scores), as.logical(FALSE), 
+                PACKAGE="exactRankTests")
 
   # add last row, column for compatibility
 
-  H <- matrix(H, nrow=N, ncol=totsum, byrow=TRUE)
-  H <- rbind(H, rep(0, ncol(H)))
-  H <- cbind(H, c(rep(0, nrow(H)-1), 1))
-
+  H <- matrix(H, nrow=N+1, byrow=TRUE)
 
   S <- rep(1:(ncol(H)-1), nrow(H) -2)
   S <- matrix(S, nrow(H) -2, ncol(H)-1, byrow=TRUE)

@@ -118,29 +118,34 @@ $90\%$ quantile of MGE using the upper bound of the
 $P$-value by \cite{on-the-exa:2001} can be computed by
 
 \renewcommand{\baselinestretch}{1}
+\begin{Schunk}
 \begin{Sinput}
 >library(maxstat)
 \end{Sinput}
 \begin{Soutput}
-Loading required package: exactRankTests 
-Loading required package: mvtnorm 
 Loading required package: survival 
 \end{Soutput}
 \begin{Sinput}
 >data(DLBCL)
 >mtHL <- maxstat.test(Surv(time, cens) ~ MGE, data = DLBCL, 
 +     smethod = "LogRank", pmethod = "HL")
+\end{Sinput}
+\begin{Soutput}
+Loading required package: exactRankTests 
+\end{Soutput}
+\begin{Sinput}
 >mtHL
 \end{Sinput}
 \begin{Soutput}
 	Maximally selected LogRank statistics using HL
 
 data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = 0.02216
+M = 3.171, p-value = 0.02218
 sample estimates:
 estimated cutpoint 
          0.1860526 
 \end{Soutput}
+\end{Schunk}
 \renewcommand{\baselinestretch}{1.5}
 
 \begin{figure}[t]
@@ -214,10 +219,16 @@ evaluate both mean gene expression and the International Prognostic Index
 (IPI) simultaneously:
 
 \renewcommand{\baselinestretch}{1}
+\begin{Schunk}
 \begin{Sinput}
 >mmax <- maxstat.test(Surv(time, cens) ~ MGE + 
 +     IPI, data = DLBCL, smethod = "LogRank", pmethod = "exactGauss", 
 +     abseps = 0.01)
+\end{Sinput}
+\begin{Soutput}
+Loading required package: mvtnorm 
+\end{Soutput}
+\begin{Sinput}
 >mmax
 \end{Sinput}
 \begin{Soutput}
@@ -234,18 +245,19 @@ Call: maxstat.test.data.frame(formula = Surv(time, cens) ~ MGE + IPI,
 	exactGauss
 
 data:  Surv(time, cens) by IPI 
-M = 2.9603, p-value = 0.01034
+M = 2.9603, p-value = 0.01167
 sample estimates:
 estimated cutpoint 
                  1 
 
 Adjusted p.value: 
-0.03350185 , error:  0.006958948 
+0.03271027 , error:  0.008848054 
 \end{Soutput}
+\end{Schunk}
 \renewcommand{\baselinestretch}{1.5}
 
 The p-value of the global test for the null hypothesis ``survival is
-independent from both IPI and MGE'' is 0.034 
+independent from both IPI and MGE'' is 0.033 
 and IPI provides a better distinction into two groups than 
 MGE does. We can display the
 standardized statistics using \texttt{plot} (Figure \ref{plotmmax}). The

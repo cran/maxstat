@@ -27,8 +27,7 @@ qexactgauss(p, x, minprop=0.1, maxprop=0.9, \dots)
 
 This is the exact distribution of a maximally selected Gauss statistic and
 the asymptotic distribution for maximally selected rank statistics.
-The correlation matrix can be computed using \code{\link{cmatrix}}, 
-normal probabilities are derived from the procedures by Genz/Bretz (see
+Normal probabilities are derived from the procedures by Genz/Bretz (see
 \code{\link[mvtnorm]{pmvnorm}} for details).
 
 }

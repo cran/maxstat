@@ -1,4 +1,4 @@
-# $Id: maxstat.test.R,v 1.15 2002/11/19 10:05:19 hothorn Exp $
+# $Id: maxstat.test.R,v 1.16 2003/02/07 14:31:39 hothorn Exp $
 
 maxstat.test <- function(formula, data, ...) 
   UseMethod("maxstat.test", data)
@@ -52,7 +52,7 @@ maxstat <- function(y, x=NULL, smethod=c("Wilcoxon",
          "Median", "NormalQuantil","LogRank", "Data"), 
          pmethod=c("none", "Lau92", "Lau94", "exactGauss", "HL", "min"), 
          iscores=(pmethod == "HL"), minprop=0.1, maxprop=0.9,  
-         alpha=NULL, ...) 
+         alpha=NULL, keepxy=TRUE, ...) 
 {
 
   if (is.null(x)) stop("no data given")
@@ -106,7 +106,11 @@ maxstat <- function(y, x=NULL, smethod=c("Wilcoxon",
     RET <- cmaxstat(scores, x, pmethod, minprop, maxprop, alpha, ...)
   }
   RET$smethod <- smethod
-  RET$pmethod <- pmethod 
+  RET$pmethod <- pmethod
+  if (keepxy) { 
+    RET$x <- x
+    RET$y <- y
+  } 
   RET
 }
 

@@ -1,4 +1,9 @@
-# $Id: CHANGES,v 1.21 2002/12/18 07:47:22 hothorn Exp $
+# $Id: CHANGES,v 1.24 2003/04/23 15:17:12 hothorn Exp $
+
+	0.6-8 (23.04.2003)
+
+	updates for exactRankTests-0.8-0
+	the package is now in a NAMESPACE
 	
 	0.6-7 (18.12.2002)
 

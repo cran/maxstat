@@ -13,7 +13,7 @@ using maximally selected rank statistics.
 maxstat(y, x=NULL, smethod=c("Wilcoxon", "Median",
             "NormalQuantil","LogRank", "Data"), pmethod=c("none", "Lau92",
             "Lau94", "exactGauss", "HL", "min"), iscores=(pmethod=="HL"),
-            minprop = 0.1, maxprop=0.9, alpha = NULL, \dots)
+            minprop = 0.1, maxprop=0.9, alpha = NULL, keepxy=TRUE, \dots)
 }
 \arguments{
   \item{y}{ numeric vector of data values, dependent variable. }
@@ -30,6 +30,8 @@ FALSE otherwise.}
                   the first group. }
   \item{alpha}{significance niveau, the appropriate quantile is computed if
    \code{alpha} is specified. Used for plotting within \code{\link{plot.maxtest}}.}
+  \item{keepxy}{logical: return \code{y} and \code{x} as elements of the
+\code{maxtest} object.}
   \item{formula}{ a formula describing the model to be tested of the form
     \code{lhs ~ rhs} where \code{lhs} is the response variable. 
     For survival problems, i.e. using the log-rank statistic, the
@@ -107,7 +109,8 @@ is returned:
   \item{univp.values}{the p-values for each of the variables under test.}
   \item{cm}{the correlation matrix the p-value is based on.}
 \code{\link{plot.maxtest}} and \code{\link{print.maxtest}} can be used for
-plotting and printing. 
+plotting and printing. If \code{keepxy = TRUE}, there are elements \code{y}
+and \code{x} giving the response and independent variable.
 }
 \references{ 
 

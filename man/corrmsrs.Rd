@@ -50,14 +50,16 @@ X <- matrix(rnorm(30), ncol=3)
 
 print(system.time(a <- corrmsrs(X, minprop=0, maxprop=0.999)))
 
-# an alternative implementation (no longer maintained 
-# but useful for testing)
-
-print(system.time(olda <- cmatrix(X)))
-
 # coded by just typing the definition of the correlation
 
 testcorr <- function(X) {
+  wh <- function(cut, x)
+    which(x <= cut)
+  index <- function(x) {
+    ux <- unique(x)
+    ux <- ux[ux < max(ux)]
+    lapply(ux, wh, x = x)
+  }
   a <- unlist(test <- apply(X, 2, index), recursive=FALSE)
   cnull <- rep(0, nrow(X))
   mycorr <- diag(length(a))
@@ -81,10 +83,6 @@ print(system.time(tc <- testcorr(X)))
 tc <- tc + t(tc)
 diag(tc) <- 1
 stopifnot(all.equal(tc, a))
-olda <- olda + t(olda)
-diag(olda) <- 1
-stopifnot(all.equal(olda, a))
-
 
 }
 \keyword{misc}
