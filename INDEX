@@ -10,3 +10,4 @@ pexactgauss             Computing Maximally Selected Gauss Statistics
 plot.maxtest            Print and Plot Standardized Statistics
 pmaxstat                Approximating Maximally Selected Statistics
 sphase                  S-phase fraction of tumor cells
+treepipit               Tree Pipit Data

@@ -1,4 +1,8 @@
-# $Id: CHANGES,v 1.28 2003/10/28 11:35:23 hothorn Exp $
+# $Id: CHANGES,v 1.29 2003/12/16 17:36:25 hothorn Exp $
+
+	0.7-6 (16.12.2003)
+
+	R-1.9.0 fixes: plot.new redefinition in preamble for tests
 
 	0.7-5 (28.10.2003)
 
