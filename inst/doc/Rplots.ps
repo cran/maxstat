@@ -26,8 +26,8 @@
 /c   { newpath 0 360 arc } def
 /r   { 4 2 roll moveto 1 copy 3 -1 roll exch 0 exch rlineto 0 rlineto -1 mul 0 exch rlineto closepath } def
 /p1  { stroke } def
-/p2  { gsave bg setrgbcolor fill grestore newpath } def
-/p3  { gsave bg setrgbcolor fill grestore stroke } def
+/p2  { gsave bg fill grestore newpath } def
+/p3  { gsave bg fill grestore stroke } def
 /t   { 6 -2 roll moveto gsave rotate
        ps mul neg 0 2 1 roll rmoveto
        1 index stringwidth pop
@@ -81,7 +81,7 @@ dup length dict begin
 %%Page: 1 1
 bp
 77.04 91.44 793.65 518.24 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -245,7 +245,7 @@ o
 708.07 391.83 2.70 c p1
 767.11 344.53 2.70 c p1
 18.00 18.00 823.89 577.28 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -329,11 +329,11 @@ np
 o
 18.00 18.00 823.89 577.28 cl
 /ps 16 def /Font1 findfont 16 s
-0 0 0 rgb
+0 setgray
 435.34 36.72 (Mean gene expression) .5 0 0 t
 30.96 304.84 (Standardized log-rank statistic using Lau94) .5 0 90 t
 77.04 91.44 793.65 518.24 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [ 3.00 5.00] 0 setdash
 1 setlinecap
@@ -355,7 +355,7 @@ ep
 bp
 91.41 91.41 793.66 518.26 cl
 18.00 18.00 823.89 577.28 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -444,11 +444,11 @@ np
 o
 18.00 18.00 823.89 577.28 cl
 /ps 16 def /Font1 findfont 16 s
-0 0 0 rgb
+0 setgray
 442.54 36.69 (Survival time in month) .5 0 0 t
 45.33 304.84 (Probability) .5 0 90 t
 91.41 91.41 793.66 518.26 cl
-0 0 0 rgb
+0 setgray
 1.50 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -674,7 +674,7 @@ ep
 bp
 91.41 371.05 793.66 518.26 cl
 91.41 371.05 793.66 518.26 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -829,7 +829,7 @@ o
 711.47 483.42 2.70 c p1
 767.65 467.51 2.70 c p1
 18.00 18.00 823.89 577.28 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -915,11 +915,11 @@ np
 o
 18.00 297.64 823.89 577.28 cl
 /ps 16 def /Font1 findfont 16 s
-0 0 0 rgb
+0 setgray
 442.54 316.33 ( MGE) .5 0 0 t
 45.33 444.65 (Standardized log-rank statistic) .5 0 90 t
 91.41 371.05 793.66 518.26 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [ 3.00 5.00] 0 setdash
 1 setlinecap
@@ -931,7 +931,7 @@ np
 o
 91.41 91.41 793.66 238.62 cl
 91.41 91.41 793.66 238.62 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -954,7 +954,7 @@ o
 550.91 217.38 2.70 c p1
 767.65 134.84 2.70 c p1
 18.00 18.00 823.89 577.28 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -1040,11 +1040,11 @@ np
 o
 18.00 18.00 823.89 297.64 cl
 /ps 16 def /Font1 findfont 16 s
-0 0 0 rgb
+0 setgray
 442.54 36.69 ( IPI) .5 0 0 t
 45.33 165.02 (Standardized log-rank statistic) .5 0 90 t
 91.41 91.41 793.66 238.62 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [ 3.00 5.00] 0 setdash
 1 setlinecap

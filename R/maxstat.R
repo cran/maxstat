@@ -71,6 +71,8 @@ plot.mmaxtest <- function(x, xlab=NULL, ylab=NULL, nrow=2, ...) {
 
 pLausen92 <- function(b, minprop=0.1, maxprop=0.9)
 {
+  ### correction suggested by "Schell, Michael J." <Michael.Schell@moffitt.org>
+  if (b < 1) return(1)
   db <- dnorm(b)
   p <- 4*db/b + db*(b - 1/b)*log((maxprop*(1 - minprop))/((1-maxprop)*minprop))
   max(p,0)

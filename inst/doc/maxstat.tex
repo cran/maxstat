@@ -123,10 +123,8 @@ $P$-value by \cite{on-the-exa:2001} can be computed by
 >library(maxstat)
 \end{Sinput}
 \begin{Soutput}
-Loading required package: exactRankTests 
-Loading required package: mvtnorm 
-Loading required package: survival 
-Loading required package: splines 
+  Package ‘exactRankTests’ is no longer under development.
+  Please consider using package ‘coin’ instead.
 \end{Soutput}
 \begin{Sinput}
 >data(DLBCL)
@@ -222,7 +220,7 @@ $10000$).
 	Maximally selected LogRank statistics using condMC
 
 data:  Surv(time, cens) by MGE 
-M = 3.1772, p-value = 0.0116
+M = 3.1772, p-value = 0.0121
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -262,19 +260,19 @@ Call: maxstat.test.data.frame(formula = Surv(time, cens) ~ MGE + IPI,
 	exactGauss
 
 data:  Surv(time, cens) by IPI 
-M = 2.9603, p-value = 0.01160
+M = 2.9603, p-value = 0.01112
 sample estimates:
 estimated cutpoint 
                  1 
 
 Adjusted p.value: 
-0.02501475 , error:  0.01496962 
+0.04075759 , error:  0.05138664 
 \end{Soutput}
 \end{Schunk}
 \renewcommand{\baselinestretch}{1.5}
 
 The p-value of the global test for the null hypothesis ``survival is
-independent from both IPI and MGE'' is 0.025 
+independent from both IPI and MGE'' is 0.041 
 and IPI provides a better distinction into two groups than 
 MGE does. We can display the
 standardized statistics using \texttt{plot} (Figure \ref{plotmmax}). The

@@ -25,8 +25,8 @@
 /c   { newpath 0 360 arc } def
 /r   { 4 2 roll moveto 1 copy 3 -1 roll exch 0 exch rlineto 0 rlineto -1 mul 0 exch rlineto closepath } def
 /p1  { stroke } def
-/p2  { gsave bg setrgbcolor fill grestore newpath } def
-/p3  { gsave bg setrgbcolor fill grestore stroke } def
+/p2  { gsave bg fill grestore newpath } def
+/p3  { gsave bg fill grestore stroke } def
 /t   { 6 -2 roll moveto gsave rotate
        ps mul neg 0 2 1 roll rmoveto
        1 index stringwidth pop
@@ -80,7 +80,7 @@ dup length dict begin
 %%Page: 1 1
 bp
 0.00 0.00 432.00 432.00 cl
-0 0 0 rgb
+0 setgray
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -169,11 +169,11 @@ np
 o
 0.00 0.00 432.00 432.00 cl
 /ps 16 def /Font1 findfont 16 s
-0 0 0 rgb
+0 setgray
 237.59 18.69 (Survival time in month) .5 0 0 t
 27.33 223.20 (Probability) .5 0 90 t
 73.41 73.41 401.77 372.98 cl
-0 0 0 rgb
+0 setgray
 1.50 setlinewidth
 [] 0 setdash
 1 setlinecap
