@@ -1,4 +1,12 @@
-# $Id: CHANGES,v 1.26 2003/06/16 13:17:23 hothorn Exp $
+# $Id: CHANGES,v 1.27 2003/08/30 14:29:30 hothorn Exp $
+
+	0.7-3 (30.08.2003)
+
+	use canonical header files
+
+	0.7-2 (18.07.2003)
+
+	optional weights argument addded
 
 	0.7-1 (15.06.2003)
 

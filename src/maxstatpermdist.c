@@ -1,6 +1,6 @@
 /*
 
-  $Id: maxstatpermdist.c,v 1.3 2003/06/16 13:17:34 hothorn Exp $
+  $Id: maxstatpermdist.c,v 1.4 2003/08/30 14:29:43 hothorn Exp $
   
   maxstatpermdist : Simulate Distribution of Maximally Selected Rank Statistics
   Copyright (C) 2003  Torsten Hothorn 
@@ -34,8 +34,8 @@
 
                                                                    
 #include <R.h>
-#include <Rinternals.h>
-#include <R_ext/Mathlib.h>
+#include <Rmath.h>
+#include <Rdefines.h>
 #include <stdio.h>
 
 /* this will move to exactRankTests */

@@ -1,4 +1,4 @@
-/* $Id: newcorr.c,v 1.4 2002/11/22 08:10:07 hothorn Exp $ 
+/* $Id: newcorr.c,v 1.5 2003/08/30 14:29:43 hothorn Exp $ 
 **
 ** Correlation matrix for maximally selected rank statistics.
 **
@@ -18,9 +18,9 @@
 **
 */
 
-# include <R.h>
-# include <Rinternals.h>
-# include <R_ext/Mathlib.h>
+#include <R.h>
+#include <Rmath.h>
+#include <Rdefines.h>
 
 SEXP newcorr (SEXP ilist, SEXP prop) {
   int p, nobs, kx, ky, i, j, k, l, mn, m, n;

@@ -1,6 +1,6 @@
 #include <R.h>
-#include <Rinternals.h>
-#include <R_ext/Mathlib.h>
+#include <Rmath.h>
+#include <Rdefines.h>
 
 int cardunion(int *x, int *y, int m, int n)
 {
