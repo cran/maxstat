@@ -9,14 +9,17 @@ greater or equal to \code{b}.
 
 }
 \usage{
-pexactgauss(b, N, m, \dots)
-qexactgauss(p, N, m, \dots)
+pexactgauss(b, x, minprop=0.1, maxprop=0.9, \dots)
+qexactgauss(p, x, minprop=0.1, maxprop=0.9, \dots)
 }
 \arguments{
   \item{b}{ quantile. }
   \item{p}{ probability. } 
-  \item{N}{ number of observations. }
-  \item{m}{ cutpoints. }
+  \item{x}{ the prognostic factor(s) under test. }
+  \item{minprop}{ at least \code{minprop}*100\% of the observations in the
+                  first group. }
+  \item{maxprop}{ not more than \code{minprop}*100\% of the observations in
+                  the first group. }
   \item{\dots}{additional parameters to be passed to
 \code{\link[mvtnorm]{pmvnorm}}.}
 }
@@ -47,7 +50,9 @@ selected gauss statistic greater equal \code{b} is observed.
 }
 \examples{
 
-pexact <- pexactgauss(2.5, 20, 2:18, abseps=0.01)
+x <- rnorm(20)
+
+pexact <- pexactgauss(2.5, x, abseps=0.01)
 
 }
 \keyword{distribution}

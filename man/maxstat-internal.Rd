@@ -3,6 +3,7 @@
 \alias{hl}
 \alias{index}
 \alias{wh}
+\alias{cmatrix}
 \title{Internal maxstat functions}
 \description{
  Internal maxstat functions.
@@ -14,6 +15,7 @@ cmaxstat(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
 hl(scores, H, E, S, msample, N, b)
 index(x)
 wh(cut, x)
+cmatrix(X)
 }
 \details{
   These functions are not to be called by the user.

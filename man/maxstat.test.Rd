@@ -11,14 +11,15 @@ using maximally selected rank statistics.
 \usage{
 \method{maxstat.test}{data.frame}(formula, data, subset, na.action, \dots)
 maxstat(y, x=NULL, smethod=c("Wilcoxon", "Median",
-            "NormalQuantil","LogRank"), pmethod=c("none", "Lau92",
+            "NormalQuantil","LogRank", "Data"), pmethod=c("none", "Lau92",
             "Lau94", "exactGauss", "HL", "min"), iscores=(pmethod=="HL"),
             minprop = 0.1, maxprop=0.9, alpha = NULL, \dots)
 }
 \arguments{
   \item{y}{ numeric vector of data values, dependent variable. }
   \item{x}{ numeric vector of data values, independent variable. }
-  \item{smethod}{ kind of statistic to be computed. }
+  \item{smethod}{ kind of statistic to be computed, i.e. defines the scores
+to be used for computing the statistic. }
   \item{pmethod}{ kind of p-value approximation to be used. }
   \item{iscores}{ logical: should the scores be mapped into integers
 \code{1:length(x)}? This is TRUE by default for \code{pmethod=="HL"} and
@@ -103,6 +104,8 @@ is returned:
   \item{whichmin}{an integer specifying the element of \code{maxstats} with
                   smallest p-value.}
   \item{p.value}{the p-value of the global test.}
+  \item{univp.values}{the p-values for each of the variables under test.}
+  \item{cm}{the correlation matrix the p-value is based on.}
 \code{\link{plot.maxtest}} and \code{\link{print.maxtest}} can be used for
 plotting and printing. 
 }

@@ -1,6 +1,6 @@
 DLBCL                   Diffuse large B-cell lymphoma 
 LausenTab2              Table 2 of Lausen and Schumacher (1992) 
-cmatrix                 Correlation Matrix 
+corrmsrs                Correlation Matrix 
 hohnloser               Left ventricular ejection fraction of patients
                         with malignant ventricular tachyarrhythmias. 
 maxstat-internal        Internal maxstat functions

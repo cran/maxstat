@@ -1,4 +1,4 @@
-# $Id: maxstat.test.R,v 1.10 2002/09/17 09:10:27 hothorn Exp $
+# $Id: maxstat.test.R,v 1.15 2002/11/19 10:05:19 hothorn Exp $
 
 maxstat.test <- function(formula, data, ...) 
   UseMethod("maxstat.test", data)
@@ -49,7 +49,7 @@ function(formula, data, subset, na.action, ...)
 
 
 maxstat <- function(y, x=NULL, smethod=c("Wilcoxon", 
-         "Median", "NormalQuantil","LogRank"), 
+         "Median", "NormalQuantil","LogRank", "Data"), 
          pmethod=c("none", "Lau92", "Lau94", "exactGauss", "HL", "min"), 
          iscores=(pmethod == "HL"), minprop=0.1, maxprop=0.9,  
          alpha=NULL, ...) 
@@ -81,36 +81,26 @@ maxstat <- function(y, x=NULL, smethod=c("Wilcoxon",
     mmax <- vector(mode="list", length=ncol(x))
     pvalues <- rep(0, ncol(x))
     statistics <- rep(0, ncol(x))
-    cx <- x
-    factors <- sapply(x, is.factor)
     for (i in 1:ncol(x)) {
       mmax[[i]] <- cmaxstat(scores, x[,i], pmethod, minprop, 
                            maxprop, alpha, ...)
       mmax[[i]]$data.name <- colnames(x)[i]
       mmax[[i]]$smethod <- smethod
       mmax[[i]]$pmethod <- pmethod 
-      if (factors[i]) {
-        cx[,i] <- as.integer(cx[,i])
-        cr <- range(as.integer(mmax[[i]]$cuts))
-      } else { 
-        cr <- range(mmax[[i]]$cuts)
-      }
-      cx[cx[,i] < cr[1],i] <- cr[1]
-      cx[cx[,i] > cr[2],i] <- cr[2]
       pvalues[i] <- mmax[[i]]$p.value
       statistics[i] <- mmax[[i]]$statistic
     }
     STATISTIC <- max(statistics)
-    cm <- cmatrix(cx)
-    cm <- cm + t(cm)
-    diag(cm) <- diag(cm)/2
+    # do not use pexactgauss, we need cm here
+    cm <- corrmsrs(x, minprop, maxprop)
     p <- pmvnorm(lower=-STATISTIC, upper=STATISTIC, mean=rep(0,ncol(cm)),
                  corr=cm, ...)
     if (attr(p, "msg") != "Normal Completion") {
       msg <- paste("pvmnorm: ", attr(p, "msg"), collapse=" ")
       warning(msg)
     }
-    RET <- list(maxstats=mmax, whichmin=which.min(pvalues), p.value=1 - p)
+    RET <- list(maxstats=mmax, whichmin=which.min(pvalues), p.value=1 - p,
+    cm=cm, univp.values=pvalues)
     class(RET) <- "mmaxtest"
   } else {
     RET <- cmaxstat(scores, x, pmethod, minprop, maxprop, alpha, ...)
@@ -128,6 +118,18 @@ cmaxstat <- function(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
   pmethod <- match.arg(pmethod)
 
   if (is.null(y) || is.null(x)) stop("no data given")
+
+  if (!is.numeric(x)) {
+    if (is.factor(x)) {
+      if (!(is.ordered(x) || nlevels(x) == 2)) {
+        warning("cannot order in x, returning NA")
+        return(NA)
+      }
+    } else {
+      warning("cannot order in x, returning NA")
+      return(NA)
+    }
+  }
 
   xname <- deparse(substitute(x))
   yname <- deparse(substitute(y))  
@@ -180,9 +182,9 @@ cmaxstat <- function(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
        QUANT <- qLausen94(alpha, N, minprop, maxprop, m=m)
   }
   if (pmethod == "exactGauss") {
-    PVAL <- pexactgauss(STATISTIC, N, m, ...)
+    PVAL <- pexactgauss(STATISTIC, x, minprop, maxprop, ...)
     if (!is.null(alpha))
-       QUANT <- qexactgauss(alpha, N, m, ...)
+       QUANT <- qexactgauss(alpha, x, minprop, maxprop, ...)
   }
   if (pmethod == "HL") {
     PVAL <- pmaxstat(STATISTIC, y, m)
@@ -192,7 +194,7 @@ cmaxstat <- function(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
   if (pmethod == "min") {
     PVAL <- min(pLausen92(STATISTIC, minprop, maxprop), 
                 pLausen94(STATISTIC, N, minprop, maxprop, m=m),  
-                pexactgauss(STATISTIC, N, m, ...),
+                pexactgauss(STATISTIC, x, minprop, maxprop, ...),
                 pmaxstat(STATISTIC, y, m))
     if (!is.null(alpha))
        QUANT <- NA

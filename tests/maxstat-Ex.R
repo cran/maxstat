@@ -285,7 +285,8 @@ cleanEx(); ..nameEx <- "pexactgauss"
 ##___ Examples ___:
 
 
-pexact <- pexactgauss(2.5, 20, 2:18, abseps=0.01)
+x <- rnorm(20)
+pexact <- pexactgauss(2.5, x,  abseps=0.01)
 
 
 ## Keywords: 'distribution'.

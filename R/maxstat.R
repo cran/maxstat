@@ -1,4 +1,4 @@
-# $Id: maxstat.R,v 1.44 2002/09/17 08:47:11 hothorn Exp $
+# $Id: maxstat.R,v 1.46 2002/11/19 10:00:39 hothorn Exp $
 
 
 print.maxtest <- function(x, digits = 4, quote = TRUE, prefix = "", ...) {
@@ -115,39 +115,33 @@ wh <- function(cut, x)
 cmatrix <- function(X) {
   N <- nrow(X)
   lindx <- unlist(test <- apply(X, 2, index), recursive=FALSE)
-  a <- .Call("corr", as.list(lindx), as.integer(N))
+  a <- .Call("corr", as.list(lindx), as.integer(N), PACKAGE="maxstat")
   a
 }
   
-pexactgauss <- function(b, N, m, ...)
+pexactgauss <- function(b, x, minprop=0.1, maxprop=0.9, ...)
 {
   if (!require(mvtnorm)) stop("package mvtnorm not loaded")
-  if (length(m) > 1) {
-    n <- m[2:length(m)]
-    mm <- m[1:(length(m)-1)]
-    mcorr <- sqrt((mm/N)*(1 - n/N))/sqrt(n/N*(1 - mm/N))
-
-    corrmatrix <- diag(length(m))
-
-    for (i in 1:(length(m)-1))
-      corrmatrix[i,(i+1):length(m)] <- cumprod(mcorr[i:(length(m)-1)])
-
-    p <- pmvnorm(mean=rep(0, length(m)),
-                 corr=t(corrmatrix), lower=rep(-b, length(m)),
-               upper=rep(b, length(m)), ...)
+  if (length(x) > 1) {
+    cm <- corrmsrs(x, minprop, maxprop) 
+    p <- pmvnorm(mean=rep(0, nrow(cm)),
+                 corr=cm, lower=rep(-b, nrow(cm)),
+               upper=rep(b, nrow(cm)), ...)
     msg <- attr(p, "msg")
     if (msg != "Normal Completion") warning(msg)
     return(1 - p)
   }
-  if (length(m) == 1) {
+  if (length(x) == 1) {
     return(pnorm(-b)*2)
   }
 }
 
-qexactgauss <- function(p, N, m, ...)
+
+
+qexactgauss <- function(p, x, minprop=0.1, maxprop=0.9,...)
 {
-  test <- function(x)
-    abs(pexactgauss(x, N, m, ...) - p)
+  test <- function(a)
+    abs(pexactgauss(a, x, minprop=minprop, maxprop=maxprop, ...) - p)
 
   return(optimize(test, interval=c(0,10))$minimum)
 }
