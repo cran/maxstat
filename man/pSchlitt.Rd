@@ -14,7 +14,7 @@ qSchlitt(p, N, m)
 }
 \arguments{
   \item{b}{ quantile. }
-  \item{p]{ probability. } 
+  \item{p}{ probability. } 
   \item{N}{ number of observations. }
   \item{m}{ cutpoints. }
   \item{method}{ method of computing bivariate normal probabilities. Results

@@ -14,7 +14,7 @@ qexactgauss(p, N, m)
 }
 \arguments{
   \item{b}{ quantile. }
-  \item{p]{ probability. } 
+  \item{p}{ probability. } 
   \item{N}{ number of observations. }
   \item{m}{ cutpoints. }
   \item{maxpts}{maximum number of function values as integer}
