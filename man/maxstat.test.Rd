@@ -9,7 +9,7 @@ Performs a maximally selected rank or Gauss test on bivariate observations.
 \usage{
 \method{maxstat.test}{default}(x, y, event = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
             "NormalQuantil","LogRank"), pmethod=c("none", "Lau92",
-            "Lau94", "exactGauss", "HL", "min"),
+            "Lau94", "exactGauss", "HL", "min"), iscores=(pmethod=="HL"),
             minprop = 0.1, maxprop=0.9, alpha = NULL, \dots)
 \method{maxstat.test}{formula}(formula, data, subset, na.action, \dots)
 }
@@ -19,6 +19,9 @@ Performs a maximally selected rank or Gauss test on bivariate observations.
   \item{event}{censoring: \code{0=alive}, \code{1=dead} (only meaningful with LogRank)}
   \item{smethod}{ kind of statistic to be computed. }
   \item{pmethod}{ kind of p-value approximation to be used. }
+  \item{iscores}{ logical: should the scores be mapped into integers
+\code{1:length(x)}? This is TRUE by default for \code{pmethod=="HL"} and
+FALSE otherwise.}
   \item{minprop}{ at least \code{minprop}*100\% of the observations in the
                   first group. }
   \item{maxprop}{ not more than \code{minprop}*100\% of the observations in

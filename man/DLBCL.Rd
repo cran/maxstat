@@ -12,7 +12,7 @@ data(DLBCL)
 }
 \format{
 \describe{
-\item{\code{DLCLid}}{DLCL identifier}
+\item{\code{DLCLid}}{DLBCL identifier}
 \item{\code{GEG}}{Gene Expression Group}
 \item{\code{time}}{survival time in month}
 \item{\code{cens}}{censoring: 0 cencored, 1 dead}
@@ -46,10 +46,11 @@ mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank")
 print(mod)
 
 \dontrun{
-  postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
+  # postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
+  pdf("statDLBCL.pdf", width=8, height=8)
 }
 par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
-plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression")
+plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression",lwd=2)
 \dontrun{
   dev.off()
 }
@@ -58,17 +59,21 @@ plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression")
 # limiting distribution
 
 maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-             smethod="LogRank", pmethod="Lau92")
+             smethod="LogRank", pmethod="Lau92", iscores=TRUE)
 
 # improved Bonferroni inequality, plot with significance bound
 
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="Lau94", iscores=TRUE)
 
 mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank",
                     pmethod="Lau94", alpha=0.05)
 plot(mod, xlab="Mean gene expression")
 
 \dontrun{
-  postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
+#  postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
+   pdf("RNewsStat.pdf", width=8, height=8)
+
 }
 par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 plot(mod, xlab="Mean gene expression", cex.lab=1.6, cex.axis=1.6)
@@ -84,7 +89,7 @@ maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 # normal approximation
 
 maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-             smethod="LogRank", pmethod="exactGauss")
+             smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
 # survival analysis and plotting like in Alizadeh et al. (2000)
 
@@ -117,13 +122,15 @@ if(require(survival, quietly = TRUE)) {
   DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
 
   \dontrun{
-    postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
+   # postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
+    pdf("survDLBCL.pdf", width=8, height=8)
+
   }
   par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 
   plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
        xlab = "Survival time in month",
-       ylab="Probability", cex.lab=1.6, cex.axis=1.6)
+       ylab="Probability", cex.lab=1.6, cex.axis=1.6, lwd=2)
 
   text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
   text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   

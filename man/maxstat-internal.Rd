@@ -7,6 +7,11 @@
 \alias{hl}
 \alias{pSchlitt}
 \alias{qSchlitt}
+\alias{corlm}
+\alias{wh}
+\alias{index}
+\alias{corrmatrix}
+\alias{forsel}
 
 \title{Internal maxstat functions}
 \description{
@@ -21,7 +26,11 @@ msurv(time, event)
 hl(scores, H, E, S, msample, N, b)
 pSchlitt(b, N, m, method=c("genz", "drezner"))
 qSchlitt(p, N, m)
-
+corlm(Xone, Xtwo)
+wh(cut, x)
+index(x)
+corrmatrix(X)
+forsel(y, Xin, Xout, ret=FALSE)
 
 }
 \details{

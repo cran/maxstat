@@ -39,7 +39,6 @@ is observed. \code{qmaxstat} needs optimization.
         On the Exact Distribution of Maximally Selected Rank Statistics.
         \emph{submitted}, preprint available from
         \url{http://www.mathpreprints.com/math/Preprint/hothorn/20020227/2}
-
 }
 
 \examples{

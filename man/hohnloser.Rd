@@ -46,10 +46,19 @@ data(hohnloser)
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 
 smethod="LogRank", pmethod="Lau92")
 
+# with integer valued scores for comparison
+
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 
+smethod="LogRank", pmethod="Lau92", iscores=TRUE)
+
 # improved Bonferroni inequality
 
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="Lau94")
+
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
+smethod="LogRank", pmethod="Lau94", iscores=TRUE)
+
 
 # small sample solution by Hothorn & Lausen
 
@@ -60,6 +69,9 @@ smethod="LogRank", pmethod="HL")
 
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="exactGauss")
+
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
+smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
 }
 

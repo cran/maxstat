@@ -1,6 +1,6 @@
 
-R : Copyright 2001, The R Development Core Team
-Version 1.4.0 Under development (unstable) (2001-12-10)
+R : Copyright 2002, The R Development Core Team
+Version 1.6.0 Under development (unstable) (2002-05-21)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,18 +17,23 @@ Type `q()' to quit R.
 > assign(".CheckExEnv", as.environment(2), pos = length(search())) # base
 > ## This plot.new() patch has no effect yet for persp();
 > ## layout() & filled.contour() are now ok
-> assign("plot.new", function() { .Internal(plot.new())
-+ 		       pp <- par(c("mfg","mfcol","oma","mar"))
-+ 		       if(all(pp$mfg[1:2] == c(1, pp$mfcol[2]))) {
-+ 			 outer <- (oma4 <- pp$oma[4]) > 0; mar4 <- pp$mar[4]
-+ 			 mtext(paste("help(",..nameEx,")"), side = 4,
-+ 			       line = if(outer)max(1, oma4 - 1) else min(1, mar4 - 1),
-+ 			       outer = outer, adj=1, cex= .8, col="orchid")} },
+> assign("plot.new",
++        function() {
++ 	   .Internal(plot.new())
++ 	   pp <- par(c("mfg","mfcol","oma","mar"))
++ 	   if(all(pp$mfg[1:2] == c(1, pp$mfcol[2]))) {
++                outer <- (oma4 <- pp$oma[4]) > 0; mar4 <- pp$mar[4]
++                mtext(paste("help(", ..nameEx, ")"), side = 4,
++                      line = if(outer)max(1, oma4 - 1) else min(1, mar4 - 1),
++                      outer = outer, adj = 1, cex = .8, col = "orchid")
++ 	   }
++        },
 +        env = .CheckExEnv)
-> assign("cleanEx", function(env = .GlobalEnv) {
-+ 	rm(list = ls(envir = env, all.names = TRUE), envir = env)
-+ 	RNGkind("Wichmann-Hill", "default")
-+ 	assign(".Random.seed", c(0,rep(7654,3)), pos=1)
+> assign("cleanEx",
++        function(env = .GlobalEnv) {
++ 	   rm(list = ls(envir = env, all.names = TRUE), envir = env)
++            RNGkind("Wichmann-Hill", "default")
++ 	   assign(".Random.seed", c(0, rep(7654, 3)), pos = 1)
 +        },
 +        env = .CheckExEnv)
 > assign("..nameEx", "__{must remake R-ex/*.R}__", env = .CheckExEnv) #-- for now
@@ -58,17 +63,18 @@ Loading required package: mvtnorm
 	LogRank using none
 
 data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = NA
+M = 3.1772, p-value = NA
 sample estimates:
 estimated cutpoint 
          0.1860526 
 
 > 
 > ##Don't run: 
-> ##D   postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
+> ##D   # postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
+> ##D   pdf("statDLBCL.pdf", width=8, height=8)
 > 
 > par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
-> plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression")
+> plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression",lwd=2)
 > ##Don't run: 
 > ##D   dev.off()
 > 
@@ -77,7 +83,7 @@ estimated cutpoint
 > # limiting distribution
 > 
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-+              smethod="LogRank", pmethod="Lau92")
++              smethod="LogRank", pmethod="Lau92", iscores=TRUE)
 
 	LogRank using Lau92
 
@@ -90,12 +96,26 @@ estimated cutpoint
 > 
 > # improved Bonferroni inequality, plot with significance bound
 > 
+> maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
++              smethod="LogRank", pmethod="Lau94", iscores=TRUE)
+
+	LogRank using Lau94
+
+data:  Surv(time, cens) by MGE 
+M = 3.171, p-value = 0.02435
+sample estimates:
+estimated cutpoint 
+         0.1860526 
+
+> 
 > mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank",
 +                     pmethod="Lau94", alpha=0.05)
 > plot(mod, xlab="Mean gene expression")
 > 
 > ##Don't run: 
-> ##D   postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
+> ##D #  postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
+> ##D    pdf("RNewsStat.pdf", width=8, height=8)
+> ##D 
 > 
 > par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 > plot(mod, xlab="Mean gene expression", cex.lab=1.6, cex.axis=1.6)
@@ -120,7 +140,7 @@ estimated cutpoint
 > # normal approximation
 > 
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-+              smethod="LogRank", pmethod="exactGauss")
++              smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
 	LogRank using exactGauss
 
@@ -162,13 +182,15 @@ estimated cutpoint
 +   DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
 + 
 +   ##Don't run: 
-+ ##D     postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
++ ##D    # postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
++ ##D     pdf("survDLBCL.pdf", width=8, height=8)
++ ##D 
 + ##D   
 +   par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 + 
 +   plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
 +        xlab = "Survival time in month",
-+        ylab="Probability", cex.lab=1.6, cex.axis=1.6)
++        ylab="Probability", cex.lab=1.6, cex.axis=1.6, lwd=2)
 + 
 +   text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
 +   text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
@@ -177,6 +199,8 @@ estimated cutpoint
 + ##D     dev.off()
 + ##D   
 + }
+Warning message: 
+The use of _ is deprecated: you will be warned only once per session 
 > 
 > 
 > ## Keywords: 'datasets'.
@@ -201,6 +225,20 @@ estimated cutpoint
 	LogRank using Lau92
 
 data:  Surv(month, cens) by EF 
+M = 3.5691, p-value = 0.01065
+sample estimates:
+estimated cutpoint 
+                39 
+
+> 
+> # with integer valued scores for comparison
+> 
+> maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 
++ smethod="LogRank", pmethod="Lau92", iscores=TRUE)
+
+	LogRank using Lau92
+
+data:  Surv(month, cens) by EF 
 M = 3.5639, p-value = 0.01083
 sample estimates:
 estimated cutpoint 
@@ -215,7 +253,19 @@ estimated cutpoint
 	LogRank using Lau94
 
 data:  Surv(month, cens) by EF 
-M = 3.5639, p-value = 0.005864
+M = 3.5691, p-value = 0.005453
+sample estimates:
+estimated cutpoint 
+                39 
+
+> 
+> maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
++ smethod="LogRank", pmethod="Lau94", iscores=TRUE)
+
+	LogRank using Lau94
+
+data:  Surv(month, cens) by EF 
+M = 3.5639, p-value = 0.005556
 sample estimates:
 estimated cutpoint 
                 39 
@@ -229,7 +279,7 @@ estimated cutpoint
 	LogRank using HL
 
 data:  Surv(month, cens) by EF 
-M = 3.5639, p-value = 0.006929
+M = 3.5639, p-value = 0.00667
 sample estimates:
 estimated cutpoint 
                 39 
@@ -243,7 +293,19 @@ estimated cutpoint
 	LogRank using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5639, p-value = 0.003307
+M = 3.5691, p-value = 0.003044
+sample estimates:
+estimated cutpoint 
+                39 
+
+> 
+> maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
++ smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
+
+	LogRank using exactGauss
+
+data:  Surv(month, cens) by EF 
+M = 3.5639, p-value = 0.002973
 sample estimates:
 estimated cutpoint 
                 39 
@@ -418,8 +480,55 @@ estimated cutpoint
 > ## Keywords: 'distribution'.
 > 
 > 
+> cleanEx(); ..nameEx <- "sphase"
+> ###--- >>> `sphase' <<<----- S-phase fraction of tumor cells
+> 
+> 	## alias	 help(sphase)
+> 
+> ##___ Examples ___:
+> 
+> data(sphase)
+> maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
++ pmethod="Lau94")
+
+	LogRank using Lau94
+
+data:  Surv(RFS, cens) by SPF 
+M = 2.4033, p-value = 0.2727
+sample estimates:
+estimated cutpoint 
+               107 
+
+> maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
++ pmethod="Lau94", iscores=TRUE)
+
+	LogRank using Lau94
+
+data:  Surv(RFS, cens) by SPF 
+M = 2.4017, p-value = 0.2738
+sample estimates:
+estimated cutpoint 
+               107 
+
+> maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
++ pmethod="HL")
+
+	LogRank using HL
+
+data:  Surv(RFS, cens) by SPF 
+M = 2.4017, p-value = 0.5494
+sample estimates:
+estimated cutpoint 
+               107 
+
+> plot(maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank"))
+> 
+> 
+> ## Keywords: 'datasets'.
+> 
+> 
 > cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-Time elapsed:  13.98 0.46 14.49 0 0 
+Time elapsed:  23.26 1.04 24.48 0 0 
 > dev.off(); quit('no')
 null device 
           1 

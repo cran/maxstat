@@ -2,18 +2,23 @@ attach(NULL, name = "CheckExEnv")
 assign(".CheckExEnv", as.environment(2), pos = length(search())) # base
 ## This plot.new() patch has no effect yet for persp();
 ## layout() & filled.contour() are now ok
-assign("plot.new", function() { .Internal(plot.new())
-		       pp <- par(c("mfg","mfcol","oma","mar"))
-		       if(all(pp$mfg[1:2] == c(1, pp$mfcol[2]))) {
-			 outer <- (oma4 <- pp$oma[4]) > 0; mar4 <- pp$mar[4]
-			 mtext(paste("help(",..nameEx,")"), side = 4,
-			       line = if(outer)max(1, oma4 - 1) else min(1, mar4 - 1),
-			       outer = outer, adj=1, cex= .8, col="orchid")} },
+assign("plot.new",
+       function() {
+	   .Internal(plot.new())
+	   pp <- par(c("mfg","mfcol","oma","mar"))
+	   if(all(pp$mfg[1:2] == c(1, pp$mfcol[2]))) {
+               outer <- (oma4 <- pp$oma[4]) > 0; mar4 <- pp$mar[4]
+               mtext(paste("help(", ..nameEx, ")"), side = 4,
+                     line = if(outer)max(1, oma4 - 1) else min(1, mar4 - 1),
+                     outer = outer, adj = 1, cex = .8, col = "orchid")
+	   }
+       },
        env = .CheckExEnv)
-assign("cleanEx", function(env = .GlobalEnv) {
-	rm(list = ls(envir = env, all.names = TRUE), envir = env)
-	RNGkind("Wichmann-Hill", "default")
-	assign(".Random.seed", c(0,rep(7654,3)), pos=1)
+assign("cleanEx",
+       function(env = .GlobalEnv) {
+	   rm(list = ls(envir = env, all.names = TRUE), envir = env)
+           RNGkind("Wichmann-Hill", "default")
+	   assign(".Random.seed", c(0, rep(7654, 3)), pos = 1)
        },
        env = .CheckExEnv)
 assign("..nameEx", "__{must remake R-ex/*.R}__", env = .CheckExEnv) #-- for now
@@ -39,10 +44,11 @@ mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank")
 print(mod)
 
 ##Don't run: 
-##D   postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
+##D   # postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
+##D   pdf("statDLBCL.pdf", width=8, height=8)
 
 par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
-plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression")
+plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression",lwd=2)
 ##Don't run: 
 ##D   dev.off()
 
@@ -51,16 +57,21 @@ plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression")
 # limiting distribution
 
 maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-             smethod="LogRank", pmethod="Lau92")
+             smethod="LogRank", pmethod="Lau92", iscores=TRUE)
 
 # improved Bonferroni inequality, plot with significance bound
+
+maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
+             smethod="LogRank", pmethod="Lau94", iscores=TRUE)
 
 mod <- maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL, smethod="LogRank",
                     pmethod="Lau94", alpha=0.05)
 plot(mod, xlab="Mean gene expression")
 
 ##Don't run: 
-##D   postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
+##D #  postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
+##D    pdf("RNewsStat.pdf", width=8, height=8)
+##D 
 
 par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 plot(mod, xlab="Mean gene expression", cex.lab=1.6, cex.axis=1.6)
@@ -76,7 +87,7 @@ maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 # normal approximation
 
 maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-             smethod="LogRank", pmethod="exactGauss")
+             smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
 # survival analysis and plotting like in Alizadeh et al. (2000)
 
@@ -109,13 +120,15 @@ if(require(survival, quietly = TRUE)) {
   DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
 
   ##Don't run: 
-##D     postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
+##D    # postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
+##D     pdf("survDLBCL.pdf", width=8, height=8)
+##D 
 ##D   
   par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 
   plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
        xlab = "Survival time in month",
-       ylab="Probability", cex.lab=1.6, cex.axis=1.6)
+       ylab="Probability", cex.lab=1.6, cex.axis=1.6, lwd=2)
 
   text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
   text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
@@ -145,10 +158,18 @@ data(hohnloser)
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 
 smethod="LogRank", pmethod="Lau92")
 
+# with integer valued scores for comparison
+
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 
+smethod="LogRank", pmethod="Lau92", iscores=TRUE)
+
 # improved Bonferroni inequality
 
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="Lau94")
+
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
+smethod="LogRank", pmethod="Lau94", iscores=TRUE)
 
 # small sample solution by Hothorn & Lausen
 
@@ -159,6 +180,9 @@ smethod="LogRank", pmethod="HL")
 
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="exactGauss")
+
+maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
+smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
 
 ## Keywords: 'datasets'.
@@ -298,6 +322,26 @@ pmaxstat(2.5, 1:20, 5:15)
 
 
 ## Keywords: 'distribution'.
+
+
+cleanEx(); ..nameEx <- "sphase"
+###--- >>> `sphase' <<<----- S-phase fraction of tumor cells
+
+	## alias	 help(sphase)
+
+##___ Examples ___:
+
+data(sphase)
+maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
+pmethod="Lau94")
+maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
+pmethod="Lau94", iscores=TRUE)
+maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
+pmethod="HL")
+plot(maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank"))
+
+
+## Keywords: 'datasets'.
 
 
 cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")

@@ -1,11 +1,11 @@
-# $Id: maxstat.R,v 1.30.2.2 2002/04/10 16:13:40 hothorn Exp $
+# $Id: maxstat.R,v 1.33 2002/05/22 13:00:16 hothorn Exp $
 
 maxstat.test <- function(x, ...) UseMethod("maxstat.test")
 
 maxstat.test.default <-
 function(x, y=NULL, event = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
          "NormalQuantil","LogRank"), pmethod=c("none", "Lau92", "Lau94",
-          "exactGauss", "HL", "min"), minprop = 0.1, maxprop=0.9, alpha =
+          "exactGauss", "HL", "min"), iscores=(pmethod=="HL"), minprop = 0.1, maxprop=0.9, alpha =
           NULL, ...)
 {
   smethod <- match.arg(smethod)
@@ -41,7 +41,7 @@ function(x, y=NULL, event = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
   x <- sort(x)
   ties <- duplicated(x)
 
-  m <- which(!ties)
+  m <- which(!ties) - 1 
   if (minprop == 0 & maxprop==1) m <- m[2:(length(m)-1)] else {
     if (all(m < floor(N*minprop))) stop("minprop too large")
     if (all(m > floor(N*maxprop))) stop("maxprop too small")
@@ -91,7 +91,8 @@ function(x, y=NULL, event = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
     if (smethod == "NormalQuantil") {
       scores <- qnorm(rank(y)/(N+1))
       scores <- scores - min(scores)
-      scores <- round(scores*N/max(scores))
+      if (pmethod=="HL" | iscores | pmethod=="min")
+        scores <- round(scores*N/max(scores))
     }
     if (smethod == "LogRank") {
       sc <- rep(0, N)
@@ -101,8 +102,10 @@ function(x, y=NULL, event = NULL, smethod=c("Gauss", "Wilcoxon", "Median",
         sc[i] <- event[i] - sum(event[indx]/(N - intr[indx] + 1))
       }
       scores <- sc
-      scores <- scores - min(scores)
-      scores <- round(scores*N/max(scores))
+      if (pmethod=="HL" | iscores | pmethod=="min") {
+        scores <- scores - min(scores)
+        scores <- round(scores*N/max(scores))
+      }
     }
     
     E <- m/N*sum(scores)
@@ -340,20 +343,25 @@ qSchlitt <- function(p, N, m)
 pexactgauss <- function(b, N, m, maxpts=25000)
 {
   if (!require(mvtnorm)) stop("package mvtnorm not loaded")
-  n <- m[2:length(m)]
-  mm <- m[1:(length(m)-1)]
-  mcorr <- sqrt((mm/N)*(1 - n/N))/sqrt(n/N*(1 - mm/N))
+  if (length(m) > 1) {
+    n <- m[2:length(m)]
+    mm <- m[1:(length(m)-1)]
+    mcorr <- sqrt((mm/N)*(1 - n/N))/sqrt(n/N*(1 - mm/N))
 
-  corrmatrix <- diag(length(m))
+    corrmatrix <- diag(length(m))
 
-  for (i in 1:(length(m)-1))
-    corrmatrix[i,(i+1):length(m)] <- cumprod(mcorr[i:(length(m)-1)])
+    for (i in 1:(length(m)-1))
+      corrmatrix[i,(i+1):length(m)] <- cumprod(mcorr[i:(length(m)-1)])
 
-  p <- pmvnorm(mean=rep(0, length(m)),
-               corr=t(corrmatrix), lower=rep(-b, length(m)),
+    p <- pmvnorm(mean=rep(0, length(m)),
+                 corr=t(corrmatrix), lower=rep(-b, length(m)),
                upper=rep(b, length(m)), maxpts=maxpts)
-  attributes(p) <- NULL
-  1 - p
+    attributes(p) <- NULL
+    return(1 - p)
+  }
+  if (length(m) == 1) {
+    return(pnorm(-b)*2)
+  }
 }
 
 qexactgauss <- function(p, N, m)
