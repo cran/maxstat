@@ -1,12 +1,10 @@
 DLBCL                   Diffuse large B-cell lymphoma 
 LausenTab2              Table 2 of Lausen and Schumacher (1992) 
-cmatrix                 correlation matrix of Gauss statistics
-corrgauss               Correlation between two Gauss-statistics 
+cmatrix                 Correlation Matrix 
 hohnloser               Left ventricular ejection fraction of patients
                         with malignant ventricular tachyarrhythmias. 
 maxstat-internal        Internal maxstat functions
-maxstat.test            Maximally Selected Rank and Gauss Statistics 
-niceleaps               Forward selection of linear models 
+maxstat.test            Maximally Selected Rank and Statistics 
 pLausen92               Approximating Maximally Selected Statistics 
 pLausen94               Approximating Maximally Selected Statistics 
 pexactgauss             Computing Maximally Selected Gauss Statistics 

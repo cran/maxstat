@@ -1,6 +1,6 @@
 
 R : Copyright 2002, The R Development Core Team
-Version 1.6.0 Under development (unstable) (2002-05-21)
+Version 1.6.0 beta (2002-09-28)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -44,6 +44,7 @@ Type `q()' to quit R.
 > library('maxstat')
 Loading required package: exactRankTests 
 Loading required package: mvtnorm 
+Loading required package: survival 
 > cleanEx(); ..nameEx <- "DLBCL"
 > ###--- >>> `DLBCL' <<<----- Diffuse large B-cell lymphoma
 > 
@@ -60,7 +61,7 @@ Loading required package: mvtnorm
 > 
 > print(mod)
 
-	LogRank using none
+	Maximally selected LogRank statistics using none
 
 data:  Surv(time, cens) by MGE 
 M = 3.1772, p-value = NA
@@ -85,7 +86,7 @@ estimated cutpoint
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 +              smethod="LogRank", pmethod="Lau92", iscores=TRUE)
 
-	LogRank using Lau92
+	Maximally selected LogRank statistics using Lau92
 
 data:  Surv(time, cens) by MGE 
 M = 3.171, p-value = 0.03611
@@ -99,7 +100,7 @@ estimated cutpoint
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 +              smethod="LogRank", pmethod="Lau94", iscores=TRUE)
 
-	LogRank using Lau94
+	Maximally selected LogRank statistics using Lau94
 
 data:  Surv(time, cens) by MGE 
 M = 3.171, p-value = 0.02435
@@ -128,10 +129,10 @@ estimated cutpoint
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 +              smethod="LogRank", pmethod="HL")
 
-	LogRank using HL
+	Maximally selected LogRank statistics using HL
 
 data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = 0.02220
+M = 3.171, p-value = 0.02216
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -140,12 +141,13 @@ estimated cutpoint
 > # normal approximation
 > 
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-+              smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
++              smethod="LogRank", pmethod="exactGauss", iscores=TRUE,
++              abseps=0.01)
 
-	LogRank using exactGauss
+	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = 0.01960
+M = 3.171, p-value = 0.02165
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -199,8 +201,6 @@ estimated cutpoint
 + ##D     dev.off()
 + ##D   
 + }
-Warning message: 
-The use of _ is deprecated: you will be warned only once per session 
 > 
 > 
 > ## Keywords: 'datasets'.
@@ -222,7 +222,7 @@ The use of _ is deprecated: you will be warned only once per session
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 
 + smethod="LogRank", pmethod="Lau92")
 
-	LogRank using Lau92
+	Maximally selected LogRank statistics using Lau92
 
 data:  Surv(month, cens) by EF 
 M = 3.5691, p-value = 0.01065
@@ -236,7 +236,7 @@ estimated cutpoint
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 
 + smethod="LogRank", pmethod="Lau92", iscores=TRUE)
 
-	LogRank using Lau92
+	Maximally selected LogRank statistics using Lau92
 
 data:  Surv(month, cens) by EF 
 M = 3.5639, p-value = 0.01083
@@ -250,7 +250,7 @@ estimated cutpoint
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 + smethod="LogRank", pmethod="Lau94")
 
-	LogRank using Lau94
+	Maximally selected LogRank statistics using Lau94
 
 data:  Surv(month, cens) by EF 
 M = 3.5691, p-value = 0.005453
@@ -262,7 +262,7 @@ estimated cutpoint
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 + smethod="LogRank", pmethod="Lau94", iscores=TRUE)
 
-	LogRank using Lau94
+	Maximally selected LogRank statistics using Lau94
 
 data:  Surv(month, cens) by EF 
 M = 3.5639, p-value = 0.005556
@@ -276,7 +276,7 @@ estimated cutpoint
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 + smethod="LogRank", pmethod="HL")
 
-	LogRank using HL
+	Maximally selected LogRank statistics using HL
 
 data:  Surv(month, cens) by EF 
 M = 3.5639, p-value = 0.00667
@@ -290,10 +290,10 @@ estimated cutpoint
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 + smethod="LogRank", pmethod="exactGauss")
 
-	LogRank using exactGauss
+	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5691, p-value = 0.003044
+M = 3.5691, p-value = 0.003529
 sample estimates:
 estimated cutpoint 
                 39 
@@ -302,10 +302,10 @@ estimated cutpoint
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 + smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
-	LogRank using exactGauss
+	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5639, p-value = 0.002973
+M = 3.5639, p-value = 0.003838
 sample estimates:
 estimated cutpoint 
                 39 
@@ -327,12 +327,13 @@ estimated cutpoint
 > 
 > x <- sort(runif(20))
 > y <- c(rnorm(10), rnorm(10, 2))
+> mydata <- data.frame(cbind(x,y))
 > 
-> mod <- maxstat.test(y ~ x, smethod="Wilcoxon", pmethod="HL",
+> mod <- maxstat.test(y ~ x, data=mydata, smethod="Wilcoxon", pmethod="HL",
 +                     minprop=0.25, maxprop=0.75, alpha=0.05)
 > print(mod)
 
-	Wilcoxon using HL
+	Maximally selected Wilcoxon statistics using HL
 
 data:  y by x 
 M = 3.3261, p-value = 0.001607
@@ -429,7 +430,7 @@ estimated cutpoint
 > ##___ Examples ___:
 > 
 > 
-> pexact <- pexactgauss(2.5, 20, 2:18)
+> pexact <- pexactgauss(2.5, 20, 2:18, abseps=0.01)
 > 
 > 
 > ## Keywords: 'distribution'.
@@ -446,14 +447,15 @@ estimated cutpoint
 > 
 > x <- sort(runif(20))
 > y <- rbinom(20, 1, 0.5)
+> mydata <- data.frame(cbind(x,y))
 > 
-> mod <- maxstat.test(y ~ x, smethod="Median", pmethod="HL", alpha=0.05)
+> mod <- maxstat.test(y ~ x, data=mydata, smethod="Median", pmethod="HL", alpha=0.05)
 > print(mod)
 
-	Median using HL
+	Maximally selected Median statistics using HL
 
 data:  y by x 
-M = 1.9714, p-value = 0.6411
+M = 1.9714, p-value = 0.5134
 sample estimates:
 estimated cutpoint 
          0.2138944 
@@ -491,7 +493,7 @@ estimated cutpoint
 > maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
 + pmethod="Lau94")
 
-	LogRank using Lau94
+	Maximally selected LogRank statistics using Lau94
 
 data:  Surv(RFS, cens) by SPF 
 M = 2.4033, p-value = 0.2727
@@ -502,7 +504,7 @@ estimated cutpoint
 > maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
 + pmethod="Lau94", iscores=TRUE)
 
-	LogRank using Lau94
+	Maximally selected LogRank statistics using Lau94
 
 data:  Surv(RFS, cens) by SPF 
 M = 2.4017, p-value = 0.2738
@@ -513,7 +515,7 @@ estimated cutpoint
 > maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
 + pmethod="HL")
 
-	LogRank using HL
+	Maximally selected LogRank statistics using HL
 
 data:  Surv(RFS, cens) by SPF 
 M = 2.4017, p-value = 0.5494
@@ -528,7 +530,7 @@ estimated cutpoint
 > 
 > 
 > cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-Time elapsed:  23.26 1.04 24.48 0 0 
+Time elapsed:  25.94 1.32 28.73 0 0 
 > dev.off(); quit('no')
 null device 
           1 

@@ -9,21 +9,23 @@ greater or equal to \code{b}.
 
 }
 \usage{
-pexactgauss(b, N, m, maxpts)
-qexactgauss(p, N, m)
+pexactgauss(b, N, m, \dots)
+qexactgauss(p, N, m, \dots)
 }
 \arguments{
   \item{b}{ quantile. }
   \item{p}{ probability. } 
   \item{N}{ number of observations. }
   \item{m}{ cutpoints. }
-  \item{maxpts}{maximum number of function values as integer}
+  \item{\dots}{additional parameters to be passed to
+\code{\link[mvtnorm]{pmvnorm}}.}
 }
 \details{
 
 This is the exact distribution of a maximally selected Gauss statistic and
 the asymptotic distribution for maximally selected rank statistics.
-Correlations from Schlittgen (1999), normal probabilities by Genz/Bretz (see
+The correlation matrix can be computed using \code{\link{cmatrix}}, 
+normal probabilities are derived from the procedures by Genz/Bretz (see
 \code{\link[mvtnorm]{pmvnorm}} for details).
 
 }
@@ -42,15 +44,10 @@ selected gauss statistic greater equal \code{b} is observed.
         normal probabilities. \emph{Computing Science and Statistics}, \bold{25},
         400--405
 
-	Schlittgen, R. (1999),
-	Regression Trees for Survival Data - an Approach to Select
-	Discontinuous Split Points by Rank Statistics.
-	\emph{Biometrical Journal}, \bold{41}(8), 943--954.
 }
-
 \examples{
 
-pexact <- pexactgauss(2.5, 20, 2:18)
+pexact <- pexactgauss(2.5, 20, 2:18, abseps=0.01)
 
 }
 \keyword{distribution}

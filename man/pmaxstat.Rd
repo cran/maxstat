@@ -37,7 +37,8 @@ is observed. \code{qmaxstat} needs optimization.
 
         Hothorn, T. and Lausen, B. (2002).
         On the Exact Distribution of Maximally Selected Rank Statistics.
-        \emph{submitted}, preprint available from
+        \emph{Computational Statistics \& Data Analysis} (in press). 
+        Preprint available from
         \url{http://www.mathpreprints.com/math/Preprint/hothorn/20020227/2}
 }
 

@@ -1,0 +1,55 @@
+
+R : Copyright 2002, The R Development Core Team
+Version 1.6.0 beta (2002-09-28)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type `license()' or `licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type `contributors()' for more information.
+
+Type `demo()' for some demos, `help()' for on-line help, or
+`help.start()' for a HTML browser interface to help.
+Type `q()' to quit R.
+
+> 
+> library(maxstat)
+Loading required package: exactRankTests 
+Loading required package: mvtnorm 
+Loading required package: survival 
+> 
+> # by Achim Zeileis, 13.09.2002
+> y <- c(0.9, 1, 0.8, 0.8, 0.85, 0.3, 0.2, 0.2, 0.1, 0.2, 0.3)
+> index <- 1:length(y)
+> mydata <- data.frame(cbind(y, index))
+> maxstat.test(y ~ index, data=mydata, smethod = "Wilcoxon", pmethod = "HL")
+
+	Maximally selected Wilcoxon statistics using HL
+
+data:  y by index 
+M = 2.7767, p-value = < 2.2e-16
+sample estimates:
+estimated cutpoint 
+                 5 
+
+> # this one failed: QUANT not known
+> maxstat.test(y ~ index, data=mydata)
+
+	Maximally selected Wilcoxon statistics using none
+
+data:  y by index 
+M = 2.7767, p-value = NA
+sample estimates:
+estimated cutpoint 
+                 5 
+
+> 
+> # spotted and fixed 16.09.2002
+> y <- rnorm(20)
+> x <- factor(c(rep(0,10), rep(1,10)))
+> mydata <- data.frame(cbind(y,x))
+> a <- maxstat.test(y ~ x, data=mydata, smethod="Wilcoxon", pmethod="HL")
+> b <- wilcox.exact(y ~ x, data=mydata)                                  
+> stopifnot(all.equal(a$p.value, b$p.value))
+> 

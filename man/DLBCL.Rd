@@ -89,7 +89,8 @@ maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 # normal approximation
 
 maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-             smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
+             smethod="LogRank", pmethod="exactGauss", iscores=TRUE,
+             abseps=0.01)
 
 # survival analysis and plotting like in Alizadeh et al. (2000)
 

@@ -1,37 +1,19 @@
 \name{maxstat-internal}
-\alias{intrank}
-\alias{p2norm}
-\alias{p2normG}
-\alias{pbvmax}
-\alias{msurv}
+\alias{cmaxstat}
 \alias{hl}
-\alias{pSchlitt}
-\alias{qSchlitt}
-\alias{corlm}
-\alias{wh}
 \alias{index}
-\alias{corrmatrix}
-\alias{forsel}
-
+\alias{wh}
 \title{Internal maxstat functions}
 \description{
  Internal maxstat functions.
 }
 \usage{
-intrank(x)
-p2norm(h, k, rho, maxp=3000)
-p2normG(h, k, rho, maxp=3000)
-pbvmax(cor, t, method=c("drezner", "genz"))
-msurv(time, event)
+cmaxstat(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
+         "exactGauss", "HL", "min"), minprop = 0.1,
+         maxprop=0.9, alpha = NULL, \dots)
 hl(scores, H, E, S, msample, N, b)
-pSchlitt(b, N, m, method=c("genz", "drezner"))
-qSchlitt(p, N, m)
-corlm(Xone, Xtwo)
-wh(cut, x)
 index(x)
-corrmatrix(X)
-forsel(y, Xin, Xout, ret=FALSE)
-
+wh(cut, x)
 }
 \details{
   These functions are not to be called by the user.

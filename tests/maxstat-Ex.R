@@ -87,7 +87,8 @@ maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 # normal approximation
 
 maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
-             smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
+             smethod="LogRank", pmethod="exactGauss", iscores=TRUE,
+             abseps=0.01)
 
 # survival analysis and plotting like in Alizadeh et al. (2000)
 
@@ -200,8 +201,9 @@ cleanEx(); ..nameEx <- "maxstat.test"
 
 x <- sort(runif(20))
 y <- c(rnorm(10), rnorm(10, 2))
+mydata <- data.frame(cbind(x,y))
 
-mod <- maxstat.test(y ~ x, smethod="Wilcoxon", pmethod="HL",
+mod <- maxstat.test(y ~ x, data=mydata, smethod="Wilcoxon", pmethod="HL",
                     minprop=0.25, maxprop=0.75, alpha=0.05)
 print(mod)
 plot(mod)
@@ -283,7 +285,7 @@ cleanEx(); ..nameEx <- "pexactgauss"
 ##___ Examples ___:
 
 
-pexact <- pexactgauss(2.5, 20, 2:18)
+pexact <- pexactgauss(2.5, 20, 2:18, abseps=0.01)
 
 
 ## Keywords: 'distribution'.
@@ -300,8 +302,9 @@ cleanEx(); ..nameEx <- "plot.maxtest"
 
 x <- sort(runif(20))
 y <- rbinom(20, 1, 0.5)
+mydata <- data.frame(cbind(x,y))
 
-mod <- maxstat.test(y ~ x, smethod="Median", pmethod="HL", alpha=0.05)
+mod <- maxstat.test(y ~ x, data=mydata, smethod="Median", pmethod="HL", alpha=0.05)
 print(mod)
 plot(mod)
 
