@@ -120,3 +120,153 @@ $P$-value by \cite{on-the-exa:2001} can be computed by
 \renewcommand{\baselinestretch}{1}
 \begin{Sinput}
 >library(maxstat)
+\end{Sinput}
+\begin{Soutput}
+Loading required package: exactRankTests 
+Loading required package: mvtnorm 
+Loading required package: survival 
+\end{Soutput}
+\begin{Sinput}
+>data(DLBCL)
+>mtHL <- maxstat.test(Surv(time, cens) ~ MGE, data = DLBCL, 
++     smethod = "LogRank", pmethod = "HL")
+>mtHL
+\end{Sinput}
+\begin{Soutput}
+	Maximally selected LogRank statistics using HL
+
+data:  Surv(time, cens) by MGE 
+M = 3.171, p-value = 0.02216
+sample estimates:
+estimated cutpoint 
+         0.1860526 
+\end{Soutput}
+\renewcommand{\baselinestretch}{1.5}
+
+\begin{figure}[t]
+\begin{center}   
+\includegraphics{maxstat-DLBCL-fig}
+\caption{Absolute standardized log-rank statistics and 
+significance bound based on the
+improved Bonferroni inequality. \label{stat}}
+\end{center}
+\end{figure}
+
+\normalsize
+\renewcommand{\baselinestretch}{1.5}
+
+For censored responses, the formula interface is similar to the one 
+used in package
+\texttt{survival}: \texttt{time} specifies the time until an event and
+\texttt{cens} is the status indicator (\texttt{dead=1}). For quantitative
+responses $y$, the formula is of the form \texttt{y} $ \sim$ \texttt{x}. 
+Currently it is not possible to specify more than one predictor \texttt{x}. 
+\texttt{smethod} allows the selection of the statistics to be used:
+\texttt{Gauss, Wilcoxon, Median, NormalQuantil} and \texttt{LogRank} are
+available.
+\texttt{pmethod} defines which kind of $P$-value approximation is computed: 
+\texttt{Lau92} means the
+limiting distribution, \texttt{Lau94} the approximation based on the improved
+Bonferroni inequality, \texttt{exactGauss} the distribution of a maximally
+selected Gau{\ss} statistic and \texttt{HL} is 
+the upper bound of the $P$-value by
+\cite{on-the-exa:2001}. All implemented approximations are known to be
+conservative and therefore their minimum $P$-value is available by choosing
+\texttt{pmethod="min"}. 
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics{maxstat-DLBCL-fig2}
+\caption{Kaplan-Meier curves of two groups of DLBCL patients separated by the
+cutpoint 0.186 mean gene expression. \label{surv}}
+\end{center}
+\end{figure}
+
+
+For the overall survival time, the estimated cutpoint is
+0.186 mean gene
+expression, the maximum of the log-rank statistics is $M =$
+3.171. The
+probability that, under the null hypothesis, the maximally selected log-rank
+statistic is greater $M =$
+3.171 is less then than
+0.022. 
+The empirical process of the standardized
+statistics together with the $\alpha$-quantile of the null distribution 
+can be plotted using \texttt{plot.maxtest}. 
+If the significance level \texttt{alpha} is specified, 
+the corresponding quantile is computed and drawn
+as a horizonal red line. 
+The estimated cutpoint is plotted as vertical dashed line, see Figure
+\ref{stat}. 
+The difference in overall survival time between the two groups determined by
+a cutpoint of 0.186 mean gene expression is plotted in Figure
+\ref{surv}. No event was observed for patients with mean gene expression
+greater 0.186.
+
+\section{More than One Predictor}
+
+If the cutpoints in more than one predictor are evalutated, the problem is
+to test the null hypothesis of independence of the response and any of the
+predictors under consideration. Furthermore, the ``best'' split in the
+``most significant'' predictor needs to be selected. For example, we
+evaluate both mean gene expression and the International Prognostic Index
+(IPI) simultaneously:
+
+\renewcommand{\baselinestretch}{1}
+\begin{Sinput}
+>mmax <- maxstat.test(Surv(time, cens) ~ MGE + 
++     IPI, data = DLBCL, smethod = "LogRank", pmethod = "exactGauss", 
++     abseps = 0.01)
+>mmax
+\end{Sinput}
+\begin{Soutput}
+	 Optimally Selected Prognostic Factors 
+
+Call: maxstat.test.data.frame(formula = Surv(time, cens) ~ MGE + IPI, 
+    data = DLBCL, smethod = "LogRank", pmethod = "exactGauss", 
+    abseps = 0.01)
+
+
+ Selected: 
+
+	Maximally selected LogRank statistics using
+	exactGauss
+
+data:  Surv(time, cens) by IPI 
+M = 2.9603, p-value = 0.01034
+sample estimates:
+estimated cutpoint 
+                 1 
+
+Adjusted p.value: 
+0.03350185 , error:  0.006958948 
+\end{Soutput}
+\renewcommand{\baselinestretch}{1.5}
+
+The p-value of the global test for the null hypothesis ``survival is
+independent from both IPI and MGE'' is 0.034 
+and IPI provides a better distinction into two groups than 
+MGE does. We can display the
+standardized statistics using \texttt{plot} (Figure \ref{plotmmax}). The
+methodology used here is described in \cite{lausenetal:2002}.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics{maxstat-mmax-fig}
+\caption{The standardized logrank statistics for the two predictors MGE and
+IPI. \label{plotmmax}}
+\end{center}
+\end{figure}
+
+\section{Summary}
+
+The package \texttt{maxstat} provides a user-friendly interface and 
+implements standard methods as well as recent suggestions for the 
+approximation of the null distribution of maximally selected rank statistics.
+
+
+\bibliographystyle{plainnat}
+\bibliography{maxstatlit}
+
+\end{document}

@@ -1,7 +1,7 @@
 Package: maxstat
-Version: 0.6-6
+Version: 0.6-7
 Title: Maximally Selected Rank Statistics
-Date: $Date: 2002/11/22 14:07:34 $
+Date: $Date: 2002/12/18 07:47:22 $
 Author: Torsten Hothorn <Torsten.Hothorn@rzmail.uni-erlangen.de>
 Maintainer: Torsten Hothorn <Torsten.Hothorn@rzmail.uni-erlangen.de>
 Description: Maximally selected rank statistics with
