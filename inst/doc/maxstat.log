@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159-1.00a-pretest-20011114-ojmw (Web2C 7.3.7) (format=pdflatex 2002.12.12)  31 AUG 2003 22:26
+This is pdfTeX, Version 3.14159-1.00a-pretest-20011114-ojmw (Web2C 7.3.7) (format=pdflatex 2002.12.12)  28 OCT 2003 12:36
 **\nonstopmode \input /home/hothorn/projects/packages/maxstat/inst/doc/maxstat.
 tex
 (/home/hothorn/projects/packages/maxstat/inst/doc/maxstat.tex
@@ -95,8 +95,17 @@ Style option: `fancyvrb' v2.7, with DG/SPQR fixes <2000/03/21> (tvz)
 \c@FancyVerbLine=\count90
 \FV@StepNumber=\count91
 \FV@OutFile=\write3
-))
-(./maxstat.aux)
+)
+(/usr/local/lib/R/share/texmf/upquote.sty
+Package: upquote 2003/08/11 v1.1 Covington's upright-quote modification to verb
+atim and verb
+
+(/usr/share/texmf/tex/latex/base/textcomp.sty
+Package: textcomp 2001/06/05 v1.94 Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)))) (./maxstat.aux)
 \openout1 = `maxstat.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -111,7 +120,15 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
- (/usr/share/texmf/tex/context/base/supp-pdf.tex
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 14.
+
+(/usr/share/texmf/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 14.
+
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
 (/usr/share/texmf/tex/context/base/supp-mis.tex
 loading : Context Support Macros / Missing
 \protectiondepth=\count92
@@ -170,10 +187,10 @@ File: maxstat-mmax-fig.pdf Graphic file (type pdf)
  <use maxstat-mmax-fig.pdf>
 (./maxstat.bbl [7] [8]) [9] [10 <./maxstat-mmax-fig.pdf>] (./maxstat.aux) ) 
 Here is how much of TeX's memory you used:
- 1953 strings out of 50428
- 24741 string characters out of 440380
- 72159 words of memory out of 263001
- 4910 multiletter control sequences out of 10000+15000
+ 2341 strings out of 50428
+ 31188 string characters out of 440380
+ 74168 words of memory out of 263001
+ 5286 multiletter control sequences out of 10000+15000
  30531 words of font info for 74 fonts, out of 500000 for 1000
  15 hyphenation exceptions out of 1000
  35i,6n,23p,422b,333s stack positions out of 3000i,500n,3000p,50000b,5000s
@@ -188,4 +205,4 @@ share/texmf/fonts/type1/bluesky/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/blu
 esky/cm/cmr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/shar
 e/texmf/fonts/type1/bluesky/cm/cmss17.pfb></usr/share/texmf/fonts/type1/bluesky
 /cm/cmr17.pfb>
-Output written on maxstat.pdf (10 pages, 127029 bytes).
+Output written on maxstat.pdf (10 pages, 127020 bytes).

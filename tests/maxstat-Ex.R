@@ -454,8 +454,23 @@ maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
 pmethod="condMC", B = 9999)
 plot(maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank"))
 
+cleanEx(); ..nameEx <- "treepipit"
 
+### * treepipit
+ 
+### Name: treepipit
+### Title: Tree Pipit Data
+### Aliases: treepipit
+### Keywords: datasets
+ 
+### ** Examples
 
+data(treepipit)
+mod <- maxstat.test(counts ~ coverstorey, data = treepipit, 
+                    smethod = "Data", pmethod = "HL", minprop = 0.2,
+                    maxprop = 0.8)
+print(mod)
+plot(mod)
 
 ### * <FOOTER>
 ###
