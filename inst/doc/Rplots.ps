@@ -37,12 +37,6 @@
        closepath clip newpath } def
 /rgb { setrgbcolor } def
 /s   { scalefont setfont } def
-/R   { /Font1 findfont } def
-/B   { /Font2 findfont } def
-/I   { /Font3 findfont } def
-/BI  { /Font4 findfont } def
-/S   { /Font5 findfont } def
-1 setlinecap 1 setlinejoin
 % end   .ps.prolog
 %%IncludeResource: font Helvetica
 /Helvetica findfont
@@ -90,6 +84,9 @@ bp
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 105.04 119.55 m
 7.28 35.16 l
@@ -251,6 +248,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 129.21 91.44 m
 642.24 0 l
@@ -283,7 +283,7 @@ np
 771.45 91.44 m
 0 -7.20 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 129.21 65.52 (-0.05) .5 0 0 t
 236.25 65.52 (0.00) .5 0 0 t
 343.29 65.52 (0.05) .5 0 0 t
@@ -328,7 +328,7 @@ np
 0 -426.80 l
 o
 18.00 18.00 823.89 577.28 cl
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 0 0 0 rgb
 435.34 36.72 (Mean gene expression) .5 0 0 t
 30.96 304.84 (Standardized log-rank statistic using Lau94) .5 0 90 t
@@ -336,6 +336,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [ 3.00 5.00] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 634.55 18.00 m
 0 460.86 l
@@ -355,6 +358,9 @@ bp
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 91.41 91.41 m
 623.78 0 l
@@ -387,7 +393,7 @@ np
 715.19 91.41 m
 0 -7.20 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 91.41 65.49 (0) .5 0 0 t
 195.38 65.49 (20) .5 0 0 t
 299.34 65.49 (40) .5 0 0 t
@@ -437,7 +443,7 @@ np
 0 -426.85 l
 o
 18.00 18.00 823.89 577.28 cl
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 0 0 0 rgb
 442.54 36.69 (Survival time in month) .5 0 0 t
 45.33 304.84 (Probability) .5 0 90 t
@@ -445,6 +451,9 @@ o
 0 0 0 rgb
 1.50 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 91.41 502.45 m
 6.76 0 l
@@ -649,16 +658,16 @@ np
 623.70 498.63 m
 0 7.64 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 398.23 458.94 (Mean gene expression) 0 0 0 t
-/ps 16 def S 16 s
+/ps 16 def /Font5 findfont 16 s
 563.78 458.94 (>) 0 0 0 t
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 576.27 458.94 (0.186) 0 0 0 t
 398.23 300.85 (Mean gene expression) 0 0 0 t
-/ps 16 def S 16 s
+/ps 16 def /Font5 findfont 16 s
 563.78 300.85 (£) 0 0 0 t
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 576.27 300.85 (0.186) 0 0 0 t
 ep
 %%Page: 3 3
@@ -668,6 +677,9 @@ bp
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 122.61 381.50 m
 8.44 8.14 l
@@ -820,6 +832,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 160.63 371.05 m
 611.15 0 l
@@ -852,7 +867,7 @@ np
 771.78 371.05 m
 0 -7.20 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 160.63 345.13 (-0.05) .5 0 0 t
 262.49 345.13 (0.00) .5 0 0 t
 364.35 345.13 (0.05) .5 0 0 t
@@ -899,7 +914,7 @@ np
 0 -147.21 l
 o
 18.00 297.64 823.89 577.28 cl
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 0 0 0 rgb
 442.54 316.33 ( MGE) .5 0 0 t
 45.33 444.65 (Standardized log-rank statistic) .5 0 90 t
@@ -907,6 +922,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [ 3.00 5.00] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 641.51 355.26 m
 0 157.55 l
@@ -916,6 +934,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 124.12 145.55 m
 203.34 79.84 l
@@ -936,6 +957,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 117.42 91.41 m
 650.23 0 l
@@ -968,7 +992,7 @@ np
 767.65 91.41 m
 0 -7.20 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 117.42 65.49 (0.0) .5 0 0 t
 225.79 65.49 (0.5) .5 0 0 t
 334.17 65.49 (1.0) .5 0 0 t
@@ -1015,7 +1039,7 @@ np
 0 -147.21 l
 o
 18.00 18.00 823.89 297.64 cl
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 0 0 0 rgb
 442.54 36.69 ( IPI) .5 0 0 t
 45.33 165.02 (Standardized log-rank statistic) .5 0 90 t
@@ -1023,6 +1047,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [ 3.00 5.00] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 334.17 75.62 m
 0 152.40 l

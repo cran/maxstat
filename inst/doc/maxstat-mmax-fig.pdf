@@ -2,10 +2,10 @@
 %Å‚Å„ÅœÅ”
 1 0 obj
 <<
-/CreationDate (D:20031216184922)
-/ModDate (D:20031216184922)
+/CreationDate (D:20041118134010)
+/ModDate (D:20041118134010)
 /Title (R Graphics Output)
-/Producer (R 1.9.0)
+/Producer (R 2.0.0)
 /Creator (R)
 >>
 endobj
@@ -15,91 +15,35 @@ endobj
 /Pages 3 0 R
 >>
 endobj
-4 0 obj
-<<
-/ProcSet [/PDF /Text]
-/Font << /F1 6 0 R /F2 7 0 R /F3 8 0 R /F4 9 0 R /F5 10 0 R /F6 11 0 R >>
->>
-endobj
 5 0 obj
-<<
-/Type /Encoding
-/BaseEncoding /PDFDocEncoding
-/Differences [ 45/minus 96/quoteleft
-144/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent
-/dieresis /.notdef /ring /cedilla /.notdef /hungarumlaut /ogonek /caron /space]
->>
-endobj
-6 0 obj
 <<
 /Type /Font
 /Subtype /Type1
 /Name /F1
-/BaseFont /Helvetica
-/Encoding 5 0 R
+/BaseFont /ZapfDingbats
+>>
+endobj
+6 0 obj
+<<
+/Type /Page
+/Parent 3 0 R
+/Contents 7 0 R
+/Resources 4 0 R
 >>
 endobj
 7 0 obj
 <<
-/Type /Font
-/Subtype /Type1
-/Name /F2
-/BaseFont /Helvetica-Bold
-/Encoding 5 0 R
->>
-endobj
-8 0 obj
-<<
-/Type /Font
-/Subtype /Type1
-/Name /F3
-/BaseFont /Helvetica-Oblique
-/Encoding 5 0 R
->>
-endobj
-9 0 obj
-<<
-/Type /Font
-/Subtype /Type1
-/Name /F4
-/BaseFont /Helvetica-BoldOblique
-/Encoding 5 0 R
->>
-endobj
-10 0 obj
-<<
-/Type /Font
-/Subtype /Type1
-/Name /F5
-/BaseFont /Symbol
->>
-endobj
-11 0 obj
-<<
-/Type /Font
-/Subtype /Type1
-/Name /F6
-/BaseFont /ZapfDingbats
->>
-endobj
-12 0 obj
-<<
-/Type /Page
-/Parent 3 0 R
-/Contents 13 0 R
-/Resources 4 0 R
->>
-endobj
-13 0 obj
-<<
-/Length 14 0 R
+/Length 8 0 R
 >>
 stream
-1 J 1 j 10 M q
+q
 Q q 59.04 361.44 342.72 155.52 re W n
 0.000 0.000 0.000 RG
 0.75 w
 [] 0 d
+1 J
+1 j
+10.00 M
 74.85 373.69 m 77.80 379.86 l S
 82.80 393.30 m 83.77 396.88 l S
 87.09 410.88 m 89.02 420.33 l S
@@ -129,43 +73,46 @@ Q q 59.04 361.44 342.72 155.52 re W n
 358.58 489.18 m 359.33 486.98 l S
 367.79 476.40 m 382.93 467.11 l S
 BT
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 68.77 364.60 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 77.95 383.76 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 82.69 401.23 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 87.50 424.79 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 92.97 440.83 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 97.73 412.99 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 99.23 390.63 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 127.09 410.28 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 132.71 431.52 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 136.27 447.75 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 149.49 428.19 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 155.11 434.92 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 157.12 445.32 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 165.13 427.54 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 167.41 408.08 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 179.57 425.79 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 206.23 438.09 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 212.49 461.41 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 226.90 443.05 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 235.30 424.77 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 237.13 447.88 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 255.34 459.91 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 266.98 442.12 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 276.32 450.25 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 277.03 469.86 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 289.33 500.72 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 301.31 486.94 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 307.96 472.86 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 324.54 508.60 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 353.30 493.40 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 358.69 477.56 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 386.10 460.75 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 68.77 364.60 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 77.95 383.76 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 82.69 401.23 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 87.50 424.79 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 92.97 440.83 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 97.73 412.99 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 99.23 390.63 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 127.09 410.28 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 132.71 431.52 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 136.27 447.75 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 149.49 428.19 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 155.11 434.92 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 157.12 445.32 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 165.13 427.54 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 167.41 408.08 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 179.57 425.79 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 206.23 438.09 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 212.49 461.41 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 226.90 443.05 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 235.30 424.77 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 237.13 447.88 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 255.34 459.91 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 266.98 442.12 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 276.32 450.25 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 277.03 469.86 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 289.33 500.72 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 301.31 486.94 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 307.96 472.86 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 324.54 508.60 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 353.30 493.40 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 358.69 477.56 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 386.10 460.75 Tm (l) Tj 0 Tr
 ET
 Q q
 0.000 0.000 0.000 RG
 0.75 w
 [] 0 d
+1 J
+1 j
+10.00 M
 92.82 361.44 m 391.08 361.44 l S
 92.82 361.44 m 92.82 354.24 l S
 142.53 361.44 m 142.53 354.24 l S
@@ -176,13 +123,13 @@ Q q
 391.08 361.44 m 391.08 354.24 l S
 BT
 0.000 0.000 0.000 rg
-/F1 1 Tf 16.00 0.00 -0.00 16.00 72.58 335.52 Tm (-0.05) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 126.96 335.52 Tm (0.00) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 176.67 335.52 Tm (0.05) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 226.38 335.52 Tm (0.10) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 276.09 335.52 Tm (0.15) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 325.80 335.52 Tm (0.20) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 375.51 335.52 Tm (0.25) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 72.58 335.52 Tm (-0.05) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 126.96 335.52 Tm (0.00) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 176.67 335.52 Tm (0.05) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 226.38 335.52 Tm (0.10) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 276.09 335.52 Tm (0.15) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 325.80 335.52 Tm (0.20) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 375.51 335.52 Tm (0.25) Tj
 ET
 59.04 371.95 m 59.04 507.93 l S
 59.04 371.95 m 51.84 371.95 l S
@@ -192,9 +139,9 @@ ET
 59.04 480.73 m 51.84 480.73 l S
 59.04 507.93 m 51.84 507.93 l S
 BT
-/F1 1 Tf 0.00 16.00 -16.00 0.00 41.76 360.83 Tm (0.5) Tj
-/F1 1 Tf 0.00 16.00 -16.00 0.00 41.76 415.22 Tm (1.5) Tj
-/F1 1 Tf 0.00 16.00 -16.00 0.00 41.76 469.61 Tm (2.5) Tj
+/F2 1 Tf 0.00 16.00 -16.00 0.00 41.76 360.83 Tm (0.5) Tj
+/F2 1 Tf 0.00 16.00 -16.00 0.00 41.76 415.22 Tm (1.5) Tj
+/F2 1 Tf 0.00 16.00 -16.00 0.00 41.76 469.61 Tm (2.5) Tj
 ET
 59.04 361.44 m
 401.76 361.44 l
@@ -205,13 +152,16 @@ S
 Q q 0.00 288.00 432.00 288.00 re W n
 BT
 0.000 0.000 0.000 rg
-/F1 1 Tf 16.00 0.00 -0.00 16.00 209.95 306.72 Tm ( MGE) Tj
-/F1 1 Tf 0.00 16.00 -16.00 0.00 12.96 330.04 Tm (Standardized log-rank statistic) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 209.95 306.72 Tm ( MGE) Tj
+/F2 1 Tf 0.00 16.00 -16.00 0.00 12.96 330.04 Tm (Standardized log-rank statistic) Tj
 ET
 Q q 59.04 361.44 342.72 155.52 re W n
 0.000 0.000 0.000 RG
 0.75 w
 [ 3.00 5.00] 0 d
+1 J
+1 j
+10.00 M
 327.50 344.76 m
 327.50 511.20 l
 S
@@ -220,19 +170,25 @@ Q q 59.04 73.44 342.72 155.52 re W n
 0.000 0.000 0.000 RG
 0.75 w
 [] 0 d
+1 J
+1 j
+10.00 M
 77.22 132.51 m 172.03 213.10 l S
 184.67 217.01 m 276.13 207.29 l S
 288.84 201.94 m 383.51 123.90 l S
 BT
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 68.77 125.25 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 174.55 215.17 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 280.33 203.93 Tm (l) Tj 0 Tr
-/F6 1 Tf 1 Tr 7.48 0 0 7.48 386.10 116.73 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 68.77 125.25 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 174.55 215.17 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 280.33 203.93 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 386.10 116.73 Tm (l) Tj 0 Tr
 ET
 Q q
 0.000 0.000 0.000 RG
 0.75 w
 [] 0 d
+1 J
+1 j
+10.00 M
 71.73 73.44 m 389.07 73.44 l S
 71.73 73.44 m 71.73 66.24 l S
 124.62 73.44 m 124.62 66.24 l S
@@ -243,13 +199,13 @@ Q q
 389.07 73.44 m 389.07 66.24 l S
 BT
 0.000 0.000 0.000 rg
-/F1 1 Tf 16.00 0.00 -0.00 16.00 60.61 47.52 Tm (0.0) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 113.50 47.52 Tm (0.5) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 166.39 47.52 Tm (1.0) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 219.28 47.52 Tm (1.5) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 272.17 47.52 Tm (2.0) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 325.06 47.52 Tm (2.5) Tj
-/F1 1 Tf 16.00 0.00 -0.00 16.00 377.95 47.52 Tm (3.0) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 60.61 47.52 Tm (0.0) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 113.50 47.52 Tm (0.5) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 166.39 47.52 Tm (1.0) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 219.28 47.52 Tm (1.5) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 272.17 47.52 Tm (2.0) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 325.06 47.52 Tm (2.5) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 377.95 47.52 Tm (3.0) Tj
 ET
 59.04 83.95 m 59.04 219.93 l S
 59.04 83.95 m 51.84 83.95 l S
@@ -259,9 +215,9 @@ ET
 59.04 192.73 m 51.84 192.73 l S
 59.04 219.93 m 51.84 219.93 l S
 BT
-/F1 1 Tf 0.00 16.00 -16.00 0.00 41.76 72.83 Tm (0.5) Tj
-/F1 1 Tf 0.00 16.00 -16.00 0.00 41.76 127.22 Tm (1.5) Tj
-/F1 1 Tf 0.00 16.00 -16.00 0.00 41.76 181.61 Tm (2.5) Tj
+/F2 1 Tf 0.00 16.00 -16.00 0.00 41.76 72.83 Tm (0.5) Tj
+/F2 1 Tf 0.00 16.00 -16.00 0.00 41.76 127.22 Tm (1.5) Tj
+/F2 1 Tf 0.00 16.00 -16.00 0.00 41.76 181.61 Tm (2.5) Tj
 ET
 59.04 73.44 m
 401.76 73.44 l
@@ -272,13 +228,16 @@ S
 Q q 0.00 0.00 432.00 288.00 re W n
 BT
 0.000 0.000 0.000 rg
-/F1 1 Tf 16.00 0.00 -0.00 16.00 218.39 18.72 Tm ( IPI) Tj
-/F1 1 Tf 0.00 16.00 -16.00 0.00 12.96 42.04 Tm (Standardized log-rank statistic) Tj
+/F2 1 Tf 16.00 0.00 -0.00 16.00 218.39 18.72 Tm ( IPI) Tj
+/F2 1 Tf 0.00 16.00 -16.00 0.00 12.96 42.04 Tm (Standardized log-rank statistic) Tj
 ET
 Q q 59.04 73.44 342.72 155.52 re W n
 0.000 0.000 0.000 RG
 0.75 w
 [ 3.00 5.00] 0 d
+1 J
+1 j
+10.00 M
 177.51 56.76 m
 177.51 217.77 l
 S
@@ -286,17 +245,77 @@ Q q 59.04 73.44 342.72 443.52 re W n
 Q
 endstream
 endobj
-14 0 obj
-6397
+8 0 obj
+6480
 endobj
 3 0 obj
 <<
 /Type /Pages
 /Kids [
-12 0 R
+6 0 R
 ]
 /Count 1
 /MediaBox [0 0 432 576]
+>>
+endobj
+4 0 obj
+<<
+/ProcSet [/PDF /Text]
+/Font << /F1 5 0 R /F2 10 0 R /F3 11 0 R /F4 12 0 R /F5 13 0 R /F6 14 0 R >>
+/ExtGState << >>
+>>
+endobj
+9 0 obj
+<<
+/Type /Encoding
+/BaseEncoding /PDFDocEncoding
+/Differences [ 45/minus 96/quoteleft
+144/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent
+/dieresis /.notdef /ring /cedilla /.notdef /hungarumlaut /ogonek /caron /space]
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F2
+/BaseFont /Helvetica
+/Encoding 9 0 R
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F3
+/BaseFont /Helvetica-Bold
+/Encoding 9 0 R
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F4
+/BaseFont /Helvetica-Oblique
+/Encoding 9 0 R
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F5
+/BaseFont /Helvetica-BoldOblique
+/Encoding 9 0 R
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F6
+/BaseFont /Symbol
 >>
 endobj
 xref
@@ -304,18 +323,18 @@ xref
 0000000000 65535 f 
 0000000020 00000 n 
 0000000162 00000 n 
-0000007710 00000 n 
+0000006927 00000 n 
+0000007010 00000 n 
 0000000211 00000 n 
-0000000328 00000 n 
-0000000584 00000 n 
-0000000680 00000 n 
-0000000781 00000 n 
-0000000885 00000 n 
-0000000993 00000 n 
-0000001071 00000 n 
-0000001155 00000 n 
-0000001237 00000 n 
-0000007689 00000 n 
+0000000294 00000 n 
+0000000374 00000 n 
+0000006907 00000 n 
+0000007147 00000 n 
+0000007403 00000 n 
+0000007500 00000 n 
+0000007602 00000 n 
+0000007707 00000 n 
+0000007816 00000 n 
 trailer
 <<
 /Size 15
@@ -323,5 +342,5 @@ trailer
 /Root 2 0 R
 >>
 startxref
-7794
+7894
 %%EOF

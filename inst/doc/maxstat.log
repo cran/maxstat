@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159-1.00a-pretest-20011114-ojmw (Web2C 7.3.7) (format=pdflatex 2002.12.12)  28 OCT 2003 12:36
+This is pdfTeX, Version 3.14159-1.00a-pretest-20011114-ojmw (Web2C 7.3.7) (format=pdflatex 2002.12.12)  18 NOV 2004 13:40
 **\nonstopmode \input /home/hothorn/projects/packages/maxstat/inst/doc/maxstat.
 tex
 (/home/hothorn/projects/packages/maxstat/inst/doc/maxstat.tex
@@ -185,24 +185,24 @@ File: maxstat-DLBCL-fig2.pdf Graphic file (type pdf)
 <maxstat-mmax-fig.pdf, id=76, 433.62pt x 578.16pt>
 File: maxstat-mmax-fig.pdf Graphic file (type pdf)
  <use maxstat-mmax-fig.pdf>
-(./maxstat.bbl [7] [8]) [9] [10 <./maxstat-mmax-fig.pdf>] (./maxstat.aux) ) 
+(./maxstat.bbl [7]) [8] [9 <./maxstat-mmax-fig.pdf>] (./maxstat.aux) ) 
 Here is how much of TeX's memory you used:
  2341 strings out of 50428
  31188 string characters out of 440380
- 74168 words of memory out of 263001
+ 74167 words of memory out of 263001
  5286 multiletter control sequences out of 10000+15000
  30531 words of font info for 74 fonts, out of 500000 for 1000
  15 hyphenation exceptions out of 1000
- 35i,6n,23p,422b,333s stack positions out of 3000i,500n,3000p,50000b,5000s
-</us
-r/share/texmf/fonts/type1/bluesky/cm/cmss10.pfb></usr/share/texmf/fonts/type1/b
-luesky/cm/cmti10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsltt10.pfb></us
-r/share/texmf/fonts/type1/bluesky/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/bl
-uesky/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb></
-usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texmf/fonts/type1/b
-luesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/
-share/texmf/fonts/type1/bluesky/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/blu
-esky/cm/cmr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/shar
-e/texmf/fonts/type1/bluesky/cm/cmss17.pfb></usr/share/texmf/fonts/type1/bluesky
-/cm/cmr17.pfb>
-Output written on maxstat.pdf (10 pages, 127020 bytes).
+ 35i,6n,23p,422b,336s stack positions out of 3000i,500n,3000p,50000b,5000s
+</usr/sha
+re/texmf/fonts/type1/bluesky/cm/cmss10.pfb></usr/share/texmf/fonts/type1/bluesk
+y/cm/cmti10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsltt10.pfb></usr/sha
+re/texmf/fonts/type1/bluesky/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/bluesky
+/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb></usr/s
+hare/texmf/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texmf/fonts/type1/bluesk
+y/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share
+/texmf/fonts/type1/bluesky/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/bluesky/
+cm/cmr10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/tex
+mf/fonts/type1/bluesky/cm/cmss17.pfb></usr/share/texmf/fonts/type1/bluesky/cm/c
+mr17.pfb>
+Output written on maxstat.pdf (9 pages, 126679 bytes).

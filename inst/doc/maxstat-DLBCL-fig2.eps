@@ -36,12 +36,6 @@
        closepath clip newpath } def
 /rgb { setrgbcolor } def
 /s   { scalefont setfont } def
-/R   { /Font1 findfont } def
-/B   { /Font2 findfont } def
-/I   { /Font3 findfont } def
-/BI  { /Font4 findfont } def
-/S   { /Font5 findfont } def
-1 setlinecap 1 setlinejoin
 % end   .ps.prolog
 %%IncludeResource: font Helvetica
 /Helvetica findfont
@@ -89,6 +83,9 @@ bp
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 73.41 73.41 m
 291.67 0 l
@@ -121,7 +118,7 @@ np
 365.08 73.41 m
 0 -7.20 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 73.41 47.49 (0) .5 0 0 t
 122.02 47.49 (20) .5 0 0 t
 170.64 47.49 (40) .5 0 0 t
@@ -171,7 +168,7 @@ np
 0 -299.57 l
 o
 0.00 0.00 432.00 432.00 cl
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 0 0 0 rgb
 237.59 18.69 (Survival time in month) .5 0 0 t
 27.33 223.20 (Probability) .5 0 90 t
@@ -179,6 +176,9 @@ o
 0 0 0 rgb
 1.50 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 73.41 361.89 m
 3.16 0 l
@@ -383,16 +383,16 @@ np
 322.30 358.07 m
 0 7.64 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 158.82 330.16 (Mean gene expression) 0 0 0 t
-/ps 16 def S 16 s
+/ps 16 def /Font5 findfont 16 s
 324.38 330.16 (>) 0 0 0 t
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 336.86 330.16 (0.186) 0 0 0 t
 158.82 219.21 (Mean gene expression) 0 0 0 t
-/ps 16 def S 16 s
+/ps 16 def /Font5 findfont 16 s
 324.38 219.21 (£) 0 0 0 t
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 336.86 219.21 (0.186) 0 0 0 t
 ep
 %%Trailer

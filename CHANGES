@@ -1,5 +1,9 @@
 # $Id: CHANGES,v 1.29 2003/12/16 17:36:25 hothorn Exp $
 
+	0.7-7 (18.11.2004)
+
+	use #!/bin/sh
+
 	0.7-6 (16.12.2003)
 
 	R-1.9.0 fixes: plot.new redefinition in preamble for tests

@@ -36,12 +36,6 @@
        closepath clip newpath } def
 /rgb { setrgbcolor } def
 /s   { scalefont setfont } def
-/R   { /Font1 findfont } def
-/B   { /Font2 findfont } def
-/I   { /Font3 findfont } def
-/BI  { /Font4 findfont } def
-/S   { /Font5 findfont } def
-1 setlinecap 1 setlinejoin
 % end   .ps.prolog
 %%IncludeResource: font Helvetica
 /Helvetica findfont
@@ -89,6 +83,9 @@ bp
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 74.85 373.69 m
 2.95 6.17 l
@@ -237,6 +234,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 92.82 361.44 m
 298.26 0 l
@@ -269,7 +269,7 @@ np
 391.08 361.44 m
 0 -7.20 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 92.82 335.52 (-0.05) .5 0 0 t
 142.53 335.52 (0.00) .5 0 0 t
 192.24 335.52 (0.05) .5 0 0 t
@@ -316,7 +316,7 @@ np
 0 -155.52 l
 o
 0.00 288.00 432.00 576.00 cl
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 0 0 0 rgb
 230.40 306.72 ( MGE) .5 0 0 t
 12.96 439.20 (Standardized log-rank statistic) .5 0 90 t
@@ -324,6 +324,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [ 3.00 5.00] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 327.50 344.76 m
 0 166.44 l
@@ -333,6 +336,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 77.22 132.51 m
 94.81 80.59 l
@@ -353,6 +359,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 71.73 73.44 m
 317.34 0 l
@@ -385,7 +394,7 @@ np
 389.07 73.44 m
 0 -7.20 l
 o
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 71.73 47.52 (0.0) .5 0 0 t
 124.62 47.52 (0.5) .5 0 0 t
 177.51 47.52 (1.0) .5 0 0 t
@@ -432,7 +441,7 @@ np
 0 -155.52 l
 o
 0.00 0.00 432.00 288.00 cl
-/ps 16 def R 16 s
+/ps 16 def /Font1 findfont 16 s
 0 0 0 rgb
 230.40 18.72 ( IPI) .5 0 0 t
 12.96 151.20 (Standardized log-rank statistic) .5 0 90 t
@@ -440,6 +449,9 @@ o
 0 0 0 rgb
 0.75 setlinewidth
 [ 3.00 5.00] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
 np
 177.51 56.76 m
 0 161.01 l
