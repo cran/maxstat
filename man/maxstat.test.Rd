@@ -94,7 +94,8 @@ plotting and printing.
 
         Hothorn, T. and Lausen, B. (2002).
         On the Exact Distribution of Maximally Selected Rank Statistics. 
-        \emph{submitted}
+        \emph{submitted}, preprint available from
+        \url{http://www.mathpreprints.com/math/Preprint/hothorn/20020227/2}
 
 	Lausen, B. and Schumacher, M. (1992).
         Maximally Selected Rank Statistics.

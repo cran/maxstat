@@ -1,4 +1,4 @@
-# $Id: maxstat.R,v 1.31 2001/12/14 13:11:54 hothorn Exp $
+# $Id: maxstat.R,v 1.30.2.1 2002/03/06 15:17:59 hothorn Exp $
 
 maxstat.test <- function(x, ...) UseMethod("maxstat.test")
 
