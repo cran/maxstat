@@ -1,0 +1,15 @@
+DLBCL                    Diffuse large B-cell lymphoma
+LausenTab2               Table 2 of Lausen and Schumacher (1992)
+hl                       Approximation by Hothorn and Lausen (2001)
+hohnloser                Left ventricular ejection fraction of patients
+                         with malignant ventricular tachyarrhythmias
+intrank                  Internal maxstat functions
+maxstat.test             Maximally Selected Rank and Gauss Statistics
+p2norm                   Internal maxstat function
+p2normG                  Internal maxstat function
+pLausen92                Approximating Maximally Selected Statistics
+pLausen94                Approximating Maximally Selected Statistics
+pSchlitt                 Approximating Maximally Selected Statistics
+pbvmax                   Internal maxstat function
+pexactgauss              Computing Maximally Selected Gauss Statistics
+pmaxstat                 Approximating Maximally Selected Statistics
