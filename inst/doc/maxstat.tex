@@ -222,7 +222,7 @@ $10000$).
 	Maximally selected LogRank statistics using condMC
 
 data:  Surv(time, cens) by MGE 
-M = 3.1772, p-value = 0.01150
+M = 3.1772, p-value = 0.0116
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -262,19 +262,19 @@ Call: maxstat.test.data.frame(formula = Surv(time, cens) ~ MGE + IPI,
 	exactGauss
 
 data:  Surv(time, cens) by IPI 
-M = 2.9603, p-value = 0.01121
+M = 2.9603, p-value = 0.01160
 sample estimates:
 estimated cutpoint 
                  1 
 
 Adjusted p.value: 
-0.02857977 , error:  0.01595969 
+0.02501475 , error:  0.01496962 
 \end{Soutput}
 \end{Schunk}
 \renewcommand{\baselinestretch}{1.5}
 
 The p-value of the global test for the null hypothesis ``survival is
-independent from both IPI and MGE'' is 0.029 
+independent from both IPI and MGE'' is 0.025 
 and IPI provides a better distinction into two groups than 
 MGE does. We can display the
 standardized statistics using \texttt{plot} (Figure \ref{plotmmax}). The
