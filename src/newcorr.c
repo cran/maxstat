@@ -1,4 +1,4 @@
-/* $Id: newcorr.c,v 1.3 2002/11/19 09:13:34 hothorn Exp $ 
+/* $Id: newcorr.c,v 1.4 2002/11/22 08:10:07 hothorn Exp $ 
 **
 ** Correlation matrix for maximally selected rank statistics.
 **

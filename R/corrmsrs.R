@@ -8,7 +8,8 @@ corrmsrs <- function(X, minprop=0.1, maxprop=0.9) {
   ilist <- vector(ncol(X), mode="list")
   for (i in 1:ncol(X))
     ilist[[i]] <- irank(as.numeric(X[,i]))
-  a <- .Call("newcorr", ilist=ilist, as.double(c(minprop, maxprop)))
+  a <- .Call("newcorr", ilist=ilist, as.double(c(minprop, maxprop)),
+             PACKAGE="maxstat")
   corrm <- a[[1]]
   coldel <- a[[2]]
   rowdel <- a[[3]]
