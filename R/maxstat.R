@@ -1,4 +1,4 @@
-# $Id: maxstat.R,v 1.33 2002/05/22 13:00:16 hothorn Exp $
+# $Id: maxstat.R,v 1.35 2002/07/03 08:14:19 hothorn Exp $
 
 maxstat.test <- function(x, ...) UseMethod("maxstat.test")
 
@@ -408,8 +408,8 @@ pmaxstat <- function(b, scores,  msample, quant=FALSE)
 
   H <- .C("cpermdist2", H = as.double(H), as.integer(N),
                 as.integer(totsum), as.integer(sc),
-    as.integer(scores), as.integer(N),
-                as.integer(length(H)))$H
+                as.integer(scores), as.integer(N),
+                as.integer(length(H)), PACKAGE="exactRankTests")$H
 
   # add last row, column for compatibility
 

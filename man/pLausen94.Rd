@@ -15,7 +15,7 @@ qLausen94(p, N, minprop=0.1, maxprop=0.9, m=NULL)
 \arguments{
   \item{b}{ quantile. }
   \item{p}{ probability. }
-  \item{N}{ number of cutpoints.}
+  \item{N}{ number of observations.}
 \item{minprop}{ at least \code{minprop}*100\% of the observations in the
 first group. }
   \item{maxprop}{ not more than \code{minprop}*100\% of the observations in
