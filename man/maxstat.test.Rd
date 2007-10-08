@@ -10,7 +10,7 @@ using maximally selected rank statistics.
 }
 \usage{
 \method{maxstat.test}{data.frame}(formula, data, subset, na.action, \dots)
-maxstat(y, x=NULL, smethod=c("Wilcoxon", "Median",
+maxstat(y, x=NULL, weights = NULL, smethod=c("Wilcoxon", "Median",
             "NormalQuantil","LogRank", "Data"), pmethod=c("none", "Lau92",
             "Lau94", "exactGauss", "HL", "condMC", "min"), iscores=(pmethod=="HL"),
             minprop = 0.1, maxprop=0.9, alpha = NULL, keepxy=TRUE, \dots)
@@ -18,6 +18,8 @@ maxstat(y, x=NULL, smethod=c("Wilcoxon", "Median",
 \arguments{
   \item{y}{ numeric vector of data values, dependent variable. }
   \item{x}{ numeric vector of data values, independent variable. }
+  \item{weights}{ an optional numeric vector of non-negative weights, 
+                  summing to the number of observations. }
   \item{smethod}{ kind of statistic to be computed, i.e. defines the scores
 to be used for computing the statistic. }
   \item{pmethod}{ kind of p-value approximation to be used. }

@@ -1,4 +1,4 @@
-# $Id: maxstat.test.R,v 1.17 2003/06/15 15:50:56 hothorn Exp $
+# $Id: maxstat.test.R,v 1.18 2003/08/30 14:29:37 hothorn Exp $
 
 maxstat.test <- function(formula, data, ...) 
   UseMethod("maxstat.test", data)
@@ -48,7 +48,7 @@ function(formula, data, subset, na.action, ...)
 }
 
 
-maxstat <- function(y, x=NULL, smethod=c("Wilcoxon", 
+maxstat <- function(y, x=NULL, weights = NULL, smethod=c("Wilcoxon", 
          "Median", "NormalQuantil","LogRank", "Data"), 
          pmethod=c("none", "Lau92", "Lau94", "exactGauss", "HL", "condMC", 
          "min"), 
@@ -83,8 +83,9 @@ maxstat <- function(y, x=NULL, smethod=c("Wilcoxon",
     pvalues <- rep(0, ncol(x))
     statistics <- rep(0, ncol(x))
     for (i in 1:ncol(x)) {
-      mmax[[i]] <- cmaxstat(scores, x[,i], pmethod, minprop, 
-                           maxprop, alpha, ...)
+      mmax[[i]] <- cmaxstat(scores, x[,i], weights = weights, 
+                            pmethod = pmethod, minprop = minprop, 
+                            maxprop = maxprop, alpha = alpha, ...)
       mmax[[i]]$data.name <- colnames(x)[i]
       mmax[[i]]$smethod <- smethod
       mmax[[i]]$pmethod <- pmethod 
@@ -104,7 +105,7 @@ maxstat <- function(y, x=NULL, smethod=c("Wilcoxon",
     cm=cm, univp.values=pvalues)
     class(RET) <- "mmaxtest"
   } else {
-    RET <- cmaxstat(scores, x, pmethod, minprop, maxprop, alpha, ...)
+    RET <- cmaxstat(scores, x, weights = weights, pmethod, minprop, maxprop, alpha, ...)
   }
   RET$smethod <- smethod
   RET$pmethod <- pmethod
@@ -116,7 +117,8 @@ maxstat <- function(y, x=NULL, smethod=c("Wilcoxon",
 }
 
 
-cmaxstat <- function(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
+cmaxstat <- function(y, x=NULL, weights = NULL, 
+          pmethod=c("none", "Lau92", "Lau94",
           "exactGauss", "HL", "condMC", "min"), minprop = 0.1, 
           maxprop=0.9, alpha = NULL, ...)
 {
@@ -144,6 +146,11 @@ cmaxstat <- function(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
     DNAME <- "y by x" 
 
   N <- length(y)
+  if (is.null(weights)) weights <- rep(1, N)
+  if (length(weights) != N || 
+###      sum(weights) != N ||
+      any(weights < 0)) stop("incorrect weights given")
+  y <- y * weights
 
   y <- y[order(x)]
   x <- sort(x)
@@ -161,7 +168,7 @@ cmaxstat <- function(y, x=NULL, pmethod=c("none", "Lau92", "Lau94",
 
   ss <- sum(y)
   E <- m/N*ss
-  V <- m*(N-m)/(N^2*(N-1))*(N*sum(y^2) - ss^2)
+  V <- m*(N-m)/(N^2*(N-1))*(N*sum((y)^2) - ss^2)
 
   Test <- abs((cumsum(y)[m] - E)/sqrt(V))
 

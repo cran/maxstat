@@ -314,7 +314,7 @@ cleanEx(); ..nameEx <- "pLausen92"
 
 # Compute quantiles. Should be equal to Table 2 in Lausen and Schumacher
 
-data(LausenTab2)
+load(file.path(system.file(package = "maxstat"), "results", "LausenTab2.rda"))
 
 a <- rev(c(0.01, 0.025, 0.05, 0.1))
 prop <- rbind(c(0.25, 0.75), c(0.4, 0.6), c(0.1, 0.9), c(0.4, 0.9))

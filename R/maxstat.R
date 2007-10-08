@@ -1,4 +1,4 @@
-# $Id: maxstat.R,v 1.51 2005/01/24 13:52:29 hothorn Exp $
+# $Id: maxstat.R,v 1.52 2007/04/10 14:35:00 hothorn Exp $
 
 
 print.maxtest <- function(x, digits = 4, ...) {

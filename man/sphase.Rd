@@ -1,6 +1,6 @@
 \name{sphase}
 \alias{sphase}
-\non_function{}
+\docType{data}
 \title{ S-phase fraction of tumor cells }
 \usage{data(sphase)}
 \description{
@@ -16,15 +16,27 @@
 }
 \details{
 
+  The data have been used to address the question whether a simple cutpoint
+  in S-phase fraction can be used to discriminate between patients with
+  good and bad prognosis (for example in Hothorn & Lausen, 2003).
+
 }
 \source{
-  J. Pfisterer, F. Kommoss, W. Sauerbrei, D. Menzel, M. Kiechle, E. Giese,
-M. Hilgarth and A. Pfleiderer (1995). DNA flow cytometry in node positive
-breast cancer: Prognostic value and correlation to morphological and
-clinical factors. \emph{Analytical and Quantitative Cytology and Histology}
-bold{7}(6), 406--412.
+
+
+    J. Pfisterer, F. Kommoss, W. Sauerbrei, D. Menzel, M. Kiechle, E. Giese,
+    M. Hilgarth \& A. Pfleiderer (1995). DNA flow cytometry in node positive
+    breast cancer: Prognostic value and correlation to morphological and
+    clinical factors. \emph{Analytical and Quantitative Cytology and Histology}
+    \bold{7}(6), 406--412.
+
 }
 \references{
+
+   Torsten Hothorn & Berthold Lausen (2003).
+   On the Exact Distribution of Maximally Selected Rank
+   Statistics. \emph{Computational Statistics \& Data Analysis}
+   \bold{43}, 121--137.
 
 }
 \examples{
