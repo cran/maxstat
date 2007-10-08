@@ -1,4 +1,4 @@
-# $Id: maxstat.R,v 1.52 2007/04/10 14:35:00 hothorn Exp $
+# $Id: maxstat.R 388 2007-04-10 14:35:00Z hothorn $
 
 
 print.maxtest <- function(x, digits = 4, ...) {
@@ -325,7 +325,7 @@ hl <- function(scores, H, E, S, msample, N, b)
 pmaxperm <- function(b, scores, msample, expect,
                      variance, B = 10000, ...) {
   N <- length(scores)
-  if (any(msample) > N) stop("invalid split points in msample")
+  if (any(msample > N)) stop("invalid split points in msample")
   p <- .Call("maxstatpermdist", scores = as.double(scores),
                            msample = as.integer(msample),
                            expect = as.double(expect),
@@ -340,7 +340,7 @@ qmaxperm <- function(p, scores, msample, expect,
                      variance, B = 10000, ...) {
   N <- length(scores)
   if (length(p) > 1 || p > 1 || p < 0) stop("p must be in [0,1]")
-  if (any(msample) > N) stop("invalid split points in msample")
+  if (any(msample > N)) stop("invalid split points in msample")
   cp <- .Call("maxstatpermdist", scores = as.double(scores),
                            msample = as.integer(msample),
                            expect = as.double(expect),
