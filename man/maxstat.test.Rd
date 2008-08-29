@@ -71,7 +71,7 @@ inequality (see Lausen, Sauerbrei and Schumacher, 1994, and \code{\link{pLausen9
 statistic, see Hothorn and Lausen (2003).
 
 \code{HL} is a small sample approximation based on the Streitberg-R\"ohmel
-algorithm (see \code{\link[exactRankTest]{pperm}}) introduced by Hothorn and
+algorithm (see \code{\link[exactRankTests]{pperm}}) introduced by Hothorn and
 Lausen (2003). This requires integer
 valued scores. For v. d. Waerden and Log-rank scores we try to find
 integer valued scores having the same shape. This results in slightly
