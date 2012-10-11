@@ -5,7 +5,7 @@
 \description{
   Counts of tree pipits at 86 raster points in oak forests.
 }
-\usage{data(treepipit)}
+\usage{data("treepipit")}
 \format{
   A data frame with 86 observations on the following 2 variables.
   \describe{
@@ -22,12 +22,13 @@
   <mue@lwf.uni-muenchen.de>.
 }
 \references{
-  Mueller J. and Hothorn T. (2003), On the Identification and Assessment of 
-  Habitat Patterns with Impact in Breeding Bird Communities in Oak Forests.
-  \emph{submitted manuscript}.
+  Mueller J. and Hothorn T. (2004), Maximally Selected Two-sample Statistics as a New 
+  Tool for the Identification and Assessment of Habitat Factors with an Application to 
+  Breeding-bird Communities in Oak Forests,
+  \emph{European Journal of Forest Research}, \bold{123}(3), 219--228.
 }
 \examples{
-data(treepipit)
+
 mod <- maxstat.test(counts ~ coverstorey, data = treepipit, 
                     smethod = "Data", pmethod = "HL", minprop = 0.2,
                     maxprop = 0.8)

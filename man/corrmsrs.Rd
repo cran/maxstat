@@ -29,17 +29,17 @@ returned.
 
         Hothorn, T. and Lausen, B. (2003).
         On the Exact Distribution of Maximally Selected Rank Statistics. 
-        \emph{Computational Statistics \& Data Analysis}, \bold{43}, 
+        \emph{Computational Statistics & Data Analysis}, \bold{43}, 
         121--137.
 
-        Lausen, B., Hothorn, T., Bretz, F. and Schmacher, M. (2002).
-        Assessment of Optimally Selected Prognostic Factors.
-	\emph{submitted}. Preprint available from
-	\url{http://www.mathpreprints.com/math/Preprint/blausen/20021007/1/}
+        Lausen, B., Hothorn, T., Bretz, F. and Schmacher, M. (2004).
+        Assessment of Optimally Selected Prognostic Factors. \emph{Biometrical Journal},
+        \bold{46}(3), 364--374.
 }
  
-\author{ Torsten Hothorn <Torsten.Hothorn@rzmail.uni-erlangen.de> }
 \examples{
+
+set.seed(29)
 
 # matrix of hypothetical prognostic factors
 

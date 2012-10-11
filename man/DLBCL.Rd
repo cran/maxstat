@@ -8,7 +8,7 @@ A data frame with gene expression data from DLBCL (diffuse large B-cell
 lymphoma) patients.
 }
 \usage{
-data(DLBCL)
+data("DLBCL")
 }
 \format{
 \describe{
@@ -37,7 +37,7 @@ expression profiling. \emph{Nature}, \bold{403}, 504--509
 
 \examples{
 
-data(DLBCL)
+set.seed(29)
 
 # compute the cutpoint and plot the empirical process 
 
@@ -93,13 +93,12 @@ maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
              abseps=0.01)
 
 # conditional Monte-Carlo
-
 maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
              smethod="LogRank", pmethod="condMC", B = 9999) 
 
 # survival analysis and plotting like in Alizadeh et al. (2000)
 
-if(require(survival, quietly = TRUE)) {
+if(require("survival", quietly = TRUE)) {
 
   splitGEG <- rep(1, nrow(DLBCL))
   DLBCL <- cbind(DLBCL, splitGEG)

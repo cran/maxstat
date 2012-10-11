@@ -9,7 +9,7 @@ A data frame with the left ventricular ejection fraction of patients with
 malignant ventricular tachyarrhythmias including recurrence-free month and censoring.
 }
 \usage{
-data(hohnloser)
+data("hohnloser")
 }
 \format{
 \describe{
@@ -39,7 +39,7 @@ Lausen, B. and Schumacher, M. (1992), Maximally Selected Rank Statistics.
 
 \examples{
 
-data(hohnloser)
+set.seed(29)
 
 # limiting distribution
 
@@ -74,7 +74,6 @@ maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
 
 # conditional Monte-Carlo
-
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 smethod="LogRank", pmethod="condMC", B = 9999)
 

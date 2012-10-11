@@ -121,7 +121,7 @@ and \code{x} giving the response and independent variable.
 
         Hothorn, T. and Lausen, B. (2003).
         On the Exact Distribution of Maximally Selected Rank Statistics. 
-        \emph{Computational Statistics \& Data Analysis}, \bold{43}, 
+        \emph{Computational Statistics & Data Analysis}, \bold{43}, 
         121--137.
 
 	Lausen, B. and Schumacher, M. (1992).
@@ -138,14 +138,15 @@ and \code{x} giving the response and independent variable.
 	Hothorn, T. (2001). On Exact Rank Tests in R.
 	\emph{R News}, \bold{1}, 11--12
 
-        Lausen, B., Hothorn, T., Bretz, F. and Schmacher, M. (2002).
-        Assessment of Optimally Selected Prognostic Factors.
-        \emph{submitted}. Preprint available from
-        \url{http://www.mathpreprints.com/math/Preprint/blausen/20021007/1/}
+        Lausen, B., Hothorn, T., Bretz, F. and Schmacher, M. (2004).
+        Assessment of Optimally Selected Prognostic Factors. \emph{Biometrical Journal},
+        \bold{46}(3), 364--374.
 
 }
 
 \examples{
+
+set.seed(29)
 
 x <- sort(runif(20))
 y <- c(rnorm(10), rnorm(10, 2))
@@ -157,8 +158,6 @@ print(mod)
 plot(mod)
 
 # adjusted for more than one prognostic factor.
-
-data(DLBCL)
 
 mstat <- maxstat.test(Surv(time, cens) ~ IPI + MGE, data=DLBCL, 
                       smethod="LogRank", pmethod="exactGauss", 

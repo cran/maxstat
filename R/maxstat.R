@@ -1,4 +1,4 @@
-# $Id: maxstat.R 392 2008-08-29 16:38:37Z hothorn $
+# $Id: maxstat.R 395 2012-10-11 12:28:14Z hothorn $
 
 
 print.maxtest <- function(x, digits = 4, ...) {
@@ -152,7 +152,6 @@ qexactgauss <- function(p, x, minprop=0.1, maxprop=0.9,...)
 
 pmaxstat <- function(b, scores,  msample, quant=FALSE)
 {
-  if (!require(exactRankTests)) stop("package exactRankTests not loaded")
 
   # for integers only
 
@@ -194,17 +193,9 @@ pmaxstat <- function(b, scores,  msample, quant=FALSE)
 
   # Streitberg / Roehmel in C, package "exactRankTest"
 
-  if (!is.loaded("cpermdist2")) stop("Function cpermdist2 from package exactRankTests not found!")
-
-#  H <- .C("cpermdist2", H = as.double(H), as.integer(N),
-#                as.integer(totsum), as.integer(sc),
-#                as.integer(scores), as.integer(N),
-#                as.integer(length(H)), PACKAGE="exactRankTests")$H
-
-  H <- .Call("cpermdist2", as.integer(N),
+  H <- exactRankTests:::cpermdist2(as.integer(N),
                 as.integer(totsum), as.integer(sc),
-                as.integer(scores), as.logical(FALSE), 
-                PACKAGE="exactRankTests")
+                as.integer(scores), as.logical(FALSE))
 
   # add last row, column for compatibility
 

@@ -30,6 +30,8 @@ a red line. \code{print.maxtest} is just a wrapper to \code{print.htest}.
 
 \examples{
 
+set.seed(29)
+
 x <- sort(runif(20))
 y <- rbinom(20, 1, 0.5)
 mydata <- data.frame(c(x,y))

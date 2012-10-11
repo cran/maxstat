@@ -1,57 +1,41 @@
 
-R : Copyright 2004, The R Foundation for Statistical Computing
-Version 2.0.1  (2004-11-15), ISBN 3-900051-07-0
+R Under development (unstable) (2012-10-07 r60893) -- "Unsuffered Consequences"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i686-pc-linux-gnu (32-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
 Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
 
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
 'citation()' on how to cite R or R packages in publications.
 
 Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for a HTML browser interface to help.
+'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-> ### * <HEADER>
-> ###
-> attach(NULL, name = "CheckExEnv")
-> assign(".CheckExEnv", as.environment(2), pos = length(search())) # base
-> ## This plot.new() patch has no effect yet for persp();
-> ## layout() & filled.contour() are now ok
-> assign("plot.new",
-+        function() {
-+ 	   .Internal(plot.new())
-+ 	   pp <- par(c("mfg","mfcol","oma","mar"))
-+ 	   if(all(pp$mfg[1:2] == c(1, pp$mfcol[2]))) {
-+                outer <- (oma4 <- pp$oma[4]) > 0; mar4 <- pp$mar[4]
-+                mtext(paste("help(", ..nameEx, ")"), side = 4,
-+                      line = if(outer)max(1, oma4 - 1) else min(1, mar4 - 1),
-+                      outer = outer, adj = 1, cex = .8, col = "orchid")
-+ 	   }
-+        },
-+        env = .CheckExEnv)
-> assign("cleanEx",
-+        function(env = .GlobalEnv) {
-+ 	   rm(list = ls(envir = env, all.names = TRUE), envir = env)
-+          assign(".Random.seed", as.integer(c(0, rep(7654, 3))), envir=.GlobalEnv)
-+        },
-+        env = .CheckExEnv)
-> assign("..nameEx", "__{must remake R-ex/*.R}__", env = .CheckExEnv) # for now
-> assign("ptime", proc.time(), env = .CheckExEnv)
-> postscript("maxstat-Examples.ps")
-> assign("par.postscript", par(no.readonly = TRUE), env = .CheckExEnv)
-> options(contrasts = c(unordered = "contr.treatment", ordered = "contr.poly"))
+> pkgname <- "maxstat"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
 > library('maxstat')
-Loading required package: exactRankTests 
-Loading required package: mvtnorm 
-Loading required package: survival 
-Loading required package: splines 
+Loading required package: exactRankTests
+Loading required package: survival
+Loading required package: splines
+ Package ‘exactRankTests’ is no longer under development.
+ Please consider using package ‘coin’ instead.
+
+Loading required package: mvtnorm
 > 
-> cleanEx(); ..nameEx <- "DLBCL"
-> 
+> assign(".oldSearch", search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("DLBCL")
 > ### * DLBCL
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: DLBCL
 > ### Title: Diffuse large B-cell lymphoma
@@ -61,7 +45,7 @@ Loading required package: splines
 > ### ** Examples
 > 
 > 
-> data(DLBCL)
+> set.seed(29)
 > 
 > # compute the cutpoint and plot the empirical process 
 > 
@@ -78,15 +62,15 @@ estimated cutpoint
          0.1860526 
 
 > 
-> ##Don't run: 
+> ## Not run: 
 > ##D   # postscript("statDLBCL.ps", horizontal=F, width=8, height=8)
 > ##D   pdf("statDLBCL.pdf", width=8, height=8)
-> 
+> ## End(Not run)
 > par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 > plot(mod, cex.lab=1.6, cex.axis=1.6, xlab="Mean gene expression",lwd=2)
-> ##Don't run: 
+> ## Not run: 
 > ##D   dev.off()
-> 
+> ## End(Not run)
 > 
 > # significance of the cutpoint
 > # limiting distribution
@@ -121,16 +105,16 @@ estimated cutpoint
 +                     pmethod="Lau94", alpha=0.05)
 > plot(mod, xlab="Mean gene expression")
 > 
-> ##Don't run: 
+> ## Not run: 
 > ##D #  postscript(file="RNewsStat.ps",horizontal=F, width=8, height=8)
 > ##D    pdf("RNewsStat.pdf", width=8, height=8)
 > ##D 
-> 
+> ## End(Not run)
 > par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 > plot(mod, xlab="Mean gene expression", cex.lab=1.6, cex.axis=1.6)
-> ##Don't run: 
+> ## Not run: 
 > ##D   dev.off()
-> 
+> ## End(Not run)
 > 
 > # small sample solution Hothorn & Lausen
 > 
@@ -155,23 +139,20 @@ estimated cutpoint
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = 0.01669
+M = 3.171, p-value = 0.01899
 sample estimates:
 estimated cutpoint 
          0.1860526 
 
-Warning message: 
-Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, ...) 
 > 
 > # conditional Monte-Carlo
-> 
 > maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 +              smethod="LogRank", pmethod="condMC", B = 9999) 
 
 	Maximally selected LogRank statistics using condMC
 
 data:  Surv(time, cens) by MGE 
-M = 3.1772, p-value = 0.01130
+M = 3.1772, p-value = 0.0102
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -179,7 +160,7 @@ estimated cutpoint
 > 
 > # survival analysis and plotting like in Alizadeh et al. (2000)
 > 
-> if(require(survival, quietly = TRUE)) {
+> if(require("survival", quietly = TRUE)) {
 + 
 +   splitGEG <- rep(1, nrow(DLBCL))
 +   DLBCL <- cbind(DLBCL, splitGEG)
@@ -207,11 +188,12 @@ estimated cutpoint
 +   DLBCL <- cbind(DLBCL, splitMGE)
 +   DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
 + 
-+   ##Don't run: 
++   ## Not run: 
 + ##D    # postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
 + ##D     pdf("survDLBCL.pdf", width=8, height=8)
 + ##D 
 + ##D   
++ ## End(Not run)
 +   par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
 + 
 +   plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
@@ -221,18 +203,21 @@ estimated cutpoint
 +   text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
 +   text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
 + 
-+   ##Don't run: 
++   ## Not run: 
 + ##D     dev.off()
 + ##D   
++ ## End(Not run)
 + }
 > 
 > 
 > 
 > 
-> par(get("par.postscript", env = .CheckExEnv))
-> cleanEx(); ..nameEx <- "corrmsrs"
-> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+> nameEx("corrmsrs")
 > ### * corrmsrs
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: corrmsrs
 > ### Title: Correlation Matrix
@@ -242,13 +227,17 @@ estimated cutpoint
 > ### ** Examples
 > 
 > 
+> set.seed(29)
+> 
 > # matrix of hypothetical prognostic factors
 > 
 > X <- matrix(rnorm(30), ncol=3) 
 > 
 > # this function
 > 
-> a <- corrmsrs(X, minprop=0, maxprop=0.9999)
+> print(system.time(a <- corrmsrs(X, minprop=0, maxprop=0.999)))
+   user  system elapsed 
+      0       0       0 
 > 
 > # coded by just typing the definition of the correlation
 > 
@@ -279,7 +268,9 @@ estimated cutpoint
 +   mycorr
 + }
 > 
-> tc <- testcorr(X)
+> print(system.time(tc <- testcorr(X)))
+   user  system elapsed 
+  0.020   0.000   0.019 
 > tc <- tc + t(tc)
 > diag(tc) <- 1
 > stopifnot(all.equal(tc, a))
@@ -287,9 +278,11 @@ estimated cutpoint
 > 
 > 
 > 
-> cleanEx(); ..nameEx <- "hohnloser"
-> 
+> cleanEx()
+> nameEx("hohnloser")
 > ### * hohnloser
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: hohnloser
 > ### Title: Left ventricular ejection fraction of patients with malignant
@@ -300,7 +293,7 @@ estimated cutpoint
 > ### ** Examples
 > 
 > 
-> data(hohnloser)
+> set.seed(29)
 > 
 > # limiting distribution
 > 
@@ -356,6 +349,7 @@ estimated cutpoint
                 39 
 
 > 
+> 
 > # small sample solution by Hothorn & Lausen
 > 
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
@@ -378,13 +372,11 @@ estimated cutpoint
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5691, p-value = 0.002932
+M = 3.5691, p-value = 0.004178
 sample estimates:
 estimated cutpoint 
                 39 
 
-Warning message: 
-Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, ...) 
 > 
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 + smethod="LogRank", pmethod="exactGauss", iscores=TRUE)
@@ -392,23 +384,20 @@ Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, .
 	Maximally selected LogRank statistics using exactGauss
 
 data:  Surv(month, cens) by EF 
-M = 3.5639, p-value = 0.004902
+M = 3.5639, p-value = 0.004338
 sample estimates:
 estimated cutpoint 
                 39 
 
-Warning message: 
-Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, ...) 
 > 
 > # conditional Monte-Carlo
-> 
 > maxstat.test(Surv(month, cens) ~ EF, data=hohnloser,
 + smethod="LogRank", pmethod="condMC", B = 9999)
 
 	Maximally selected LogRank statistics using condMC
 
 data:  Surv(month, cens) by EF 
-M = 3.5691, p-value = 0.0036
+M = 3.5691, p-value = 0.0045
 sample estimates:
 estimated cutpoint 
                 39 
@@ -417,9 +406,11 @@ estimated cutpoint
 > 
 > 
 > 
-> cleanEx(); ..nameEx <- "maxstat.test"
-> 
+> cleanEx()
+> nameEx("maxstat.test")
 > ### * maxstat.test
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: maxstat.test
 > ### Title: Maximally Selected Rank and Statistics
@@ -429,6 +420,8 @@ estimated cutpoint
 > 
 > ### ** Examples
 > 
+> 
+> set.seed(29)
 > 
 > x <- sort(runif(20))
 > y <- c(rnorm(10), rnorm(10, 2))
@@ -441,31 +434,28 @@ estimated cutpoint
 	Maximally selected Wilcoxon statistics using HL
 
 data:  y by x 
-M = 3.3261, p-value = 0.001607
+M = 3.4017, p-value = 0.0009476
 sample estimates:
 estimated cutpoint 
-         0.4062305 
+         0.3621201 
 
 > plot(mod)
 > 
 > # adjusted for more than one prognostic factor.
 > 
-> data(DLBCL)
-> 
 > mstat <- maxstat.test(Surv(time, cens) ~ IPI + MGE, data=DLBCL, 
 +                       smethod="LogRank", pmethod="exactGauss", 
 +                       abseps=0.01)
-Warning messages: 
-1: Completion with error > abseps in: pexactgauss(STATISTIC, x, minprop, maxprop, ...) 
-2: pvmnorm:  Completion with error > abseps in: maxstat(y = c(77.4, 3.4, 71.3, 69.6, 51.2, 3.2, 8.3, 102.4, 89.8,  
 > plot(mstat)
 > 
 > 
 > 
 > 
-> cleanEx(); ..nameEx <- "pLausen92"
-> 
+> cleanEx()
+> nameEx("pLausen92")
 > ### * pLausen92
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: pLausen92
 > ### Title: Approximating Maximally Selected Statistics
@@ -477,7 +467,7 @@ Warning messages:
 > 
 > # Compute quantiles. Should be equal to Table 2 in Lausen and Schumacher
 > 
-> data(LausenTab2)
+> load(file.path(system.file(package = "maxstat"), "results", "LausenTab2.rda"))
 > 
 > a <- rev(c(0.01, 0.025, 0.05, 0.1))
 > prop <- rbind(c(0.25, 0.75), c(0.4, 0.6), c(0.1, 0.9), c(0.4, 0.9))
@@ -514,9 +504,11 @@ Warning messages:
 > 
 > 
 > 
-> cleanEx(); ..nameEx <- "pLausen94"
-> 
+> cleanEx()
+> nameEx("pLausen94")
 > ### * pLausen94
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: pLausen94
 > ### Title: Approximating Maximally Selected Statistics
@@ -541,9 +533,11 @@ Warning messages:
 > 
 > 
 > 
-> cleanEx(); ..nameEx <- "pexactgauss"
-> 
+> cleanEx()
+> nameEx("pexactgauss")
 > ### * pexactgauss
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: pexactgauss
 > ### Title: Computing Maximally Selected Gauss Statistics
@@ -553,6 +547,8 @@ Warning messages:
 > ### ** Examples
 > 
 > 
+> set.seed(29)
+> 
 > x <- rnorm(20)
 > 
 > pexact <- pexactgauss(2.5, x, abseps=0.01)
@@ -560,9 +556,11 @@ Warning messages:
 > 
 > 
 > 
-> cleanEx(); ..nameEx <- "plot.maxtest"
-> 
+> cleanEx()
+> nameEx("plot.maxtest")
 > ### * plot.maxtest
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: plot.maxtest
 > ### Title: Print and Plot Standardized Statistics
@@ -571,6 +569,8 @@ Warning messages:
 > 
 > ### ** Examples
 > 
+> 
+> set.seed(29)
 > 
 > x <- sort(runif(20))
 > y <- rbinom(20, 1, 0.5)
@@ -583,19 +583,21 @@ Warning messages:
 	Maximally selected Median statistics using HL
 
 data:  y by x 
-M = 1.9714, p-value = 0.5432
+M = 2.7822, p-value = 0.02024
 sample estimates:
 estimated cutpoint 
-         0.2138944 
+         0.1761709 
 
 > plot(mod)
 > 
 > 
 > 
 > 
-> cleanEx(); ..nameEx <- "pmaxstat"
-> 
+> cleanEx()
+> nameEx("pmaxstat")
 > ### * pmaxstat
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: pmaxstat
 > ### Title: Approximating Maximally Selected Statistics
@@ -611,9 +613,11 @@ estimated cutpoint
 > 
 > 
 > 
-> cleanEx(); ..nameEx <- "sphase"
-> 
+> cleanEx()
+> nameEx("sphase")
 > ### * sphase
+> 
+> flush(stderr()); flush(stdout())
 > 
 > ### Name: sphase
 > ### Title: S-phase fraction of tumor cells
@@ -622,9 +626,11 @@ estimated cutpoint
 > 
 > ### ** Examples
 > 
-> data(sphase)
+> 
+> set.seed(29)
+> 
 > maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-+ pmethod="Lau94")
++              pmethod="Lau94")
 
 	Maximally selected LogRank statistics using Lau94
 
@@ -634,8 +640,9 @@ sample estimates:
 estimated cutpoint 
                107 
 
+> 
 > maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-+ pmethod="Lau94", iscores=TRUE)
++              pmethod="Lau94", iscores=TRUE)
 
 	Maximally selected LogRank statistics using Lau94
 
@@ -645,8 +652,9 @@ sample estimates:
 estimated cutpoint 
                107 
 
+> 
 > maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-+ pmethod="HL")
++              pmethod="HL")
 
 	Maximally selected LogRank statistics using HL
 
@@ -656,31 +664,38 @@ sample estimates:
 estimated cutpoint 
                107 
 
+> 
 > maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-+ pmethod="condMC", B = 9999)
++              pmethod="condMC", B = 9999)
 
 	Maximally selected LogRank statistics using condMC
 
 data:  Surv(RFS, cens) by SPF 
-M = 2.4033, p-value = 0.1590
+M = 2.4033, p-value = 0.1581
 sample estimates:
 estimated cutpoint 
                107 
 
+> 
 > plot(maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank"))
 > 
-> cleanEx(); ..nameEx <- "treepipit"
 > 
+> 
+> 
+> cleanEx()
+> nameEx("treepipit")
 > ### * treepipit
->  
+> 
+> flush(stderr()); flush(stdout())
+> 
 > ### Name: treepipit
 > ### Title: Tree Pipit Data
 > ### Aliases: treepipit
 > ### Keywords: datasets
->  
+> 
 > ### ** Examples
 > 
-> data(treepipit)
+> 
 > mod <- maxstat.test(counts ~ coverstorey, data = treepipit, 
 +                     smethod = "Data", pmethod = "HL", minprop = 0.2,
 +                     maxprop = 0.8)
@@ -696,11 +711,13 @@ estimated cutpoint
 
 > plot(mod)
 > 
+> 
+> 
 > ### * <FOOTER>
 > ###
-> cat("Time elapsed: ", proc.time() - get("ptime", env = .CheckExEnv),"\n")
-Time elapsed:  10.6 0.21 10.91 0 0 
-> dev.off()
+> cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  4.48 0.156 4.643 0 0 
+> grDevices::dev.off()
 null device 
           1 
 > ###

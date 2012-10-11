@@ -49,6 +49,8 @@ selected gauss statistic greater equal \code{b} is observed.
 }
 \examples{
 
+set.seed(29)
+
 x <- rnorm(20)
 
 pexact <- pexactgauss(2.5, x, abseps=0.01)

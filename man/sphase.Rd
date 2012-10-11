@@ -2,7 +2,7 @@
 \alias{sphase}
 \docType{data}
 \title{ S-phase fraction of tumor cells }
-\usage{data(sphase)}
+\usage{data("sphase")}
 \description{
   S-phase fraction of tumor cells in breast cancer patients. 
 }
@@ -35,20 +35,26 @@
 
    Torsten Hothorn & Berthold Lausen (2003).
    On the Exact Distribution of Maximally Selected Rank
-   Statistics. \emph{Computational Statistics \& Data Analysis}
+   Statistics. \emph{Computational Statistics & Data Analysis}
    \bold{43}, 121--137.
 
 }
 \examples{
-data(sphase)
+
+set.seed(29)
+
 maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-pmethod="Lau94")
+             pmethod="Lau94")
+
 maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-pmethod="Lau94", iscores=TRUE)
+             pmethod="Lau94", iscores=TRUE)
+
 maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-pmethod="HL")
+             pmethod="HL")
+
 maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-pmethod="condMC", B = 9999)
+             pmethod="condMC", B = 9999)
+
 plot(maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank"))
 
 }
