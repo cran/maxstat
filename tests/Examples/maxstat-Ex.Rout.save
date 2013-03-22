@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2012-10-07 r60893) -- "Unsuffered Consequences"
-Copyright (C) 2012 The R Foundation for Statistical Computing
+R version 2.15.3 (2013-03-01) -- "Security Blanket"
+Copyright (C) 2013 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 Platform: i686-pc-linux-gnu (32-bit)
 
@@ -235,9 +235,7 @@ estimated cutpoint
 > 
 > # this function
 > 
-> print(system.time(a <- corrmsrs(X, minprop=0, maxprop=0.999)))
-   user  system elapsed 
-      0       0       0 
+> a <- corrmsrs(X, minprop=0, maxprop=0.999)
 > 
 > # coded by just typing the definition of the correlation
 > 
@@ -268,9 +266,7 @@ estimated cutpoint
 +   mycorr
 + }
 > 
-> print(system.time(tc <- testcorr(X)))
-   user  system elapsed 
-  0.020   0.000   0.019 
+> tc <- testcorr(X)
 > tc <- tc + t(tc)
 > diag(tc) <- 1
 > stopifnot(all.equal(tc, a))
@@ -716,7 +712,7 @@ estimated cutpoint
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.48 0.156 4.643 0 0 
+Time elapsed:  4.144 0.168 4.321 0 0 
 > grDevices::dev.off()
 null device 
           1 

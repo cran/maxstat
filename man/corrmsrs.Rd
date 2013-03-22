@@ -47,7 +47,7 @@ X <- matrix(rnorm(30), ncol=3)
 
 # this function
 
-print(system.time(a <- corrmsrs(X, minprop=0, maxprop=0.999)))
+a <- corrmsrs(X, minprop=0, maxprop=0.999)
 
 # coded by just typing the definition of the correlation
 
@@ -78,7 +78,7 @@ testcorr <- function(X) {
   mycorr
 }
 
-print(system.time(tc <- testcorr(X)))
+tc <- testcorr(X)
 tc <- tc + t(tc)
 diag(tc) <- 1
 stopifnot(all.equal(tc, a))

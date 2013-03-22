@@ -1,6 +1,8 @@
 
-R : Copyright 2004, The R Foundation for Statistical Computing
-Version 2.0.1  (2004-11-15), ISBN 3-900051-07-0
+R version 2.15.3 (2013-03-01) -- "Security Blanket"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i686-pc-linux-gnu (32-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -11,15 +13,18 @@ Type 'contributors()' for more information and
 'citation()' on how to cite R or R packages in publications.
 
 Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for a HTML browser interface to help.
+'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
 > 
 > library(maxstat)
-Loading required package: exactRankTests 
-Loading required package: mvtnorm 
-Loading required package: survival 
-Loading required package: splines 
+Loading required package: exactRankTests
+Loading required package: survival
+Loading required package: splines
+ Package 'exactRankTests' is no longer under development.
+ Please consider using package 'coin' instead.
+
+Loading required package: mvtnorm
 > set.seed(290875)
 > 
 > # by Achim Zeileis, 13.09.2002
@@ -71,3 +76,6 @@ estimated cutpoint
 > stopifnot(all.equal(a, b))
 > 
 > 
+> proc.time()
+   user  system elapsed 
+  0.308   0.028   0.327 
