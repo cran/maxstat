@@ -202,6 +202,8 @@ SEXP maxstatpermdist(SEXP scores, SEXP msample, SEXP expect, SEXP variance,
     k = 0;
     for (j = 0; j < N; j++) {
     
+      if (k == mN) break;
+    
       /* the statistic at cutpoint k is the standardized sum of the scores */
     
       dummy = dummy + y[perm[j]];

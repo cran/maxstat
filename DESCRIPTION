@@ -1,7 +1,7 @@
 Package: maxstat
-Version: 0.7-16
+Version: 0.7-17
 Title: Maximally Selected Rank Statistics
-Date: 2013-03-22
+Date: 2013-04-18
 Author: Torsten Hothorn
 Maintainer: Torsten Hothorn <Torsten.Hothorn@R-project.org>
 Description: Maximally selected rank statistics with several p-value
@@ -10,7 +10,7 @@ Depends: R (>= 1.7.0), exactRankTests(>= 0.8-23), mvtnorm(>= 0.5-10),
         survival
 License: GPL (>= 2)
 LazyData: yes
-Packaged: 2013-03-22 09:50:37 UTC; hothorn
+Packaged: 2013-04-18 11:02:36 UTC; hothorn
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2013-03-22 11:25:28
+Date/Publication: 2013-04-18 15:06:03

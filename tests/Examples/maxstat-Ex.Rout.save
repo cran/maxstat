@@ -1,8 +1,7 @@
 
-R version 2.15.3 (2013-03-01) -- "Security Blanket"
+R version 3.0.0 (2013-04-03) -- "Masked Marvel"
 Copyright (C) 2013 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: i686-pc-linux-gnu (32-bit)
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -30,7 +29,7 @@ Loading required package: splines
 
 Loading required package: mvtnorm
 > 
-> assign(".oldSearch", search(), pos = 'CheckExEnv')
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
 > nameEx("DLBCL")
 > ### * DLBCL
@@ -55,7 +54,7 @@ Loading required package: mvtnorm
 
 	Maximally selected LogRank statistics using none
 
-data:  Surv(time, cens) by MGE 
+data:  Surv(time, cens) by MGE
 M = 3.1772, p-value = NA
 sample estimates:
 estimated cutpoint 
@@ -80,7 +79,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using Lau92
 
-data:  Surv(time, cens) by MGE 
+data:  Surv(time, cens) by MGE
 M = 3.171, p-value = 0.03611
 sample estimates:
 estimated cutpoint 
@@ -94,7 +93,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using Lau94
 
-data:  Surv(time, cens) by MGE 
+data:  Surv(time, cens) by MGE
 M = 3.171, p-value = 0.02435
 sample estimates:
 estimated cutpoint 
@@ -123,7 +122,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using HL
 
-data:  Surv(time, cens) by MGE 
+data:  Surv(time, cens) by MGE
 M = 3.171, p-value = 0.02218
 sample estimates:
 estimated cutpoint 
@@ -138,8 +137,8 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using exactGauss
 
-data:  Surv(time, cens) by MGE 
-M = 3.171, p-value = 0.01899
+data:  Surv(time, cens) by MGE
+M = 3.171, p-value = 0.01898
 sample estimates:
 estimated cutpoint 
          0.1860526 
@@ -151,7 +150,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using condMC
 
-data:  Surv(time, cens) by MGE 
+data:  Surv(time, cens) by MGE
 M = 3.1772, p-value = 0.0102
 sample estimates:
 estimated cutpoint 
@@ -298,7 +297,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using Lau92
 
-data:  Surv(month, cens) by EF 
+data:  Surv(month, cens) by EF
 M = 3.5691, p-value = 0.01065
 sample estimates:
 estimated cutpoint 
@@ -312,7 +311,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using Lau92
 
-data:  Surv(month, cens) by EF 
+data:  Surv(month, cens) by EF
 M = 3.5639, p-value = 0.01083
 sample estimates:
 estimated cutpoint 
@@ -326,7 +325,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using Lau94
 
-data:  Surv(month, cens) by EF 
+data:  Surv(month, cens) by EF
 M = 3.5691, p-value = 0.005453
 sample estimates:
 estimated cutpoint 
@@ -338,7 +337,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using Lau94
 
-data:  Surv(month, cens) by EF 
+data:  Surv(month, cens) by EF
 M = 3.5639, p-value = 0.005556
 sample estimates:
 estimated cutpoint 
@@ -353,7 +352,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using HL
 
-data:  Surv(month, cens) by EF 
+data:  Surv(month, cens) by EF
 M = 3.5639, p-value = 0.00667
 sample estimates:
 estimated cutpoint 
@@ -367,8 +366,8 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using exactGauss
 
-data:  Surv(month, cens) by EF 
-M = 3.5691, p-value = 0.004178
+data:  Surv(month, cens) by EF
+M = 3.5691, p-value = 0.004435
 sample estimates:
 estimated cutpoint 
                 39 
@@ -379,7 +378,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using exactGauss
 
-data:  Surv(month, cens) by EF 
+data:  Surv(month, cens) by EF
 M = 3.5639, p-value = 0.004338
 sample estimates:
 estimated cutpoint 
@@ -392,7 +391,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using condMC
 
-data:  Surv(month, cens) by EF 
+data:  Surv(month, cens) by EF
 M = 3.5691, p-value = 0.0045
 sample estimates:
 estimated cutpoint 
@@ -429,7 +428,7 @@ estimated cutpoint
 
 	Maximally selected Wilcoxon statistics using HL
 
-data:  y by x 
+data:  y by x
 M = 3.4017, p-value = 0.0009476
 sample estimates:
 estimated cutpoint 
@@ -578,7 +577,7 @@ estimated cutpoint
 
 	Maximally selected Median statistics using HL
 
-data:  y by x 
+data:  y by x
 M = 2.7822, p-value = 0.02024
 sample estimates:
 estimated cutpoint 
@@ -630,7 +629,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using Lau94
 
-data:  Surv(RFS, cens) by SPF 
+data:  Surv(RFS, cens) by SPF
 M = 2.4033, p-value = 0.2727
 sample estimates:
 estimated cutpoint 
@@ -642,7 +641,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using Lau94
 
-data:  Surv(RFS, cens) by SPF 
+data:  Surv(RFS, cens) by SPF
 M = 2.4017, p-value = 0.2738
 sample estimates:
 estimated cutpoint 
@@ -654,7 +653,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using HL
 
-data:  Surv(RFS, cens) by SPF 
+data:  Surv(RFS, cens) by SPF
 M = 2.4017, p-value = 0.5494
 sample estimates:
 estimated cutpoint 
@@ -666,7 +665,7 @@ estimated cutpoint
 
 	Maximally selected LogRank statistics using condMC
 
-data:  Surv(RFS, cens) by SPF 
+data:  Surv(RFS, cens) by SPF
 M = 2.4033, p-value = 0.1581
 sample estimates:
 estimated cutpoint 
@@ -699,7 +698,7 @@ estimated cutpoint
 
 	Maximally selected Data statistics using HL
 
-data:  counts by coverstorey 
+data:  counts by coverstorey
 M = 4.3139, p-value = 0.0001141
 sample estimates:
 estimated cutpoint 
@@ -711,8 +710,8 @@ estimated cutpoint
 > 
 > ### * <FOOTER>
 > ###
-> cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.144 0.168 4.321 0 0 
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  3.004 0.06 3.068 0 0 
 > grDevices::dev.off()
 null device 
           1 
