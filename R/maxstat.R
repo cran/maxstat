@@ -1,4 +1,4 @@
-# $Id: maxstat.R 395 2012-10-11 12:28:14Z hothorn $
+# $Id: maxstat.R 406 2013-09-02 10:00:45Z hothorn $
 
 
 print.maxtest <- function(x, digits = 4, ...) {
@@ -123,7 +123,6 @@ cmatrix <- function(X) {
   
 pexactgauss <- function(b, x, minprop=0.1, maxprop=0.9, ...)
 {
-  if (!require(mvtnorm)) stop("package mvtnorm not loaded")
   if (length(x) > 1) {
     cm <- corrmsrs(x, minprop, maxprop) 
     if (is.null(dim(cm))) return(pnorm(-b)*2)

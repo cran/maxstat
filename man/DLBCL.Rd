@@ -37,6 +37,8 @@ expression profiling. \emph{Nature}, \bold{403}, 504--509
 
 \examples{
 
+library("survival")
+
 set.seed(29)
 
 # compute the cutpoint and plot the empirical process 
@@ -98,8 +100,6 @@ maxstat.test(Surv(time, cens) ~ MGE, data=DLBCL,
 
 # survival analysis and plotting like in Alizadeh et al. (2000)
 
-if(require("survival", quietly = TRUE)) {
-
   splitGEG <- rep(1, nrow(DLBCL))
   DLBCL <- cbind(DLBCL, splitGEG)
   DLBCL$splitGEG[DLBCL$GEG == "Activated B-like"] <- 0
@@ -143,7 +143,5 @@ if(require("survival", quietly = TRUE)) {
   \dontrun{
     dev.off()
   }
-}
-
 }
 \keyword{datasets}

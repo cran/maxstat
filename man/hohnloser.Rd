@@ -41,6 +41,8 @@ Lausen, B. and Schumacher, M. (1992), Maximally Selected Rank Statistics.
 
 set.seed(29)
 
+library("survival")
+
 # limiting distribution
 
 maxstat.test(Surv(month, cens) ~ EF, data=hohnloser, 

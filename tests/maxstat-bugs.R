@@ -1,5 +1,6 @@
 
-library(maxstat)
+library("maxstat")
+library("exactRankTests")
 set.seed(290875)
 
 # by Achim Zeileis, 13.09.2002

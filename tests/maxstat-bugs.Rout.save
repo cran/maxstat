@@ -1,8 +1,7 @@
 
-R version 2.15.3 (2013-03-01) -- "Security Blanket"
+R Under development (unstable) (2013-09-01 r63796) -- "Unsuffered Consequences"
 Copyright (C) 2013 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: i686-pc-linux-gnu (32-bit)
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,14 +16,13 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > 
-> library(maxstat)
-Loading required package: exactRankTests
+> library("maxstat")
+> library("exactRankTests")
 Loading required package: survival
 Loading required package: splines
  Package 'exactRankTests' is no longer under development.
  Please consider using package 'coin' instead.
 
-Loading required package: mvtnorm
 > set.seed(290875)
 > 
 > # by Achim Zeileis, 13.09.2002
@@ -35,7 +33,7 @@ Loading required package: mvtnorm
 
 	Maximally selected Wilcoxon statistics using HL
 
-data:  y by index 
+data:  y by index
 M = 2.7767, p-value < 2.2e-16
 sample estimates:
 estimated cutpoint 
@@ -46,7 +44,7 @@ estimated cutpoint
 
 	Maximally selected Wilcoxon statistics using none
 
-data:  y by index 
+data:  y by index
 M = 2.7767, p-value = NA
 sample estimates:
 estimated cutpoint 
@@ -78,4 +76,4 @@ estimated cutpoint
 > 
 > proc.time()
    user  system elapsed 
-  0.308   0.028   0.327 
+  0.192   0.036   0.223 

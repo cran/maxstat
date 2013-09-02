@@ -158,11 +158,30 @@ print(mod)
 plot(mod)
 
 # adjusted for more than one prognostic factor.
-
+library("survival")
 mstat <- maxstat.test(Surv(time, cens) ~ IPI + MGE, data=DLBCL, 
                       smethod="LogRank", pmethod="exactGauss", 
                       abseps=0.01)
 plot(mstat)
+
+### sphase
+set.seed(29)
+data("sphase", package = "TH.data")
+
+maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank",
+             pmethod="Lau94")
+
+maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank",
+             pmethod="Lau94", iscores=TRUE)
+
+maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank",
+             pmethod="HL")
+
+maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank",
+             pmethod="condMC", B = 9999)
+
+plot(maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank"))
+
 
 }
 \keyword{htest}

@@ -9,8 +9,9 @@ options(prompt=">", width=60)
 ###################################################
 ### code chunk number 2: DLBCL
 ###################################################
-library(maxstat)
-data(DLBCL)
+library("maxstat")
+library("survival")
+data("DLBCL", package="maxstat")
 mtHL <- maxstat.test(Surv(time, cens) ~ MGE, 
         data=DLBCL, smethod="LogRank", pmethod="HL")
 mtHL

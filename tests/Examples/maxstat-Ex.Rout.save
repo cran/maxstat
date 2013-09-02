@@ -1,5 +1,5 @@
 
-R version 3.0.0 (2013-04-03) -- "Masked Marvel"
+R Under development (unstable) (2013-09-01 r63796) -- "Unsuffered Consequences"
 Copyright (C) 2013 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -21,13 +21,6 @@ Type 'q()' to quit R.
 > source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
 > library('maxstat')
-Loading required package: exactRankTests
-Loading required package: survival
-Loading required package: splines
- Package ‘exactRankTests’ is no longer under development.
- Please consider using package ‘coin’ instead.
-
-Loading required package: mvtnorm
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
@@ -43,6 +36,9 @@ Loading required package: mvtnorm
 > 
 > ### ** Examples
 > 
+> 
+> library("survival")
+Loading required package: splines
 > 
 > set.seed(29)
 > 
@@ -159,60 +155,59 @@ estimated cutpoint
 > 
 > # survival analysis and plotting like in Alizadeh et al. (2000)
 > 
-> if(require("survival", quietly = TRUE)) {
-+ 
-+   splitGEG <- rep(1, nrow(DLBCL))
-+   DLBCL <- cbind(DLBCL, splitGEG)
-+   DLBCL$splitGEG[DLBCL$GEG == "Activated B-like"] <- 0
-+ 
-+   plot(survfit(Surv(time, cens) ~ splitGEG, data=DLBCL),
+>   splitGEG <- rep(1, nrow(DLBCL))
+>   DLBCL <- cbind(DLBCL, splitGEG)
+>   DLBCL$splitGEG[DLBCL$GEG == "Activated B-like"] <- 0
+> 
+>   plot(survfit(Surv(time, cens) ~ splitGEG, data=DLBCL),
 +        xlab="Survival time in month", ylab="Probability")
-+ 
-+   text(90, 0.7, "GC B-like")
-+   text(60, 0.3, "Activated B-like")
-+ 
-+   splitIPI <- rep(1, nrow(DLBCL))
-+   DLBCL <- cbind(DLBCL, splitIPI)
-+   DLBCL$splitIPI[DLBCL$IPI <= 2] <- 0
-+ 
-+   plot(survfit(Surv(time, cens) ~ splitIPI, data=DLBCL),
+> 
+>   text(90, 0.7, "GC B-like")
+>   text(60, 0.3, "Activated B-like")
+> 
+>   splitIPI <- rep(1, nrow(DLBCL))
+>   DLBCL <- cbind(DLBCL, splitIPI)
+>   DLBCL$splitIPI[DLBCL$IPI <= 2] <- 0
+> 
+>   plot(survfit(Surv(time, cens) ~ splitIPI, data=DLBCL),
 +        xlab="Survival time in month", ylab="Probability")
-+ 
-+   text(90, 0.7, "Low clinical risk")
-+   text(60, 0.25, "High clinical risk")
-+ 
-+   # survival analysis using the cutpoint 
-+ 
-+   splitMGE <- rep(1, nrow(DLBCL))
-+   DLBCL <- cbind(DLBCL, splitMGE)
-+   DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
-+ 
-+   ## Not run: 
-+ ##D    # postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
-+ ##D     pdf("survDLBCL.pdf", width=8, height=8)
-+ ##D 
-+ ##D   
-+ ## End(Not run)
-+   par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
-+ 
-+   plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
+> 
+>   text(90, 0.7, "Low clinical risk")
+>   text(60, 0.25, "High clinical risk")
+> 
+>   # survival analysis using the cutpoint 
+> 
+>   splitMGE <- rep(1, nrow(DLBCL))
+>   DLBCL <- cbind(DLBCL, splitMGE)
+>   DLBCL$splitMGE[DLBCL$MGE <= mod$estimate] <- 0
+> 
+>   ## Not run: 
+> ##D    # postscript("survDLBCL.ps",horizontal=F, width=8, height=8)
+> ##D     pdf("survDLBCL.pdf", width=8, height=8)
+> ##D 
+> ##D   
+> ## End(Not run)
+>   par(mai=c(1.0196235, 1.0196235, 0.8196973, 0.4198450))
+> 
+>   plot(survfit(Surv(time, cens) ~ splitMGE, data=DLBCL),
 +        xlab = "Survival time in month",
 +        ylab="Probability", cex.lab=1.6, cex.axis=1.6, lwd=2)
-+ 
-+   text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
-+   text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
-+ 
-+   ## Not run: 
-+ ##D     dev.off()
-+ ##D   
-+ ## End(Not run)
-+ }
 > 
+>   text(90, 0.9, expression("Mean gene expression" > 0.186), cex=1.6)   
+>   text(90, 0.45, expression("Mean gene expression" <= 0.186 ), cex=1.6)   
+> 
+>   ## Not run: 
+> ##D     dev.off()
+> ##D   
+> ## End(Not run)
 > 
 > 
 > 
 > graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
+
+detaching ‘package:survival’, ‘package:splines’
+
 > nameEx("corrmsrs")
 > ### * corrmsrs
 > 
@@ -289,6 +284,9 @@ estimated cutpoint
 > 
 > 
 > set.seed(29)
+> 
+> library("survival")
+Loading required package: splines
 > 
 > # limiting distribution
 > 
@@ -402,6 +400,9 @@ estimated cutpoint
 > 
 > 
 > cleanEx()
+
+detaching ‘package:survival’, ‘package:splines’
+
 > nameEx("maxstat.test")
 > ### * maxstat.test
 > 
@@ -437,16 +438,75 @@ estimated cutpoint
 > plot(mod)
 > 
 > # adjusted for more than one prognostic factor.
-> 
+> library("survival")
+Loading required package: splines
 > mstat <- maxstat.test(Surv(time, cens) ~ IPI + MGE, data=DLBCL, 
 +                       smethod="LogRank", pmethod="exactGauss", 
 +                       abseps=0.01)
 > plot(mstat)
 > 
+> ### sphase
+> set.seed(29)
+> data("sphase", package = "TH.data")
+> 
+> maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank",
++              pmethod="Lau94")
+
+	Maximally selected LogRank statistics using Lau94
+
+data:  Surv(RFS, event) by SPF
+M = 2.4033, p-value = 0.2727
+sample estimates:
+estimated cutpoint 
+               107 
+
+> 
+> maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank",
++              pmethod="Lau94", iscores=TRUE)
+
+	Maximally selected LogRank statistics using Lau94
+
+data:  Surv(RFS, event) by SPF
+M = 2.4017, p-value = 0.2738
+sample estimates:
+estimated cutpoint 
+               107 
+
+> 
+> maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank",
++              pmethod="HL")
+
+	Maximally selected LogRank statistics using HL
+
+data:  Surv(RFS, event) by SPF
+M = 2.4017, p-value = 0.5494
+sample estimates:
+estimated cutpoint 
+               107 
+
+> 
+> maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank",
++              pmethod="condMC", B = 9999)
+
+	Maximally selected LogRank statistics using condMC
+
+data:  Surv(RFS, event) by SPF
+M = 2.4033, p-value = 0.1581
+sample estimates:
+estimated cutpoint 
+               107 
+
+> 
+> plot(maxstat.test(Surv(RFS, event) ~ SPF, data=sphase, smethod="LogRank"))
+> 
+> 
 > 
 > 
 > 
 > cleanEx()
+
+detaching ‘package:survival’, ‘package:splines’
+
 > nameEx("pLausen92")
 > ### * pLausen92
 > 
@@ -609,75 +669,6 @@ estimated cutpoint
 > 
 > 
 > cleanEx()
-> nameEx("sphase")
-> ### * sphase
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: sphase
-> ### Title: S-phase fraction of tumor cells
-> ### Aliases: sphase
-> ### Keywords: datasets
-> 
-> ### ** Examples
-> 
-> 
-> set.seed(29)
-> 
-> maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-+              pmethod="Lau94")
-
-	Maximally selected LogRank statistics using Lau94
-
-data:  Surv(RFS, cens) by SPF
-M = 2.4033, p-value = 0.2727
-sample estimates:
-estimated cutpoint 
-               107 
-
-> 
-> maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-+              pmethod="Lau94", iscores=TRUE)
-
-	Maximally selected LogRank statistics using Lau94
-
-data:  Surv(RFS, cens) by SPF
-M = 2.4017, p-value = 0.2738
-sample estimates:
-estimated cutpoint 
-               107 
-
-> 
-> maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-+              pmethod="HL")
-
-	Maximally selected LogRank statistics using HL
-
-data:  Surv(RFS, cens) by SPF
-M = 2.4017, p-value = 0.5494
-sample estimates:
-estimated cutpoint 
-               107 
-
-> 
-> maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank",
-+              pmethod="condMC", B = 9999)
-
-	Maximally selected LogRank statistics using condMC
-
-data:  Surv(RFS, cens) by SPF
-M = 2.4033, p-value = 0.1581
-sample estimates:
-estimated cutpoint 
-               107 
-
-> 
-> plot(maxstat.test(Surv(RFS, cens) ~ SPF, data=sphase, smethod="LogRank"))
-> 
-> 
-> 
-> 
-> cleanEx()
 > nameEx("treepipit")
 > ### * treepipit
 > 
@@ -710,8 +701,9 @@ estimated cutpoint
 > 
 > ### * <FOOTER>
 > ###
+> options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.004 0.06 3.068 0 0 
+Time elapsed:  2.936 0.06 3.001 0 0 
 > grDevices::dev.off()
 null device 
           1 

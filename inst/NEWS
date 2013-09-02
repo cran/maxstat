@@ -1,8 +1,12 @@
-# $Id: NEWS 401 2013-03-22 09:49:37Z hothorn $
+# $Id: NEWS 409 2013-09-02 12:57:06Z hothorn $
 
-	0.7-17 (18.04.2013)
+	0.7-18 (02.09.2013)
 
-	fix memory leak in maxstatpermdist
+	mv sphase data to TH.data; fix NAMESPACE issues
+
+        0.7-18 (18.04.2013)
+
+        ???
 
 	0.7-16 (22.03.2013)
 
