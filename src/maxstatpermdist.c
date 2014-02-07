@@ -1,6 +1,6 @@
 /*
 
-  $Id: maxstatpermdist.c 372 2003-08-30 14:29:45Z hothorn $
+  $Id: maxstatpermdist.c 412 2014-02-07 16:43:19Z hothorn $
   
   maxstatpermdist : Simulate Distribution of Maximally Selected Rank Statistics
   Copyright (C) 2003  Torsten Hothorn 
@@ -205,6 +205,7 @@ SEXP maxstatpermdist(SEXP scores, SEXP msample, SEXP expect, SEXP variance,
       /* the statistic at cutpoint k is the standardized sum of the scores */
     
       dummy = dummy + y[perm[j]];
+      if( k >= mN) break; /* make sure m[k] is defined */
       if ((j + 1) == m[k]) {
         stat[k] = fabs((dummy - e[k])/v[k]);
 
