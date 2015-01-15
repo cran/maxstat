@@ -160,7 +160,7 @@ cmaxstat <- function(y, x=NULL, weights = NULL,
   if (minprop == 0 & maxprop==1) m <- m[2:(length(m)-1)] else {
     if (all(m < floor(N*minprop))) stop("minprop too large")
     if (all(m > floor(N*maxprop))) stop("maxprop too small")
-    m <- m[m >= floor(N*minprop)]
+    m <- m[m >= max(1, floor(N*minprop))]
     m <- m[m <= floor(N*maxprop)]
   }
 
