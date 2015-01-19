@@ -1,4 +1,4 @@
-# $Id: maxstat.R 406 2013-09-02 10:00:45Z hothorn $
+# $Id: maxstat.R 413 2015-01-19 17:27:25Z hothorn $
 
 
 print.maxtest <- function(x, digits = 4, ...) {
@@ -90,10 +90,14 @@ pLausen94 <- function(b, N, minprop=0.1, maxprop=0.9, m=NULL)
 {
   if(is.null(m))
     m <- floor(N*minprop):floor(N*maxprop)
-  m1 <- m[1:(length(m)-1)]
-  m2 <- m[2:length(m)]
-  t <- sqrt(1 - m1*(N-m2)/((N-m1)*m2))
-  D <- sum(1/pi*exp(-b^2/2)*(t - (b^2/4 -1)*(t^3)/6))
+  if (length(m) == 0) {
+      D <- 0
+  } else {
+      m1 <- m[1:(length(m)-1)]
+      m2 <- m[2:length(m)]
+      t <- sqrt(1 - m1*(N-m2)/((N-m1)*m2))
+      D <- sum(1/pi*exp(-b^2/2)*(t - (b^2/4 -1)*(t^3)/6))
+  }
   1 - (pnorm(b) - pnorm(-b)) + D
 }
 
