@@ -1,5 +1,5 @@
-8ea1dc4a33c689adecdc70e56ca40b21 *DESCRIPTION
-43fb965ea2c7eba9811881dbb088ae05 *NAMESPACE
+890d0e8061dd5effae91d1ae93891d16 *DESCRIPTION
+9bd7e73db84970bbd2874bacac50c317 *NAMESPACE
 df468443663315409465e253a54f053f *R/corrmsrs.R
 fb2dff6ac643ca9f091bdbf5538ab1cf *R/maxstat.R
 9f13bee063f9e28e2b32064050270ca5 *R/maxstat.test.R
@@ -8,10 +8,10 @@ d6c713e83ba785305abc23b878f73e50 *build/vignette.rds
 dbf28f2b8d5ebc80007f9ea5e4afb5c2 *data/DLBCL.rda
 5fb279f69d51e073af90838a9fd3f571 *data/hohnloser.rda
 2a4e128d54077a90e61c93e55664aa5c *data/treepipit.rda
-0ab588ea7235b26976be93ea548b0df6 *inst/NEWS
+31fad6712ffd0f6c91a7b70f08bf5d51 *inst/NEWS
 758a55b3a068a08500c8089384bd66d6 *inst/doc/maxstat.R
 d8c1d6345edfcc16401359de34dc3686 *inst/doc/maxstat.Rnw
-5f80084c7501691a1558e488f9b0ec25 *inst/doc/maxstat.pdf
+5cfdc7a38968c133e37ec1bdf198aa1a *inst/doc/maxstat.pdf
 49f5ccc2ec31dbe1df0fa02bc3c283ce *inst/results/LausenTab2.rda
 bf434884bd72a464447a86068521e6e6 *man/DLBCL.Rd
 68a6e57d7d163464c3763c97bcb6800a *man/corrmsrs.Rd

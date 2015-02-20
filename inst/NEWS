@@ -1,5 +1,9 @@
 # $Id: NEWS 412 2014-02-07 16:43:19Z hothorn $
 
+	0.7-22 (20.02.2015)
+
+        register maxstat.test.data.frame and default
+
 	0.7-21 (19.01.2015)
 
         avoid two meaningless cases; fix by Marvin Wright <wright@imbs.uni-luebeck.de>

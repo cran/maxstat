@@ -9,6 +9,8 @@ S3method(print, maxtest)
 S3method(plot, maxtest)
 S3method(print, mmaxtest)
 S3method(plot, mmaxtest)
+S3method(maxstat.test, data.frame)
+S3method(maxstat.test, default)
 
 import(exactRankTests)
 import(mvtnorm)
