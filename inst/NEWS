@@ -1,4 +1,10 @@
-# $Id: NEWS 412 2014-02-07 16:43:19Z hothorn $
+# $Id: NEWS 414 2015-02-20 14:28:23Z hothorn $
+
+	0.7-23 (01.07.2015)
+
+        correct digits in print.htest
+
+        documentation updates
 
 	0.7-22 (20.02.2015)
 

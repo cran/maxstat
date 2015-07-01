@@ -105,7 +105,8 @@ is returned:
   \item{smethod}{ the type of test applied.}
   \item{pmethod}{ the type of p-value approximation applied.}
   \item{estimate}{ the estimated cutpoint (of \code{x}) which separates
-                   \code{y} best.} 
+                   \code{y} best. For numeric data, the groups are defined
+                   by \code{x} less or equal to \code{estimate} and \code{x} greater \code{estimate}.}
   \item{maxstats}{a list of \code{maxtest} objects, one for each
                   covariable.}
   \item{whichmin}{an integer specifying the element of \code{maxstats} with

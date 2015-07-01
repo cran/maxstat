@@ -8,9 +8,9 @@
 Printing and ploting method of objects of class \code{maxtest}}
 \usage{
 \method{plot}{maxtest}(x, xlab=NULL, ylab=NULL, \dots)
-\method{print}{maxtest}(x, digits = 4, \dots)
+\method{print}{maxtest}(x, digits = getOption("digits"), \dots)
 \method{plot}{mmaxtest}(x, xlab=NULL, ylab=NULL, nrow=2, \dots)
-\method{print}{mmaxtest}(x, digits = 4, \dots)
+\method{print}{mmaxtest}(x, digits = getOption("digits"), \dots)
 }
 \arguments{
   \item{x}{ an object of class \code{maxtest} or \code{mmaxtest}.}

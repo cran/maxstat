@@ -1,4 +1,7 @@
 
+import(stats)
+import(graphics)
+
 useDynLib(maxstat)
 
 export(maxstat.test, maxstat.test.data.frame, maxstat.test.default, 

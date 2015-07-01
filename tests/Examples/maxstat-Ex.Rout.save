@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2013-09-01 r63796) -- "Unsuffered Consequences"
-Copyright (C) 2013 The R Foundation for Statistical Computing
+R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
+Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -38,7 +38,6 @@ Type 'q()' to quit R.
 > 
 > 
 > library("survival")
-Loading required package: splines
 > 
 > set.seed(29)
 > 
@@ -206,7 +205,7 @@ estimated cutpoint
 > graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
 
-detaching ‘package:survival’, ‘package:splines’
+detaching ‘package:survival’
 
 > nameEx("corrmsrs")
 > ### * corrmsrs
@@ -286,7 +285,6 @@ detaching ‘package:survival’, ‘package:splines’
 > set.seed(29)
 > 
 > library("survival")
-Loading required package: splines
 > 
 > # limiting distribution
 > 
@@ -401,7 +399,7 @@ estimated cutpoint
 > 
 > cleanEx()
 
-detaching ‘package:survival’, ‘package:splines’
+detaching ‘package:survival’
 
 > nameEx("maxstat.test")
 > ### * maxstat.test
@@ -439,7 +437,6 @@ estimated cutpoint
 > 
 > # adjusted for more than one prognostic factor.
 > library("survival")
-Loading required package: splines
 > mstat <- maxstat.test(Surv(time, cens) ~ IPI + MGE, data=DLBCL, 
 +                       smethod="LogRank", pmethod="exactGauss", 
 +                       abseps=0.01)
@@ -505,7 +502,7 @@ estimated cutpoint
 > 
 > cleanEx()
 
-detaching ‘package:survival’, ‘package:splines’
+detaching ‘package:survival’
 
 > nameEx("pLausen92")
 > ### * pLausen92
@@ -703,7 +700,7 @@ estimated cutpoint
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.936 0.06 3.001 0 0 
+Time elapsed:  3.704 0.06 3.768 0 0 
 > grDevices::dev.off()
 null device 
           1 

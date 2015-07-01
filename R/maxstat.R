@@ -1,7 +1,7 @@
 # $Id: maxstat.R 413 2015-01-19 17:27:25Z hothorn $
 
 
-print.maxtest <- function(x, digits = 4, ...) {
+print.maxtest <- function(x, digits = getOption("digits"), ...) {
   x$stats <- NULL
   x$cuts <- NULL
   x$quant <- NULL
@@ -13,7 +13,7 @@ print.maxtest <- function(x, digits = 4, ...) {
   print(x, digits = digits, quote = TRUE, prefix = "", ...)
 } 
 
-print.mmaxtest <- function(x, digits = 4, ...) {
+print.mmaxtest <- function(x, digits = getOption("digits"), ...) {
   cat("\n\t Optimally Selected Prognostic Factors \n\n")
   cat("Call: ")
   print(x$call)
