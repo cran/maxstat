@@ -145,7 +145,7 @@ SEXP maxstatpermdist(SEXP scores, SEXP msample, SEXP expect, SEXP variance,
   SEXP myscores, mymsample, myexpect, myvariance;
   double *y, thisstat = 0.0;
   int *m, N, mN, ns;
-  double *e, *v, *urand, *stat, dummy = 0.0;
+  double *e, *v, *vv, *urand, *stat, dummy = 0.0;
   int i, j, *perm, k;
 
   PROTECT(myscores = coerceVector(scores, REALSXP));
@@ -158,7 +158,8 @@ SEXP maxstatpermdist(SEXP scores, SEXP msample, SEXP expect, SEXP variance,
   y = REAL(myscores);
   m = INTEGER(mymsample);
   e = REAL(myexpect);
-  v = REAL(myvariance);
+  vv = REAL(myvariance);
+  v = (double *) R_alloc(LENGTH(variance), sizeof(double));
   ns = INTEGER(Nsim)[0];
 
   N = LENGTH(scores);
@@ -184,7 +185,7 @@ SEXP maxstatpermdist(SEXP scores, SEXP msample, SEXP expect, SEXP variance,
   }
   PROTECT(distr = allocVector(REALSXP, ns));
 
-  for (k = 0; k < mN; k++) v[k] = sqrt(v[k]);
+  for (k = 0; k < mN; k++) v[k] = sqrt(vv[k]);
                     
   for (j = 0; j < N; j++) perm[j] = j;
 

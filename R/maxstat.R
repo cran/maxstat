@@ -1,4 +1,4 @@
-# $Id: maxstat.R 413 2015-01-19 17:27:25Z hothorn $
+# $Id: maxstat.R 417 2015-10-05 18:45:38Z hothorn $
 
 
 print.maxtest <- function(x, digits = getOption("digits"), ...) {
@@ -90,7 +90,7 @@ pLausen94 <- function(b, N, minprop=0.1, maxprop=0.9, m=NULL)
 {
   if(is.null(m))
     m <- floor(N*minprop):floor(N*maxprop)
-  if (length(m) == 0) {
+  if (length(m) <= 1L) {
       D <- 0
   } else {
       m1 <- m[1:(length(m)-1)]
