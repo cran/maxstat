@@ -1,4 +1,4 @@
-# $Id: maxstat.R 417 2015-10-05 18:45:38Z hothorn $
+# $Id: maxstat.R 420 2017-03-02 14:41:28Z hothorn $
 
 
 print.maxtest <- function(x, digits = getOption("digits"), ...) {
@@ -121,7 +121,7 @@ wh <- function(cut, x)
 cmatrix <- function(X) {
   N <- nrow(X)
   lindx <- unlist(test <- apply(X, 2, index), recursive=FALSE)
-  a <- .Call("corr", as.list(lindx), as.integer(N), PACKAGE="maxstat")
+  a <- .Call(corr, as.list(lindx), as.integer(N))
   a
 }
   
@@ -196,7 +196,7 @@ pmaxstat <- function(b, scores,  msample, quant=FALSE)
 
   # Streitberg / Roehmel in C, package "exactRankTest"
 
-  H <- exactRankTests:::cpermdist2(as.integer(N),
+  H <- exactRankTests:::.cpermdist2(as.integer(N),
                 as.integer(totsum), as.integer(sc),
                 as.integer(scores), as.logical(FALSE))
 
@@ -320,13 +320,13 @@ pmaxperm <- function(b, scores, msample, expect,
                      variance, B = 10000, ...) {
   N <- length(scores)
   if (any(msample > N)) stop("invalid split points in msample")
-  p <- .Call("maxstatpermdist", scores = as.double(scores),
+  p <- .Call(maxstatpermdist, scores = as.double(scores),
                            msample = as.integer(msample),
                            expect = as.double(expect),
                            variance = as.double(variance),
                            Nsim = as.integer(B),    
                            pvalonly = as.logical(TRUE),
-                           ostat = as.double(b), PACKAGE = "maxstat")
+                           ostat = as.double(b))
   p
 }
 
@@ -335,13 +335,13 @@ qmaxperm <- function(p, scores, msample, expect,
   N <- length(scores)
   if (length(p) > 1 || p > 1 || p < 0) stop("p must be in [0,1]")
   if (any(msample > N)) stop("invalid split points in msample")
-  cp <- .Call("maxstatpermdist", scores = as.double(scores),
+  cp <- .Call(maxstatpermdist, scores = as.double(scores),
                            msample = as.integer(msample),
                            expect = as.double(expect),
                            variance = as.double(variance),
                            Nsim = as.integer(B),    
                            pvalonly = as.logical(FALSE),
-                           ostat = NULL, PACKAGE = "maxstat")
+                           ostat = NULL)
   names(cp) <- c("T", "Prob")
   # class(cp) <- c("data.frame", "excondens")
   cs <- cumsum(cp$Prob) 

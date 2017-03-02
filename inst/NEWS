@@ -1,4 +1,12 @@
-# $Id: NEWS 416 2015-07-01 13:28:27Z hothorn $
+# $Id: NEWS 419 2017-03-01 13:57:28Z hothorn $
+
+	0.7-25 (01.03.2017)
+
+	register C routines
+
+	0.7-24 (06.04.2016)
+
+	maxstatpermdist.c must not overwrite R objects
 
 	0.7-23 (01.07.2015)
 

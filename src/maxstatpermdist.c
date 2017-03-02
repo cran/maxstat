@@ -1,6 +1,6 @@
 /*
 
-  $Id: maxstatpermdist.c 412 2014-02-07 16:43:19Z hothorn $
+  $Id: maxstatpermdist.c 418 2016-04-06 13:58:17Z hothorn $
   
   maxstatpermdist : Simulate Distribution of Maximally Selected Rank Statistics
   Copyright (C) 2003  Torsten Hothorn 
